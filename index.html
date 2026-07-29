@@ -686,26 +686,7 @@
     });
   });
 
-  /* Standings table */
-  const standingsBody = document.getElementById("standings-body");
-  for (const t of teams) {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>
-        <div class="team-cell">
-          <span class="name">${t.team}</span>
-          <span class="mgr">${t.manager}</span>
-        </div>
-      </td>
-      <td class="num mono">0&#8209;0</td>
-      <td class="num mono">0.0</td>
-      <td class="num mono">${t.skinsWon}</td>
-      <td><span class="chip ${t.paid ? "paid" : "unpaid"}">${t.paid ? "Paid" : "Unpaid"}</span></td>
-    `;
-    standingsBody.appendChild(tr);
-  }
-
-  /* Hall of Fame / Shame */
+  /* Hall of Fame / Shame — unaffected by paid status, render immediately */
   const hofBody = document.getElementById("hof-body");
   const ranked = [...teams].sort((a, b) => (b.skinsWon * 10 - b.skinsLow) - (a.skinsWon * 10 - a.skinsLow) || a.team.localeCompare(b.team));
   ranked.forEach((t, i) => {
@@ -725,11 +706,32 @@
     hofBody.appendChild(tr);
   });
 
-  /* Dues-at-a-glance, driven by the fixed $75/team dues */
+  /* Standings table + dues-at-a-glance, both depend on paid status from data.json */
+  const standingsBody = document.getElementById("standings-body");
   const duesCountEl = document.getElementById("dues-count");
   const duesCollectedEl = document.getElementById("dues-collected");
   const duesTargetEl = document.getElementById("dues-target");
   const duesFillEl = document.getElementById("dues-fill");
+
+  function renderStandings() {
+    standingsBody.innerHTML = "";
+    for (const t of teams) {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>
+          <div class="team-cell">
+            <span class="name">${t.team}</span>
+            <span class="mgr">${t.manager}</span>
+          </div>
+        </td>
+        <td class="num mono">0&#8209;0</td>
+        <td class="num mono">0.0</td>
+        <td class="num mono">${t.skinsWon}</td>
+        <td><span class="chip ${t.paid ? "paid" : "unpaid"}">${t.paid ? "Paid" : "Unpaid"}</span></td>
+      `;
+      standingsBody.appendChild(tr);
+    }
+  }
 
   function renderDues() {
     const total = duesAmount * 12;
@@ -741,7 +743,22 @@
     duesFillEl.style.width = `${Math.round((collected / total) * 100)}%`;
   }
 
+  renderStandings();
   renderDues();
+
+  fetch("./data.json", { cache: "no-store" })
+    .then(r => r.json())
+    .then(data => {
+      const paidMap = (data && data.paid) || {};
+      for (const t of teams) {
+        if (Object.prototype.hasOwnProperty.call(paidMap, t.team)) {
+          t.paid = !!paidMap[t.team];
+        }
+      }
+      renderStandings();
+      renderDues();
+    })
+    .catch(() => { /* data.json unavailable — fall back to the defaults already rendered */ });
 
   /* Draft countdown */
   const draftDate = new Date("2026-08-23T17:00:00-05:00");
