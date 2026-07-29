@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Real Ones — Fantasy Hub</title>
+</head>
+<body>
+<style>
+  :root{
+    --bg: #0d1512;
+    --surface: #16211b;
+    --surface-2: #1e2b23;
+    --ink: #eef3ec;
+    --muted: #8ea395;
+    --line: #2a3830;
+    --accent: #f5b731;
+    --accent-ink: #241a04;
+    --danger: #ef5a3c;
+    --danger-ink: #2c0f07;
+    --good: #4fae6a;
+    --good-ink: #0b2213;
+  }
+
+  *{ box-sizing: border-box; }
+  body{
+    margin:0;
+    background:
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.018) 0 1px, transparent 1px 120px),
+      var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection{ background: var(--accent); color: var(--accent-ink); }
+
+  .display{
+    font-family: "Arial Black", "Arial Bold", "Helvetica Neue", Arial, sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    text-wrap: balance;
+  }
+  .mono{
+    font-family: "Consolas", "SF Mono", ui-monospace, Menlo, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+  .eyebrow{
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+  }
+
+  .wrap{
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 28px 20px 64px;
+  }
+
+  /* Masthead */
+  header.masthead{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 22px;
+    border-bottom: 3px solid var(--accent);
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+  }
+  .masthead-title{ display:flex; align-items:baseline; gap:14px; flex-wrap: wrap; }
+  .masthead h1{
+    margin:0;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--ink);
+    line-height: 0.95;
+  }
+  .masthead h1 span{ color: var(--accent); }
+  .masthead .sub{ color: var(--muted); font-size: 0.95rem; margin-top: 4px; }
+  .season-tag{
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--bg);
+    background: var(--accent);
+    padding: 6px 12px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+
+  /* Tabs */
+  .tabs{
+    display:flex;
+    gap: 4px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 26px;
+    overflow-x: auto;
+  }
+  .tab-btn{
+    appearance:none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--muted);
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 12px 18px;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .tab-btn:hover{ color: var(--ink); }
+  .tab-btn.active{ color: var(--ink); border-color: var(--accent); }
+  .tab-btn:focus-visible{ outline: 2px solid var(--accent); outline-offset: -2px; }
+
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+
+  /* Scoreboard hero */
+  .scoreboard{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 24px 26px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .scoreboard::before{
+    content:"";
+    position:absolute; inset:0 0 auto 0; height:4px;
+    background: linear-gradient(90deg, var(--accent), var(--danger));
+  }
+  .scoreboard-head{
+    display:flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+  .scoreboard-head h2{ margin:0; font-size: 1rem; color: var(--ink); }
+  .scoreboard-head .hint{ color: var(--muted); font-size: 0.82rem; }
+
+  .countdown{ display:flex; align-items:flex-end; gap: 18px; flex-wrap: wrap; }
+  .cd-seg{ display:flex; flex-direction:column; align-items:center; gap: 4px; }
+  .cd-num{
+    font-size: clamp(1.8rem, 5vw, 2.7rem);
+    color: var(--accent);
+    line-height: 1;
+  }
+  .cd-label{ font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .cd-sep{ font-size: clamp(1.4rem, 4vw, 2rem); color: var(--line); margin-bottom: 14px; }
+  .scoreboard-caption{ color: var(--muted); font-size: 0.92rem; margin: 16px 0 0; max-width: 56ch; }
+  .scoreboard-caption strong{ color: var(--ink); }
+
+  .skins-live{
+    display:grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 18px;
+    align-items: center;
+  }
+  .skins-side{ display:flex; flex-direction:column; gap:6px; }
+  .skins-side.low{ text-align: right; }
+  .skins-role{ font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; font-weight:700; }
+  .skins-role.high{ color: var(--good); }
+  .skins-role.low{ color: var(--danger); }
+  .skins-team{ font-size:1.3rem; font-weight:800; }
+  .skins-score{ font-size: 2rem; }
+  .skins-vs{
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    color: var(--muted);
+  }
+  .skins-arrow{ font-size: 1.6rem; color: var(--accent); }
+  .skins-amount{
+    font-size: 1.6rem; font-weight: 900; color: var(--accent);
+  }
+
+  /* Dues-at-a-glance */
+  .dues-glance{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 22px;
+  }
+  .dues-glance-head{
+    display:flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+  .dues-glance-head strong{ color: var(--ink); font-size: 1rem; }
+  .dues-track{
+    height: 10px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    overflow: hidden;
+  }
+  .dues-fill{
+    height: 100%;
+    background: linear-gradient(90deg, var(--good), var(--accent));
+    border-radius: 999px;
+    transition: width 0.3s ease;
+  }
+
+  /* Section headings */
+  section{ margin-bottom: 34px; }
+  .section-head{
+    display:flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .section-head h2{
+    margin:0;
+    font-size: 1.15rem;
+    color: var(--ink);
+  }
+  .section-head .hint{ color: var(--muted); font-size: 0.85rem; }
+
+  .rules-card{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--danger);
+    border-radius: 8px;
+    padding: 16px 18px;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+  .rules-card strong{ color: var(--ink); }
+
+  /* Table */
+  .table-scroll{ overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+  table{ width:100%; border-collapse: collapse; min-width: 640px; }
+  thead th{
+    text-align:left;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+    padding: 12px 16px;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  tbody td{
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+    font-size: 0.92rem;
+    white-space: nowrap;
+  }
+  tbody tr:last-child td{ border-bottom: none; }
+  tbody tr:hover td{ background: var(--surface-2); }
+  .team-cell{ display:flex; flex-direction:column; gap:2px; white-space: normal; }
+  .team-cell .name{ font-weight: 700; }
+  .team-cell .mgr{ color: var(--muted); font-size: 0.8rem; }
+  td.num, th.num{ text-align:right; }
+  .rank{ color: var(--muted); font-weight: 700; }
+
+  .chip{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    border: 1px solid transparent;
+  }
+  .chip.paid{ background: rgba(79,174,106,0.14); color: var(--good); border-color: rgba(79,174,106,0.4); }
+  .chip.unpaid{ background: rgba(239,90,60,0.14); color: var(--danger); border-color: rgba(239,90,60,0.4); }
+  .chip::before{ content:""; width:6px; height:6px; border-radius:50%; background: currentColor; }
+
+  .empty-row td{ color: var(--muted); font-style: normal; text-align:center; padding: 22px 16px; }
+
+  /* Prize pool */
+  .pool-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
+
+  .pool-card{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 20px;
+  }
+  .pool-card .place{ font-size: 0.72rem; letter-spacing:0.1em; text-transform:uppercase; color: var(--muted); font-weight:700; }
+  .pool-card .amount{ font-size: 2rem; font-weight: 900; margin: 6px 0 2px; color: var(--ink); }
+  .pool-card.first .amount{ color: var(--accent); }
+  .pool-card .pct{ color: var(--muted); font-size: 0.82rem; }
+  .pool-total{
+    display:flex; justify-content:space-between; align-items:center;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin-top: 14px;
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+  .pool-total strong{ color: var(--ink); font-size: 1.1rem; }
+
+  footer{
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 20px;
+    border-top: 1px solid var(--line);
+    padding-top: 18px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    display:flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* Past champions */
+  .podium{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .podium-card{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px 16px;
+    text-align: center;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .podium-card.rank1{
+    border-color: var(--accent);
+    background: linear-gradient(180deg, rgba(245,183,49,0.12), var(--surface) 60%);
+    order: 2;
+    padding-top: 8px;
+  }
+  .podium-card.rank2{ order: 1; align-self: end; }
+  .podium-card.rank3{ order: 3; align-self: end; }
+  .podium-medal{ font-size: 1.8rem; line-height:1; }
+  .podium-year{ font-size: 0.7rem; letter-spacing:0.1em; text-transform:uppercase; color: var(--muted); font-weight:700; }
+  .podium-team{ font-size: 1.05rem; font-weight: 800; text-wrap: balance; }
+  .podium-mgr{ color: var(--muted); font-size: 0.82rem; }
+  .podium-record{ color: var(--accent); font-size: 0.85rem; font-weight:700; margin-top: 2px; }
+  .podium-card.rank2 .podium-record, .podium-card.rank3 .podium-record{ color: var(--muted); }
+
+  @media (max-width: 560px){
+    .podium{ grid-template-columns: 1fr; }
+    .podium-card.rank1, .podium-card.rank2, .podium-card.rank3{ order: initial; align-self: stretch; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    * { transition: none !important; }
+  }
+
+  @media (max-width: 560px){
+    .skins-live{ grid-template-columns: 1fr; text-align:left !important; }
+    .skins-side.low{ text-align:left; }
+    .skins-vs{ flex-direction:row; justify-content:flex-start; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="masthead-title">
+      <div>
+        <h1 class="display">Real <span>Ones</span></h1>
+        <div class="sub">Fantasy Football Hub — commissioned by Guy Hargon</div>
+      </div>
+    </div>
+    <div class="season-tag mono">2026 SEASON · PRESEASON</div>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Hub sections">
+    <button class="tab-btn active" data-tab="overview" role="tab" aria-selected="true">Overview</button>
+    <button class="tab-btn" data-tab="standings" role="tab" aria-selected="false">Standings &amp; Dues</button>
+    <button class="tab-btn" data-tab="pool" role="tab" aria-selected="false">Prize Pool</button>
+    <button class="tab-btn" data-tab="ledger" role="tab" aria-selected="false">Skins Ledger</button>
+    <button class="tab-btn" data-tab="hof" role="tab" aria-selected="false">Hall of Fame</button>
+    <button class="tab-btn" data-tab="champs" role="tab" aria-selected="false">Past Champions</button>
+  </nav>
+
+  <div class="tab-panel active" id="panel-overview" role="tabpanel">
+    <section class="scoreboard">
+      <div class="scoreboard-head">
+        <h2>On the clock</h2>
+        <span class="hint">Draft: Aug 23, 2026 · 5:00 PM CDT</span>
+      </div>
+      <div class="countdown" id="countdown">
+        <div class="cd-seg"><span class="cd-num mono" id="cd-d">00</span><span class="cd-label">Days</span></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-seg"><span class="cd-num mono" id="cd-h">00</span><span class="cd-label">Hrs</span></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-seg"><span class="cd-num mono" id="cd-m">00</span><span class="cd-label">Min</span></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-seg"><span class="cd-num mono" id="cd-s">00</span><span class="cd-label">Sec</span></div>
+      </div>
+      <p class="scoreboard-caption"><strong>Week 1 hasn't kicked off yet.</strong> Once Sunday's games are final, this space flips to the week's Skins matchup — lowest score of the week pays the highest score $10. Check back after games wrap, or ping Guy to refresh.</p>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>The Skins Game</h2>
+        <span class="hint">New this season</span>
+      </div>
+      <div class="rules-card">
+        Every week, the <strong>highest total score</strong> in the league collects <strong>$10</strong> out of the season pool — the <strong>lowest total score</strong> is on notice, but the money itself comes out of everyone's dues, not a separate side bet. Ties split the payment evenly. Runs the 13 regular-season weeks (playoff weeks excluded, since not every team is still playing).
+      </div>
+    </section>
+  </div>
+
+  <div class="tab-panel" id="panel-standings" role="tabpanel">
+    <section>
+      <div class="dues-glance">
+        <div class="dues-glance-head">
+          <span><strong id="dues-count">0 of 12</strong> teams paid</span>
+          <span class="mono"><strong id="dues-collected">$0</strong> of <span id="dues-target">$900</span> collected</span>
+        </div>
+        <div class="dues-track"><div class="dues-fill" id="dues-fill" style="width:0%"></div></div>
+      </div>
+      <div class="section-head">
+        <h2>Standings &amp; Dues</h2>
+        <span class="hint">Preseason — records begin Week 1</span>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Team</th>
+              <th class="num">W&#8209;L</th>
+              <th class="num">PF</th>
+              <th class="num">Skins won</th>
+              <th>Dues</th>
+            </tr>
+          </thead>
+          <tbody id="standings-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <div class="tab-panel" id="panel-pool" role="tabpanel">
+    <section>
+      <div class="section-head">
+        <h2>Season Prize Pool</h2>
+        <span class="hint">$75 / team · locked in</span>
+      </div>
+      <div class="pool-grid">
+        <div class="pool-card first">
+          <div class="place">1st place</div>
+          <div class="amount mono">$460</div>
+          <div class="pct">Winner of Real Ones, 2026</div>
+        </div>
+        <div class="pool-card">
+          <div class="place">2nd place</div>
+          <div class="amount mono">$230</div>
+          <div class="pct">Runner-up</div>
+        </div>
+        <div class="pool-card">
+          <div class="place">3rd place</div>
+          <div class="amount mono">$75</div>
+          <div class="pct">Third place</div>
+        </div>
+      </div>
+      <div class="pool-total">
+        <span>12 teams &times; $75 collected</span>
+        <strong class="mono">$900</strong>
+      </div>
+      <div class="pool-total">
+        <span>Reserved for weekly skins (13 wks &times; $10)</span>
+        <strong class="mono">&minus;$130</strong>
+      </div>
+      <div class="pool-total">
+        <span>Paid out to 1st / 2nd / 3rd</span>
+        <strong class="mono">&minus;$765</strong>
+      </div>
+      <div class="pool-total" style="border-color: var(--accent);">
+        <span>Left in the league fund</span>
+        <strong class="mono">$5</strong>
+      </div>
+    </section>
+  </div>
+
+  <div class="tab-panel" id="panel-ledger" role="tabpanel">
+    <section>
+      <div class="section-head">
+        <h2>Skins Ledger</h2>
+        <span class="hint">Weekly $10 payments</span>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th class="num">Week</th>
+              <th>High score</th>
+              <th>Low score</th>
+              <th class="num">Amount</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="empty-row"><td colspan="5">No games played yet — the ledger fills in after Week 1.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <div class="tab-panel" id="panel-hof" role="tabpanel">
+    <section>
+      <div class="section-head">
+        <h2>Skins Hall of Fame &amp; Shame</h2>
+        <span class="hint">Fills in as weeks are played</span>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th class="num">#</th>
+              <th>Team</th>
+              <th class="num">Weeks high score</th>
+              <th class="num">$ won</th>
+              <th class="num">Weeks low score</th>
+            </tr>
+          </thead>
+          <tbody id="hof-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <div class="tab-panel" id="panel-champs" role="tabpanel">
+    <section>
+      <div class="section-head">
+        <h2>Past Champions</h2>
+        <span class="hint">Real Ones league history</span>
+      </div>
+      <div class="podium" id="podium"></div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Champion</th>
+              <th class="num">Record</th>
+              <th>Runner-up</th>
+              <th>Third place</th>
+            </tr>
+          </thead>
+          <tbody id="champs-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <span>Updated by the commissioner after each week's games.</span>
+    <span class="mono" id="updated-at"></span>
+  </footer>
+
+</div>
+
+<script>
+  const teams = [
+    { team: "Stop Higgin in My Booty", manager: "Guy Hargon", paid: false, skinsWon: 0, skinsLow: 0 },
+    { team: "IMEATINGTHEWIENERS", manager: "William Moore", paid: false, skinsWon: 0, skinsLow: 0 },
+    { team: "Reggie Boys", manager: "Cole Criswell", paid: false, skinsWon: 0, skinsLow: 0 },
+    { team: "Korbun's Top-Notch Team", manager: "Korbun Harrell", paid: false, skinsWon: 0, skinsLow: 0 },
+    { team: "Team McFather", manager: "Hayden McFarlain", paid: false, skinsWon: 0, skinsLow: 0 },
+    { team: "CeeDees Chubbs", manager: "Kade Thomas", paid: false, skinsWon: 0, skinsLow: 0 },
+    { team: "YoureEatingHotDogs", manager: "Ryan Willis", paid: false, skinsWon: 0, skinsLow: 0 },
+    { team: "Sutt On My Face", manager: "Sutton Oathout", paid: false, skinsWon: 0, skinsLow: 0 },
+    { team: "YoungNjigba squad", manager: "Blake Fant", paid: false, skinsWon: 0, skinsLow: 0 },
+    { team: "Assman", manager: "Hudson Ossman", paid: false, skinsWon: 0, skinsLow: 0 },
+    { team: "Lee's Army", manager: "Carter Cox", paid: false, skinsWon: 0, skinsLow: 0 },
+    { team: "Big Stally", manager: "Addison Stallcup", paid: false, skinsWon: 0, skinsLow: 0 }
+  ];
+
+  const pastChampions = [
+    {
+      year: 2025,
+      champion: { team: "Team McFather", manager: "Hayden McFarlain", record: "9-4-0" },
+      runnerUp: { team: "Stop Higgin in My Booty", manager: "Guy Hargon", record: "11-2-0" },
+      third: { team: "Lee's Army", manager: "Carter Cox", record: "7-6-0" }
+    }
+  ];
+
+  const podiumEl = document.getElementById("podium");
+  const champsBody = document.getElementById("champs-body");
+  const latest = pastChampions[0];
+  if (latest) {
+    podiumEl.innerHTML = `
+      <div class="podium-card rank2">
+        <div class="podium-medal">🥈</div>
+        <div class="podium-year">${latest.year} · 2nd</div>
+        <div class="podium-team">${latest.runnerUp.team}</div>
+        <div class="podium-mgr">${latest.runnerUp.manager}</div>
+        <div class="podium-record mono">${latest.runnerUp.record}</div>
+      </div>
+      <div class="podium-card rank1">
+        <div class="podium-medal">🏆</div>
+        <div class="podium-year">${latest.year} Champion</div>
+        <div class="podium-team">${latest.champion.team}</div>
+        <div class="podium-mgr">${latest.champion.manager}</div>
+        <div class="podium-record mono">${latest.champion.record}</div>
+      </div>
+      <div class="podium-card rank3">
+        <div class="podium-medal">🥉</div>
+        <div class="podium-year">${latest.year} · 3rd</div>
+        <div class="podium-team">${latest.third.team}</div>
+        <div class="podium-mgr">${latest.third.manager}</div>
+        <div class="podium-record mono">${latest.third.record}</div>
+      </div>
+    `;
+  }
+  for (const c of pastChampions) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td class="mono">${c.year}</td>
+      <td>
+        <div class="team-cell">
+          <span class="name">${c.champion.team}</span>
+          <span class="mgr">${c.champion.manager}</span>
+        </div>
+      </td>
+      <td class="num mono">${c.champion.record}</td>
+      <td>${c.runnerUp.team}</td>
+      <td>${c.third.team}</td>
+    `;
+    champsBody.appendChild(tr);
+  }
+
+  const REGULAR_SEASON_WEEKS = 13;
+  const SKINS_PER_WEEK = 10;
+  let duesAmount = 75;
+
+  /* Tabs */
+  const tabButtons = document.querySelectorAll(".tab-btn");
+  const panels = document.querySelectorAll(".tab-panel");
+  tabButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      tabButtons.forEach(b => { b.classList.remove("active"); b.setAttribute("aria-selected", "false"); });
+      panels.forEach(p => p.classList.remove("active"));
+      btn.classList.add("active");
+      btn.setAttribute("aria-selected", "true");
+      document.getElementById("panel-" + btn.dataset.tab).classList.add("active");
+    });
+  });
+
+  /* Standings table */
+  const standingsBody = document.getElementById("standings-body");
+  for (const t of teams) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>
+        <div class="team-cell">
+          <span class="name">${t.team}</span>
+          <span class="mgr">${t.manager}</span>
+        </div>
+      </td>
+      <td class="num mono">0&#8209;0</td>
+      <td class="num mono">0.0</td>
+      <td class="num mono">${t.skinsWon}</td>
+      <td><span class="chip ${t.paid ? "paid" : "unpaid"}">${t.paid ? "Paid" : "Unpaid"}</span></td>
+    `;
+    standingsBody.appendChild(tr);
+  }
+
+  /* Hall of Fame / Shame */
+  const hofBody = document.getElementById("hof-body");
+  const ranked = [...teams].sort((a, b) => (b.skinsWon * 10 - b.skinsLow) - (a.skinsWon * 10 - a.skinsLow) || a.team.localeCompare(b.team));
+  ranked.forEach((t, i) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td class="rank mono">${i + 1}</td>
+      <td>
+        <div class="team-cell">
+          <span class="name">${t.team}</span>
+          <span class="mgr">${t.manager}</span>
+        </div>
+      </td>
+      <td class="num mono">${t.skinsWon}</td>
+      <td class="num mono">$${t.skinsWon * 10}</td>
+      <td class="num mono">${t.skinsLow}</td>
+    `;
+    hofBody.appendChild(tr);
+  });
+
+  /* Dues-at-a-glance, driven by the fixed $75/team dues */
+  const duesCountEl = document.getElementById("dues-count");
+  const duesCollectedEl = document.getElementById("dues-collected");
+  const duesTargetEl = document.getElementById("dues-target");
+  const duesFillEl = document.getElementById("dues-fill");
+
+  function renderDues() {
+    const total = duesAmount * 12;
+    const paidCount = teams.filter(t => t.paid).length;
+    const collected = paidCount * duesAmount;
+    duesCountEl.textContent = `${paidCount} of 12`;
+    duesCollectedEl.textContent = `$${collected}`;
+    duesTargetEl.textContent = `$${total}`;
+    duesFillEl.style.width = `${Math.round((collected / total) * 100)}%`;
+  }
+
+  renderDues();
+
+  /* Draft countdown */
+  const draftDate = new Date("2026-08-23T17:00:00-05:00");
+  const cdD = document.getElementById("cd-d");
+  const cdH = document.getElementById("cd-h");
+  const cdM = document.getElementById("cd-m");
+  const cdS = document.getElementById("cd-s");
+
+  function tickCountdown() {
+    const diff = draftDate.getTime() - Date.now();
+    if (diff <= 0) {
+      cdD.textContent = cdH.textContent = cdM.textContent = cdS.textContent = "00";
+      return;
+    }
+    const totalSeconds = Math.floor(diff / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    cdD.textContent = String(days).padStart(2, "0");
+    cdH.textContent = String(hours).padStart(2, "0");
+    cdM.textContent = String(minutes).padStart(2, "0");
+    cdS.textContent = String(seconds).padStart(2, "0");
+  }
+  tickCountdown();
+  setInterval(tickCountdown, 1000);
+
+  document.getElementById("updated-at").textContent =
+    "Last updated " + new Date().toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+</script>
+</body>
+</html>
