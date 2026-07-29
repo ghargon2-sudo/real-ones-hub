@@ -396,6 +396,7 @@
     <button class="tab-btn" data-tab="ledger" role="tab" aria-selected="false">Skins Ledger</button>
     <button class="tab-btn" data-tab="hof" role="tab" aria-selected="false">Hall of Fame</button>
     <button class="tab-btn" data-tab="champs" role="tab" aria-selected="false">Past Champions</button>
+    <button class="tab-btn" data-tab="tx" role="tab" aria-selected="false">Transactions</button>
   </nav>
 
   <div class="tab-panel active" id="panel-overview" role="tabpanel">
@@ -466,7 +467,7 @@
       <div class="pool-grid">
         <div class="pool-card first">
           <div class="place">1st place</div>
-          <div class="amount mono">$460</div>
+          <div class="amount mono">$465</div>
           <div class="pct">Winner of Real Ones, 2026</div>
         </div>
         <div class="pool-card">
@@ -488,13 +489,9 @@
         <span>Reserved for weekly skins (13 wks &times; $10)</span>
         <strong class="mono">&minus;$130</strong>
       </div>
-      <div class="pool-total">
-        <span>Paid out to 1st / 2nd / 3rd</span>
-        <strong class="mono">&minus;$765</strong>
-      </div>
       <div class="pool-total" style="border-color: var(--accent);">
-        <span>Left in the league fund</span>
-        <strong class="mono">$5</strong>
+        <span>Paid out to 1st / 2nd / 3rd</span>
+        <strong class="mono">&minus;$770</strong>
       </div>
     </section>
   </div>
@@ -566,6 +563,30 @@
             </tr>
           </thead>
           <tbody id="champs-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <div class="tab-panel" id="panel-tx" role="tabpanel">
+    <section>
+      <div class="section-head">
+        <h2>Transactions</h2>
+        <span class="hint">Adds, drops &amp; trades</span>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Team</th>
+              <th>Action</th>
+              <th>Player(s)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="empty-row"><td colspan="4">No moves yet — this fills in once free agency and waivers open.</td></tr>
+          </tbody>
         </table>
       </div>
     </section>
