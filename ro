@@ -1,0 +1,44 @@
+name: Sync ESPN league
+
+on:
+  schedule:
+    - cron: "0 * * * 1,2"
+    - cron: "0 13 * * 0,3,4,5,6"
+  workflow_dispatch:
+
+concurrency:
+  group: sync-espn
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Fetch league from ESPN
+        env:
+          ESPN_LEAGUE_ID: ${{ vars.ESPN_LEAGUE_ID }}
+          ESPN_SEASON: ${{ vars.ESPN_SEASON }}
+          ESPN_S2: ${{ secrets.ESPN_S2 }}
+          ESPN_SWID: ${{ secrets.ESPN_SWID }}
+        run: node scripts/sync-espn.mjs
+
+      - name: Commit if anything changed
+        run: |
+          if git diff --quiet -- data.json; then
+            echo "No change."
+            exit 0
+          fi
+          git config user.name "real-ones-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data.json
+          git commit -m "Sync league data from ESPN"
+          git push
