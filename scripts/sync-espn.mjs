@@ -150,28 +150,39 @@ const TX_ACTION = {
 
 async function fetchPlayerNames(playerIds) {
   if (!playerIds.size) return {};
-  // The league endpoint resolves names for a specific id list, which avoids
-  // pulling ESPN's entire multi-megabyte player universe.
-  const data = await espnGet(`/segments/0/leagues/${LEAGUE_ID}?view=kona_player_info`, {
-    players: { filterIds: { value: [...playerIds] }, limit: 2000 },
+  // The dedicated players endpoint resolves a specific id list without pulling
+  // ESPN's whole player universe. (The league kona_player_info view ignores an
+  // id filter and returns nothing useful, which is why names came back blank.)
+  const data = await espnGet(`/players?view=players_wl`, {
+    filterIds: { value: [...playerIds] },
   });
+  const list = Array.isArray(data) ? data : data.players || [];
   const names = {};
-  for (const entry of data.players || []) {
+  for (const entry of list) {
     const p = entry.player || entry;
-    if (p && p.id != null) names[p.id] = p.fullName || p.name || `Player ${p.id}`;
+    if (p && p.id != null && (p.fullName || p.name)) names[p.id] = p.fullName || p.name;
   }
   return names;
 }
 
+// Transaction item types we surface on the hub. ESPN ignores a server-side
+// filterType on this view, so draft picks, lineup sets and the like all come
+// back and have to be dropped here.
+const TX_KEEP = new Set(["ADD", "DROP", "WAIVER", "TRADE_ACCEPT"]);
+
 async function shapeTransactions(regularSeasonWeeks) {
   const data = await espnGet(`/segments/0/leagues/${LEAGUE_ID}?view=mTransactions2`, {
-    transactions: { filterType: { value: ["WAIVER", "FREEAGENT", "TRADE"] }, limit: 250 },
+    transactions: { limit: 500 },
   });
 
   const raw = data.transactions || [];
+  const kept = [];
   const playerIds = new Set();
   for (const tx of raw) {
+    if (tx.status && tx.status !== "EXECUTED") continue;
     for (const item of tx.items || []) {
+      if (!TX_KEEP.has(item.type)) continue; // skip DRAFT, LINEUP, proposals...
+      kept.push({ tx, item });
       if (item.playerId != null) playerIds.add(item.playerId);
     }
   }
@@ -183,21 +194,13 @@ async function shapeTransactions(regularSeasonWeeks) {
     warnings.push(`Could not resolve player names: ${e.message}`);
   }
 
-  const out = [];
-  for (const tx of raw) {
-    if (tx.status && tx.status !== "EXECUTED") continue;
-    for (const item of tx.items || []) {
-      const action = TX_ACTION[item.type] || item.type || "Move";
-      if (action === "Lineup") continue;
-      out.push({
-        date: tx.proposedDate ? new Date(tx.proposedDate).toISOString().slice(0, 10) : "",
-        week: tx.scoringPeriodId && tx.scoringPeriodId <= regularSeasonWeeks ? tx.scoringPeriodId : null,
-        teamId: item.toTeamId || item.fromTeamId || tx.teamId || null,
-        action,
-        player: names[item.playerId] || (item.playerId ? `Player ${item.playerId}` : ""),
-      });
-    }
-  }
+  const out = kept.map(({ tx, item }) => ({
+    date: tx.proposedDate ? new Date(tx.proposedDate).toISOString().slice(0, 10) : "",
+    week: tx.scoringPeriodId && tx.scoringPeriodId <= regularSeasonWeeks ? tx.scoringPeriodId : null,
+    teamId: item.toTeamId || item.fromTeamId || tx.teamId || null,
+    action: TX_ACTION[item.type] || item.type,
+    player: names[item.playerId] || (item.playerId ? `Player ${item.playerId}` : ""),
+  }));
 
   out.sort((a, b) => String(b.date).localeCompare(String(a.date)));
   return out.slice(0, 100);
