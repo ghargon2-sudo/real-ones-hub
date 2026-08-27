@@ -118,7 +118,7 @@
 
   <div class="card hidden" id="dues-card">
     <h2>Dues — who's paid</h2>
-    <p>$75/team. Toggle a team once their payment is in, then hit Publish.</p>
+    <p>Teams are pulled from ESPN. Toggle a team once their payment is in, then hit Publish. Only the dues are changed — records, scores and transactions stay owned by the sync.</p>
     <div class="team-list" id="team-list"></div>
     <div class="row">
       <button class="primary" id="publish-btn">Publish changes</button>
@@ -135,29 +135,24 @@
   const FILE_PATH = "data.json";
   const TOKEN_KEY = "realOnesAdminToken";
 
-  const teams = [
-    { team: "Stop Higgin in My Booty", manager: "Guy Hargon" },
-    { team: "IMEATINGTHEWIENERS", manager: "William Moore" },
-    { team: "Reggie Boys", manager: "Cole Criswell" },
-    { team: "Korbun's Top-Notch Team", manager: "Korbun Harrell" },
-    { team: "Team McFather", manager: "Hayden McFarlain" },
-    { team: "CeeDees Chubbs", manager: "Kade Thomas" },
-    { team: "YoureEatingHotDogs", manager: "Ryan Willis" },
-    { team: "Sutt On My Face", manager: "Sutton Oathout" },
-    { team: "YoungNjigba squad", manager: "Blake Fant" },
-    { team: "Assman", manager: "Hudson Ossman" },
-    { team: "Lee's Army", manager: "Carter Cox" },
-    { team: "Unemployed", manager: "Addison Stallcup" }
-  ];
-
   const tokenInput = document.getElementById("token-input");
   const tokenStatus = document.getElementById("token-status");
   const duesCard = document.getElementById("dues-card");
   const teamList = document.getElementById("team-list");
   const publishStatus = document.getElementById("publish-status");
 
+  // The whole data.json is kept so publishing can't clobber the fields the
+  // ESPN sync owns (teams, weeks, transactions...). We only touch `paid`.
   let currentSha = null;
+  let currentData = {};
   let currentPaid = {};
+  let teams = [];
+
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, (c) => (
+      { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]
+    ));
+  }
 
   function getToken() {
     return localStorage.getItem(TOKEN_KEY) || "";
@@ -185,11 +180,17 @@
       const json = await res.json();
       currentSha = json.sha;
       const decoded = decodeURIComponent(escape(atob(json.content.replace(/\n/g, ""))));
-      const parsed = JSON.parse(decoded);
-      currentPaid = (parsed && parsed.paid) || {};
+      currentData = JSON.parse(decoded) || {};
+      currentPaid = currentData.paid || {};
+      teams = currentData.teams || [];
       renderTeamList();
-      tokenStatus.textContent = "Connected.";
-      tokenStatus.className = "status ok";
+      if (!teams.length) {
+        tokenStatus.textContent = "Connected, but no teams yet — run the \"Sync ESPN league\" action first.";
+        tokenStatus.className = "status pending";
+      } else {
+        tokenStatus.textContent = `Connected. ${teams.length} teams loaded from ESPN.`;
+        tokenStatus.className = "status ok";
+      }
       duesCard.classList.remove("hidden");
     } catch (e) {
       tokenStatus.textContent = "Error: " + e.message;
@@ -200,17 +201,22 @@
 
   function renderTeamList() {
     teamList.innerHTML = "";
+    if (!teams.length) {
+      teamList.innerHTML = `<div class="team-row"><div class="team-mgr">No teams yet — the ESPN sync hasn't run.</div></div>`;
+      return;
+    }
     for (const t of teams) {
       const row = document.createElement("div");
       row.className = "team-row";
-      const paid = !!currentPaid[t.team];
+      // Keyed by ESPN team id so renaming a team doesn't lose its payment.
+      const paid = !!currentPaid[t.id];
       row.innerHTML = `
         <div>
-          <div class="team-name">${t.team}</div>
-          <div class="team-mgr">${t.manager}</div>
+          <div class="team-name">${esc(t.team)}</div>
+          <div class="team-mgr">${esc(t.manager)}</div>
         </div>
         <label class="toggle">
-          <input type="checkbox" data-team="${t.team}" ${paid ? "checked" : ""}>
+          <input type="checkbox" data-team-id="${esc(t.id)}" ${paid ? "checked" : ""}>
           Paid
         </label>
       `;
@@ -218,7 +224,7 @@
     }
     teamList.querySelectorAll("input[type=checkbox]").forEach(cb => {
       cb.addEventListener("change", () => {
-        currentPaid[cb.dataset.team] = cb.checked;
+        currentPaid[cb.dataset.teamId] = cb.checked;
       });
     });
   }
@@ -244,7 +250,17 @@
     publishStatus.textContent = "Publishing...";
     publishStatus.className = "status pending";
     try {
-      const newContent = JSON.stringify({ paid: currentPaid }, null, 2) + "\n";
+      // Merge onto the latest file so a sync landing mid-edit isn't overwritten.
+      const fresh = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE_PATH}`, {
+        headers: ghHeaders(token)
+      }).then(r => r.ok ? r.json() : null);
+      if (fresh) {
+        currentSha = fresh.sha;
+        const decoded = decodeURIComponent(escape(atob(fresh.content.replace(/\n/g, ""))));
+        currentData = JSON.parse(decoded) || currentData;
+      }
+      const merged = { ...currentData, paid: currentPaid };
+      const newContent = JSON.stringify(merged, null, 2) + "\n";
       const encoded = btoa(unescape(encodeURIComponent(newContent)));
       const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE_PATH}`, {
         method: "PUT",

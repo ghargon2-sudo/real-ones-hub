@@ -1,4 +1,169 @@
 {
+  "league": {
+    "id": "535797493",
+    "name": "Real Ones",
+    "season": 2026,
+    "currentWeek": 0,
+    "regularSeasonWeeks": 13,
+    "teamCount": 12
+  },
+  "config": {
+    "duesPerTeam": 75,
+    "skinsPerWeek": 10,
+    "payouts": [
+      {
+        "place": "1st place",
+        "amount": 465,
+        "note": "Winner of Real Ones"
+      },
+      {
+        "place": "2nd place",
+        "amount": 230,
+        "note": "Runner-up"
+      },
+      {
+        "place": "3rd place",
+        "amount": 75,
+        "note": "Third place"
+      }
+    ]
+  },
+  "teams": [
+    {
+      "id": "Stop Higgin in My Booty",
+      "team": "Stop Higgin in My Booty",
+      "manager": "Guy Hargon",
+      "abbrev": "",
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "pointsFor": 0.0,
+      "pointsAgainst": 0.0
+    },
+    {
+      "id": "IMEATINGTHEWIENERS",
+      "team": "IMEATINGTHEWIENERS",
+      "manager": "William Moore",
+      "abbrev": "",
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "pointsFor": 0.0,
+      "pointsAgainst": 0.0
+    },
+    {
+      "id": "Reggie Boys",
+      "team": "Reggie Boys",
+      "manager": "Cole Criswell",
+      "abbrev": "",
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "pointsFor": 0.0,
+      "pointsAgainst": 0.0
+    },
+    {
+      "id": "Korbun's Top-Notch Team",
+      "team": "Korbun's Top-Notch Team",
+      "manager": "Korbun Harrell",
+      "abbrev": "",
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "pointsFor": 0.0,
+      "pointsAgainst": 0.0
+    },
+    {
+      "id": "Team McFather",
+      "team": "Team McFather",
+      "manager": "Hayden McFarlain",
+      "abbrev": "",
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "pointsFor": 0.0,
+      "pointsAgainst": 0.0
+    },
+    {
+      "id": "CeeDees Chubbs",
+      "team": "CeeDees Chubbs",
+      "manager": "Kade Thomas",
+      "abbrev": "",
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "pointsFor": 0.0,
+      "pointsAgainst": 0.0
+    },
+    {
+      "id": "YoureEatingHotDogs",
+      "team": "YoureEatingHotDogs",
+      "manager": "Ryan Willis",
+      "abbrev": "",
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "pointsFor": 0.0,
+      "pointsAgainst": 0.0
+    },
+    {
+      "id": "Sutt On My Face",
+      "team": "Sutt On My Face",
+      "manager": "Sutton Oathout",
+      "abbrev": "",
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "pointsFor": 0.0,
+      "pointsAgainst": 0.0
+    },
+    {
+      "id": "YoungNjigba squad",
+      "team": "YoungNjigba squad",
+      "manager": "Blake Fant",
+      "abbrev": "",
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "pointsFor": 0.0,
+      "pointsAgainst": 0.0
+    },
+    {
+      "id": "Assman",
+      "team": "Assman",
+      "manager": "Hudson Ossman",
+      "abbrev": "",
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "pointsFor": 0.0,
+      "pointsAgainst": 0.0
+    },
+    {
+      "id": "Lee's Army",
+      "team": "Lee's Army",
+      "manager": "Carter Cox",
+      "abbrev": "",
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "pointsFor": 0.0,
+      "pointsAgainst": 0.0
+    },
+    {
+      "id": "Unemployed",
+      "team": "Unemployed",
+      "manager": "Addison Stallcup",
+      "abbrev": "",
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "pointsFor": 0.0,
+      "pointsAgainst": 0.0
+    }
+  ],
+  "weeks": [],
+  "transactions": [],
   "paid": {
     "Stop Higgin in My Booty": true,
     "IMEATINGTHEWIENERS": true,
@@ -12,5 +177,27 @@
     "Assman": true,
     "Lee's Army": true,
     "Unemployed": false
-  }
+  },
+  "champions": [
+    {
+      "year": 2025,
+      "champion": {
+        "team": "Team McFather",
+        "manager": "Hayden McFarlain",
+        "record": "9-4-0"
+      },
+      "runnerUp": {
+        "team": "Stop Higgin in My Booty",
+        "manager": "Guy Hargon",
+        "record": "11-2-0"
+      },
+      "third": {
+        "team": "Lee's Army",
+        "manager": "Carter Cox",
+        "record": "7-6-0"
+      }
+    }
+  ],
+  "updatedAt": null,
+  "syncWarnings": []
 }

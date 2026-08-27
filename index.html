@@ -148,15 +148,34 @@
   .scoreboard-head h2{ margin:0; font-size: 1rem; color: var(--ink); }
   .scoreboard-head .hint{ color: var(--muted); font-size: 0.82rem; }
 
-  .countdown{ display:flex; align-items:flex-end; gap: 18px; flex-wrap: wrap; }
-  .cd-seg{ display:flex; flex-direction:column; align-items:center; gap: 4px; }
-  .cd-num{
-    font-size: clamp(1.8rem, 5vw, 2.7rem);
-    color: var(--accent);
-    line-height: 1;
+  .status-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 14px;
   }
-  .cd-label{ font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
-  .cd-sep{ font-size: clamp(1.4rem, 4vw, 2rem); color: var(--line); margin-bottom: 14px; }
+  .status-tile{
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .status-tile .k{
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+  }
+  .status-tile .v{
+    font-size: clamp(1.4rem, 3.4vw, 1.9rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin: 4px 0 2px;
+    color: var(--ink);
+  }
+  .status-tile.done .v{ color: var(--good); }
+  .status-tile.money .v{ color: var(--accent); }
+  .status-tile .note{ font-size: 0.78rem; color: var(--muted); }
   .scoreboard-caption{ color: var(--muted); font-size: 0.92rem; margin: 16px 0 0; max-width: 56ch; }
   .scoreboard-caption strong{ color: var(--ink); }
 
@@ -386,7 +405,7 @@
         <div class="sub">Fantasy Football Hub — commissioned by Guy Hargon</div>
       </div>
     </div>
-    <div class="season-tag mono">2026 SEASON · PRESEASON</div>
+    <div class="season-tag mono" id="season-tag">LOADING…</div>
   </header>
 
   <nav class="tabs" role="tablist" aria-label="Hub sections">
@@ -402,19 +421,32 @@
   <div class="tab-panel active" id="panel-overview" role="tabpanel">
     <section class="scoreboard">
       <div class="scoreboard-head">
-        <h2>On the clock</h2>
-        <span class="hint">Draft: Aug 23, 2026 · 5:00 PM CDT</span>
+        <h2>Season status</h2>
+        <span class="hint">Draft complete — Week 1 is next</span>
       </div>
-      <div class="countdown" id="countdown">
-        <div class="cd-seg"><span class="cd-num mono" id="cd-d">00</span><span class="cd-label">Days</span></div>
-        <div class="cd-sep">:</div>
-        <div class="cd-seg"><span class="cd-num mono" id="cd-h">00</span><span class="cd-label">Hrs</span></div>
-        <div class="cd-sep">:</div>
-        <div class="cd-seg"><span class="cd-num mono" id="cd-m">00</span><span class="cd-label">Min</span></div>
-        <div class="cd-sep">:</div>
-        <div class="cd-seg"><span class="cd-num mono" id="cd-s">00</span><span class="cd-label">Sec</span></div>
+      <div class="status-grid">
+        <div class="status-tile done">
+          <div class="k">Draft</div>
+          <div class="v">Done</div>
+          <div class="note">Aug 23, 2026</div>
+        </div>
+        <div class="status-tile">
+          <div class="k">Rosters</div>
+          <div class="v mono" id="status-teams">—</div>
+          <div class="note">Teams locked in</div>
+        </div>
+        <div class="status-tile money">
+          <div class="k">Dues in</div>
+          <div class="v mono" id="status-dues">—</div>
+          <div class="note" id="status-dues-note">Loading…</div>
+        </div>
+        <div class="status-tile money">
+          <div class="k">Season pot</div>
+          <div class="v mono" id="status-pot">—</div>
+          <div class="note" id="status-pot-note">Loading…</div>
+        </div>
       </div>
-      <p class="scoreboard-caption"><strong>Week 1 hasn't kicked off yet.</strong> Once Sunday's games are final, this space flips to the week's Skins matchup — lowest score of the week pays the highest score $10. Check back after games wrap, or ping Guy to refresh.</p>
+      <p class="scoreboard-caption" id="scoreboard-caption"><strong>Week 1 hasn't kicked off yet.</strong> Once Sunday's games are final, this space flips to the week's Skins matchup — lowest score of the week pays the highest score $10. Check back after games wrap, or ping Guy to refresh.</p>
     </section>
 
     <section>
@@ -423,7 +455,7 @@
         <span class="hint">New this season</span>
       </div>
       <div class="rules-card">
-        Every week, the <strong>highest total score</strong> in the league collects <strong>$10</strong> out of the season pool — the <strong>lowest total score</strong> is on notice, but the money itself comes out of everyone's dues, not a separate side bet. Ties split the payment evenly. Runs the 13 regular-season weeks (playoff weeks excluded, since not every team is still playing).
+        Every week, the <strong>highest total score</strong> in the league collects <strong id="skins-amount">$10</strong> out of the season pool — the <strong>lowest total score</strong> is on notice, but the money itself comes out of everyone's dues, not a separate side bet. Ties split the payment evenly. Runs the <span id="skins-weeks">regular-season</span> weeks (playoff weeks excluded, since not every team is still playing).
       </div>
     </section>
   </div>
@@ -432,14 +464,14 @@
     <section>
       <div class="dues-glance">
         <div class="dues-glance-head">
-          <span><strong id="dues-count">0 of 12</strong> teams paid</span>
-          <span class="mono"><strong id="dues-collected">$0</strong> of <span id="dues-target">$900</span> collected</span>
+          <span><strong id="dues-count">—</strong> teams paid</span>
+          <span class="mono"><strong id="dues-collected">—</strong> of <span id="dues-target">—</span> collected</span>
         </div>
         <div class="dues-track"><div class="dues-fill" id="dues-fill" style="width:0%"></div></div>
       </div>
       <div class="section-head">
         <h2>Standings &amp; Dues</h2>
-        <span class="hint">Preseason — records begin Week 1</span>
+        <span class="hint" id="standings-hint">Loading…</span>
       </div>
       <div class="table-scroll">
         <table>
@@ -462,37 +494,10 @@
     <section>
       <div class="section-head">
         <h2>Season Prize Pool</h2>
-        <span class="hint">$75 / team · locked in</span>
+        <span class="hint" id="pool-hint">Loading…</span>
       </div>
-      <div class="pool-grid">
-        <div class="pool-card first">
-          <div class="place">1st place</div>
-          <div class="amount mono">$465</div>
-          <div class="pct">Winner of Real Ones, 2026</div>
-        </div>
-        <div class="pool-card">
-          <div class="place">2nd place</div>
-          <div class="amount mono">$230</div>
-          <div class="pct">Runner-up</div>
-        </div>
-        <div class="pool-card">
-          <div class="place">3rd place</div>
-          <div class="amount mono">$75</div>
-          <div class="pct">Third place</div>
-        </div>
-      </div>
-      <div class="pool-total">
-        <span>12 teams &times; $75 collected</span>
-        <strong class="mono">$900</strong>
-      </div>
-      <div class="pool-total">
-        <span>Reserved for weekly skins (13 wks &times; $10)</span>
-        <strong class="mono">&minus;$130</strong>
-      </div>
-      <div class="pool-total" style="border-color: var(--accent);">
-        <span>Paid out to 1st / 2nd / 3rd</span>
-        <strong class="mono">&minus;$770</strong>
-      </div>
+      <div class="pool-grid" id="pool-grid"></div>
+      <div id="pool-totals"></div>
     </section>
   </div>
 
@@ -513,9 +518,7 @@
               <th>Status</th>
             </tr>
           </thead>
-          <tbody>
-            <tr class="empty-row"><td colspan="5">No games played yet — the ledger fills in after Week 1.</td></tr>
-          </tbody>
+          <tbody id="ledger-body"></tbody>
         </table>
       </div>
     </section>
@@ -584,210 +587,322 @@
               <th>Player(s)</th>
             </tr>
           </thead>
-          <tbody id="tx-body">
-            <tr class="empty-row"><td colspan="4">No moves yet — this fills in once free agency and waivers open.</td></tr>
-          </tbody>
+          <tbody id="tx-body"></tbody>
         </table>
       </div>
     </section>
   </div>
 
   <footer>
-    <span>Updated by the commissioner after each week's games.</span>
+    <span id="footer-note">Synced automatically from ESPN.</span>
     <span class="mono" id="updated-at"></span>
   </footer>
 
 </div>
 
 <script>
-  const teams = [
-    { team: "Stop Higgin in My Booty", manager: "Guy Hargon", paid: false, skinsWon: 0, skinsLow: 0 },
-    { team: "IMEATINGTHEWIENERS", manager: "William Moore", paid: false, skinsWon: 0, skinsLow: 0 },
-    { team: "Reggie Boys", manager: "Cole Criswell", paid: false, skinsWon: 0, skinsLow: 0 },
-    { team: "Korbun's Top-Notch Team", manager: "Korbun Harrell", paid: false, skinsWon: 0, skinsLow: 0 },
-    { team: "Team McFather", manager: "Hayden McFarlain", paid: false, skinsWon: 0, skinsLow: 0 },
-    { team: "CeeDees Chubbs", manager: "Kade Thomas", paid: false, skinsWon: 0, skinsLow: 0 },
-    { team: "YoureEatingHotDogs", manager: "Ryan Willis", paid: false, skinsWon: 0, skinsLow: 0 },
-    { team: "Sutt On My Face", manager: "Sutton Oathout", paid: false, skinsWon: 0, skinsLow: 0 },
-    { team: "YoungNjigba squad", manager: "Blake Fant", paid: false, skinsWon: 0, skinsLow: 0 },
-    { team: "Assman", manager: "Hudson Ossman", paid: false, skinsWon: 0, skinsLow: 0 },
-    { team: "Lee's Army", manager: "Carter Cox", paid: false, skinsWon: 0, skinsLow: 0 },
-    { team: "Unemployed", manager: "Addison Stallcup", paid: false, skinsWon: 0, skinsLow: 0 }
-  ];
+  /* ------------------------------------------------------------------
+     Everything on this page is rendered from data.json, which the
+     "Sync ESPN league" GitHub Action refreshes. Nothing is hardcoded:
+     teams, records, scores, skins, dues and payouts all come from there.
+     ------------------------------------------------------------------ */
 
-  const pastChampions = [
-    {
-      year: 2025,
-      champion: { team: "Team McFather", manager: "Hayden McFarlain", record: "9-4-0" },
-      runnerUp: { team: "Stop Higgin in My Booty", manager: "Guy Hargon", record: "11-2-0" },
-      third: { team: "Lee's Army", manager: "Carter Cox", record: "7-6-0" }
-    }
-  ];
+  const $ = (id) => document.getElementById(id);
 
-  const podiumEl = document.getElementById("podium");
-  const champsBody = document.getElementById("champs-body");
-  const latest = pastChampions[0];
-  if (latest) {
-    podiumEl.innerHTML = `
-      <div class="podium-card rank2">
-        <div class="podium-medal">🥈</div>
-        <div class="podium-year">${latest.year} · 2nd</div>
-        <div class="podium-team">${latest.runnerUp.team}</div>
-        <div class="podium-mgr">${latest.runnerUp.manager}</div>
-        <div class="podium-record mono">${latest.runnerUp.record}</div>
-      </div>
-      <div class="podium-card rank1">
-        <div class="podium-medal">🏆</div>
-        <div class="podium-year">${latest.year} Champion</div>
-        <div class="podium-team">${latest.champion.team}</div>
-        <div class="podium-mgr">${latest.champion.manager}</div>
-        <div class="podium-record mono">${latest.champion.record}</div>
-      </div>
-      <div class="podium-card rank3">
-        <div class="podium-medal">🥉</div>
-        <div class="podium-year">${latest.year} · 3rd</div>
-        <div class="podium-team">${latest.third.team}</div>
-        <div class="podium-mgr">${latest.third.manager}</div>
-        <div class="podium-record mono">${latest.third.record}</div>
-      </div>
-    `;
+  // Team names come from ESPN and managers can type anything into them.
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, (c) => (
+      { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]
+    ));
   }
-  for (const c of pastChampions) {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td class="mono">${c.year}</td>
-      <td>
-        <div class="team-cell">
-          <span class="name">${c.champion.team}</span>
-          <span class="mgr">${c.champion.manager}</span>
-        </div>
-      </td>
-      <td class="num mono">${c.champion.record}</td>
-      <td>${c.runnerUp.team}</td>
-      <td>${c.third.team}</td>
-    `;
-    champsBody.appendChild(tr);
+  const money = (n) => "$" + Math.round(n).toLocaleString();
+  const teamCell = (t) => `
+    <div class="team-cell">
+      <span class="name">${esc(t ? t.team : "Unknown team")}</span>
+      <span class="mgr">${esc(t && t.manager ? t.manager : "")}</span>
+    </div>`;
+  function emptyRow(cols, message) {
+    return `<tr class="empty-row"><td colspan="${cols}">${esc(message)}</td></tr>`;
   }
 
-  const REGULAR_SEASON_WEEKS = 13;
-  const SKINS_PER_WEEK = 10;
-  let duesAmount = 75;
+  // Payouts are a league decision, not a formula, so they can drift out of step
+  // with the pot if the team count changes. Say so rather than quietly not adding up.
+  function balanceRow(left) {
+    if (left === 0) return "";
+    const over = left < 0;
+    return `<div class="pool-total" style="border-color: var(--${over ? "danger" : "muted"});">
+      <span>${over ? "Over-allocated — payouts exceed the pot" : "Unallocated"}</span>
+      <strong class="mono" style="color: var(--${over ? "danger" : "ink"});">${money(Math.abs(left))}</strong>
+    </div>`;
+  }
 
   /* Tabs */
   const tabButtons = document.querySelectorAll(".tab-btn");
   const panels = document.querySelectorAll(".tab-panel");
-  tabButtons.forEach(btn => {
+  tabButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      tabButtons.forEach(b => { b.classList.remove("active"); b.setAttribute("aria-selected", "false"); });
-      panels.forEach(p => p.classList.remove("active"));
+      tabButtons.forEach((b) => { b.classList.remove("active"); b.setAttribute("aria-selected", "false"); });
+      panels.forEach((p) => p.classList.remove("active"));
       btn.classList.add("active");
       btn.setAttribute("aria-selected", "true");
-      document.getElementById("panel-" + btn.dataset.tab).classList.add("active");
+      $("panel-" + btn.dataset.tab).classList.add("active");
     });
   });
 
-  /* Hall of Fame / Shame — unaffected by paid status, render immediately */
-  const hofBody = document.getElementById("hof-body");
-  const ranked = [...teams].sort((a, b) => (b.skinsWon * 10 - b.skinsLow) - (a.skinsWon * 10 - a.skinsLow) || a.team.localeCompare(b.team));
-  ranked.forEach((t, i) => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td class="rank mono">${i + 1}</td>
-      <td>
-        <div class="team-cell">
-          <span class="name">${t.team}</span>
-          <span class="mgr">${t.manager}</span>
-        </div>
-      </td>
-      <td class="num mono">${t.skinsWon}</td>
-      <td class="num mono">$${t.skinsWon * 10}</td>
-      <td class="num mono">${t.skinsLow}</td>
-    `;
-    hofBody.appendChild(tr);
-  });
+  /* ---------- skins, derived from weekly scores ---------- */
 
-  /* Standings table + dues-at-a-glance, both depend on paid status from data.json */
-  const standingsBody = document.getElementById("standings-body");
-  const duesCountEl = document.getElementById("dues-count");
-  const duesCollectedEl = document.getElementById("dues-collected");
-  const duesTargetEl = document.getElementById("dues-target");
-  const duesFillEl = document.getElementById("dues-fill");
+  /**
+   * Highest score each week takes the pot; ties split it evenly. Returns a
+   * per-week ledger plus per-team totals, both keyed off ESPN team ids.
+   */
+  function computeSkins(weeks, perWeek) {
+    const ledger = [];
+    const totals = {};
+    const bump = (id, field, amount) => {
+      totals[id] = totals[id] || { won: 0, low: 0, dollars: 0 };
+      totals[id][field] += 1;
+      totals[id].dollars += amount || 0;
+    };
 
-  function renderStandings() {
-    standingsBody.innerHTML = "";
-    for (const t of teams) {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td>
-          <div class="team-cell">
-            <span class="name">${t.team}</span>
-            <span class="mgr">${t.manager}</span>
-          </div>
-        </td>
-        <td class="num mono">0&#8209;0</td>
-        <td class="num mono">0.0</td>
-        <td class="num mono">${t.skinsWon}</td>
-        <td><span class="chip ${t.paid ? "paid" : "unpaid"}">${t.paid ? "Paid" : "Unpaid"}</span></td>
-      `;
-      standingsBody.appendChild(tr);
+    for (const wk of weeks) {
+      const scores = (wk.scores || []).filter((s) => s && s.teamId != null);
+      if (!scores.length) continue;
+
+      const top = Math.max(...scores.map((s) => s.score));
+      const bottom = Math.min(...scores.map((s) => s.score));
+      const winners = scores.filter((s) => s.score === top);
+      const losers = scores.filter((s) => s.score === bottom);
+      const share = perWeek / winners.length;
+
+      winners.forEach((w) => bump(w.teamId, "won", share));
+      losers.forEach((l) => bump(l.teamId, "low", 0));
+
+      ledger.push({ week: wk.week, winners, losers, amount: perWeek, share });
+    }
+    return { ledger, totals };
+  }
+
+  /* ---------- render ---------- */
+
+  function render(data) {
+    const cfg = data.config || {};
+    const league = data.league || {};
+    const teams = data.teams || [];
+    const weeks = data.weeks || [];
+    const byId = Object.fromEntries(teams.map((t) => [t.id, t]));
+
+    const duesPerTeam = cfg.duesPerTeam || 0;
+    const perWeek = cfg.skinsPerWeek || 0;
+    const payouts = cfg.payouts || [];
+    const teamCount = teams.length;
+    const totalPot = duesPerTeam * teamCount;
+    const regularSeasonWeeks = league.regularSeasonWeeks || 0;
+
+    const { ledger, totals } = computeSkins(weeks, perWeek);
+    const paidMap = data.paid || {};
+    const paidCount = teams.filter((t) => paidMap[t.id]).length;
+    const collected = paidCount * duesPerTeam;
+
+    /* Masthead + season status */
+    const phase = !regularSeasonWeeks || !league.currentWeek
+      ? "PRESEASON"
+      : weeks.length >= regularSeasonWeeks
+        ? "PLAYOFFS"
+        : weeks.length === 0
+          ? "POST-DRAFT"
+          : "WEEK " + Math.min(league.currentWeek, regularSeasonWeeks);
+    $("season-tag").textContent = `${league.season || ""} SEASON · ${phase}`;
+
+    const podiumTotal = payouts.reduce((sum, p) => sum + (p.amount || 0), 0);
+    $("status-teams").textContent = teamCount || "—";
+    $("status-dues").textContent = teamCount ? money(collected) : "—";
+    $("status-dues-note").textContent = teamCount
+      ? `${paidCount} of ${teamCount} paid`
+      : "Awaiting first sync";
+    $("status-pot").textContent = teamCount ? money(totalPot) : "—";
+    $("status-pot-note").textContent = !teamCount
+      ? "Awaiting first sync"
+      : podiumTotal
+        ? `${money(podiumTotal)} to the podium`
+        : "Payouts not set";
+
+    if (weeks.length) {
+      const last = ledger[ledger.length - 1];
+      const winner = last && byId[last.winners[0].teamId];
+      $("scoreboard-caption").innerHTML = last
+        ? `<strong>Week ${last.week} is in the books.</strong> ${esc(winner ? winner.team : "The high scorer")} posted the top score of ${last.winners[0].score.toFixed(2)} and collects ${money(last.share)}. Full history is in the Skins Ledger.`
+        : "";
+    }
+
+    /* Skins rules copy */
+    $("skins-amount").textContent = money(perWeek);
+    $("skins-weeks").textContent = regularSeasonWeeks
+      ? `${regularSeasonWeeks} regular-season`
+      : "regular-season";
+
+    /* Standings + dues */
+    const standings = [...teams].sort(
+      (a, b) => b.wins - a.wins || b.pointsFor - a.pointsFor || a.team.localeCompare(b.team)
+    );
+    $("standings-body").innerHTML = standings.length
+      ? standings.map((t) => {
+          const rec = t.ties ? `${t.wins}-${t.losses}-${t.ties}` : `${t.wins}-${t.losses}`;
+          const isPaid = !!paidMap[t.id];
+          return `<tr>
+            <td>${teamCell(t)}</td>
+            <td class="num mono">${esc(rec)}</td>
+            <td class="num mono">${t.pointsFor.toFixed(1)}</td>
+            <td class="num mono">${(totals[t.id] || {}).won || 0}</td>
+            <td><span class="chip ${isPaid ? "paid" : "unpaid"}">${isPaid ? "Paid" : "Unpaid"}</span></td>
+          </tr>`;
+        }).join("")
+      : emptyRow(5, "Waiting on the first sync from ESPN.");
+
+    $("standings-hint").textContent = weeks.length
+      ? `Through Week ${weeks[weeks.length - 1].week}`
+      : "Preseason — records begin Week 1";
+
+    $("dues-count").textContent = `${paidCount} of ${teamCount}`;
+    $("dues-collected").textContent = money(collected);
+    $("dues-target").textContent = money(totalPot);
+    $("dues-fill").style.width = totalPot ? `${Math.round((collected / totalPot) * 100)}%` : "0%";
+
+    /* Prize pool */
+    $("pool-hint").textContent = duesPerTeam ? `${money(duesPerTeam)} / team · locked in` : "";
+    $("pool-grid").innerHTML = payouts.map((p, i) => `
+      <div class="pool-card${i === 0 ? " first" : ""}">
+        <div class="place">${esc(p.place)}</div>
+        <div class="amount mono">${money(p.amount)}</div>
+        <div class="pct">${esc(p.note || "")}</div>
+      </div>`).join("");
+
+    const skinsReserved = perWeek * regularSeasonWeeks;
+    $("pool-totals").innerHTML = !teamCount ? `
+      <div class="pool-total">
+        <span>Pot is calculated once the ESPN sync brings in the teams.</span>
+        <strong class="mono">—</strong>
+      </div>` : `
+      <div class="pool-total">
+        <span>${teamCount} teams &times; ${money(duesPerTeam)} collected</span>
+        <strong class="mono">${money(totalPot)}</strong>
+      </div>
+      <div class="pool-total">
+        <span>Reserved for weekly skins (${regularSeasonWeeks} wks &times; ${money(perWeek)})</span>
+        <strong class="mono">&minus;${money(skinsReserved)}</strong>
+      </div>
+      <div class="pool-total" style="border-color: var(--accent);">
+        <span>Paid out to the podium</span>
+        <strong class="mono">&minus;${money(podiumTotal)}</strong>
+      </div>
+      ${balanceRow(totalPot - skinsReserved - podiumTotal)}`;
+
+    /* Skins ledger */
+    const names = (list) => list.map((s) => {
+      const t = byId[s.teamId];
+      return `${esc(t ? t.team : "?")} (${s.score.toFixed(2)})`;
+    }).join(", ");
+
+    $("ledger-body").innerHTML = ledger.length
+      ? [...ledger].reverse().map((row) => `<tr>
+          <td class="num mono">${row.week}</td>
+          <td>${names(row.winners)}</td>
+          <td>${names(row.losers)}</td>
+          <td class="num mono">${money(row.amount)}</td>
+          <td><span class="chip paid">Final</span></td>
+        </tr>`).join("")
+      : emptyRow(5, "No games played yet — the ledger fills in after Week 1.");
+
+    /* Hall of Fame & Shame */
+    const ranked = [...teams].sort((a, b) => {
+      const A = totals[a.id] || { won: 0, low: 0, dollars: 0 };
+      const B = totals[b.id] || { won: 0, low: 0, dollars: 0 };
+      return B.dollars - A.dollars || A.low - B.low || a.team.localeCompare(b.team);
+    });
+    $("hof-body").innerHTML = ranked.length
+      ? ranked.map((t, i) => {
+          const s = totals[t.id] || { won: 0, low: 0, dollars: 0 };
+          return `<tr>
+            <td class="rank mono">${i + 1}</td>
+            <td>${teamCell(t)}</td>
+            <td class="num mono">${s.won}</td>
+            <td class="num mono">${money(s.dollars)}</td>
+            <td class="num mono">${s.low}</td>
+          </tr>`;
+        }).join("")
+      : emptyRow(5, "Waiting on the first sync from ESPN.");
+
+    /* Past champions */
+    const champs = data.champions || [];
+    const latest = champs[0];
+    $("podium").innerHTML = latest ? `
+      <div class="podium-card rank2">
+        <div class="podium-medal">&#129352;</div>
+        <div class="podium-year">${esc(latest.year)} &middot; 2nd</div>
+        <div class="podium-team">${esc(latest.runnerUp.team)}</div>
+        <div class="podium-mgr">${esc(latest.runnerUp.manager)}</div>
+        <div class="podium-record mono">${esc(latest.runnerUp.record)}</div>
+      </div>
+      <div class="podium-card rank1">
+        <div class="podium-medal">&#127942;</div>
+        <div class="podium-year">${esc(latest.year)} Champion</div>
+        <div class="podium-team">${esc(latest.champion.team)}</div>
+        <div class="podium-mgr">${esc(latest.champion.manager)}</div>
+        <div class="podium-record mono">${esc(latest.champion.record)}</div>
+      </div>
+      <div class="podium-card rank3">
+        <div class="podium-medal">&#129353;</div>
+        <div class="podium-year">${esc(latest.year)} &middot; 3rd</div>
+        <div class="podium-team">${esc(latest.third.team)}</div>
+        <div class="podium-mgr">${esc(latest.third.manager)}</div>
+        <div class="podium-record mono">${esc(latest.third.record)}</div>
+      </div>` : "";
+
+    $("champs-body").innerHTML = champs.length
+      ? champs.map((c) => `<tr>
+          <td class="mono">${esc(c.year)}</td>
+          <td>${teamCell({ team: c.champion.team, manager: c.champion.manager })}</td>
+          <td class="num mono">${esc(c.champion.record)}</td>
+          <td>${esc(c.runnerUp.team)}</td>
+          <td>${esc(c.third.team)}</td>
+        </tr>`).join("")
+      : emptyRow(5, "No seasons on the books yet.");
+
+    /* Transactions */
+    const tx = data.transactions || [];
+    $("tx-body").innerHTML = tx.length
+      ? tx.map((r) => `<tr>
+          <td class="mono">${esc(r.date)}</td>
+          <td>${esc((byId[r.teamId] || {}).team || "—")}</td>
+          <td>${esc(r.action)}</td>
+          <td>${esc(r.player)}</td>
+        </tr>`).join("")
+      : emptyRow(4, "No moves yet — this fills in once free agency and waivers open.");
+
+    /* Footer */
+    if (data.updatedAt) {
+      const when = new Date(data.updatedAt);
+      $("updated-at").textContent = "Synced " + when.toLocaleString(undefined, {
+        month: "short", day: "numeric", hour: "numeric", minute: "2-digit",
+      });
     }
   }
 
-  function renderDues() {
-    const total = duesAmount * 12;
-    const paidCount = teams.filter(t => t.paid).length;
-    const collected = paidCount * duesAmount;
-    duesCountEl.textContent = `${paidCount} of 12`;
-    duesCollectedEl.textContent = `$${collected}`;
-    duesTargetEl.textContent = `$${total}`;
-    duesFillEl.style.width = `${Math.round((collected / total) * 100)}%`;
+  function renderError() {
+    $("season-tag").textContent = "DATA UNAVAILABLE";
+    $("status-dues-note").textContent = "Sync hasn't run yet";
+    $("status-pot-note").textContent = "Sync hasn't run yet";
+    $("standings-hint").textContent = "Could not load league data";
+    $("standings-body").innerHTML = emptyRow(5, "Could not load data.json — check that the ESPN sync has run.");
+    $("hof-body").innerHTML = emptyRow(5, "Could not load data.json.");
+    $("ledger-body").innerHTML = emptyRow(5, "Could not load data.json.");
+    $("tx-body").innerHTML = emptyRow(4, "Could not load data.json.");
+    $("champs-body").innerHTML = emptyRow(5, "Could not load data.json.");
   }
-
-  renderStandings();
-  renderDues();
 
   fetch("./data.json", { cache: "no-store" })
-    .then(r => r.json())
-    .then(data => {
-      const paidMap = (data && data.paid) || {};
-      for (const t of teams) {
-        if (Object.prototype.hasOwnProperty.call(paidMap, t.team)) {
-          t.paid = !!paidMap[t.team];
-        }
-      }
-      renderStandings();
-      renderDues();
-    })
-    .catch(() => { /* data.json unavailable — fall back to the defaults already rendered */ });
-
-  /* Draft countdown */
-  const draftDate = new Date("2026-08-23T17:00:00-05:00");
-  const cdD = document.getElementById("cd-d");
-  const cdH = document.getElementById("cd-h");
-  const cdM = document.getElementById("cd-m");
-  const cdS = document.getElementById("cd-s");
-
-  function tickCountdown() {
-    const diff = draftDate.getTime() - Date.now();
-    if (diff <= 0) {
-      cdD.textContent = cdH.textContent = cdM.textContent = cdS.textContent = "00";
-      return;
-    }
-    const totalSeconds = Math.floor(diff / 1000);
-    const days = Math.floor(totalSeconds / 86400);
-    const hours = Math.floor((totalSeconds % 86400) / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
-    cdD.textContent = String(days).padStart(2, "0");
-    cdH.textContent = String(hours).padStart(2, "0");
-    cdM.textContent = String(minutes).padStart(2, "0");
-    cdS.textContent = String(seconds).padStart(2, "0");
-  }
-  tickCountdown();
-  setInterval(tickCountdown, 1000);
-
-  document.getElementById("updated-at").textContent =
-    "Last updated " + new Date().toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+    .then((r) => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+    .then(render)
+    .catch(renderError);
 </script>
 </body>
 </html>
