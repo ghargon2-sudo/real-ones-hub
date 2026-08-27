@@ -155,7 +155,7 @@ async function fetchPlayerNames(playerIds) {
   // active set once (a few hundred KB) and index it — reliable, and we only do
   // it when there are transactions to label.
   const data = await espnGet(`/players?view=players_wl`, {
-    filterActive: { value: true },
+    filter: { filterActive: { value: true } },
   });
   const list = Array.isArray(data) ? data : data.players || [];
   const names = {};
@@ -173,7 +173,7 @@ const TX_KEEP = new Set(["ADD", "DROP", "WAIVER", "TRADE_ACCEPT"]);
 
 async function shapeTransactions(regularSeasonWeeks) {
   const data = await espnGet(`/segments/0/leagues/${LEAGUE_ID}?view=mTransactions2`, {
-    transactions: { limit: 500 },
+    filter: { transactions: { limit: 500 } },
   });
 
   const raw = data.transactions || [];
