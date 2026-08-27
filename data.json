@@ -163,22 +163,7 @@
     }
   ],
   "weeks": [],
-  "transactions": [
-    {
-      "date": "2026-08-27",
-      "week": 1,
-      "teamId": 1,
-      "action": "Added",
-      "player": "Player 4429023"
-    },
-    {
-      "date": "2026-08-27",
-      "week": 1,
-      "teamId": 1,
-      "action": "Dropped",
-      "player": "Player 4362619"
-    }
-  ],
+  "transactions": [],
   "paid": {
     "1": true,
     "2": true,
@@ -213,6 +198,8 @@
       }
     }
   ],
-  "updatedAt": "2026-08-27T22:18:33.749Z",
-  "syncWarnings": []
+  "updatedAt": "2026-08-27T22:19:19.042Z",
+  "syncWarnings": [
+    "Transactions unavailable: ESPN 400 for /segments/0/leagues/535797493?view=mTransactions2: {\"messages\":[\"Filter: Limit request must be accompanied by a sort\"],\"details\":[{\"message\":\"Filter: Limit request must be accompanied by a sort\",\"shortMessage\":\"Filter: Limit request must be accompanie"
+  ]
 }
