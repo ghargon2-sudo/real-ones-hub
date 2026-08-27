@@ -163,7 +163,22 @@
     }
   ],
   "weeks": [],
-  "transactions": [],
+  "transactions": [
+    {
+      "date": "2026-08-27",
+      "week": 1,
+      "teamId": 1,
+      "action": "Added",
+      "player": "MarShawn Lloyd"
+    },
+    {
+      "date": "2026-08-27",
+      "week": 1,
+      "teamId": 1,
+      "action": "Dropped",
+      "player": "Chris Rodriguez Jr."
+    }
+  ],
   "paid": {
     "1": true,
     "2": true,
@@ -198,8 +213,6 @@
       }
     }
   ],
-  "updatedAt": "2026-08-27T22:19:19.042Z",
-  "syncWarnings": [
-    "Transactions unavailable: ESPN 400 for /segments/0/leagues/535797493?view=mTransactions2: {\"messages\":[\"Filter: Limit request must be accompanied by a sort\"],\"details\":[{\"message\":\"Filter: Limit request must be accompanied by a sort\",\"shortMessage\":\"Filter: Limit request must be accompanie"
-  ]
+  "updatedAt": "2026-08-27T22:21:10.446Z",
+  "syncWarnings": []
 }
