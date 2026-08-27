@@ -349,11 +349,24 @@
   .trade-player.checked .pl-name{ color: var(--accent); }
   .trade-player .pl-value{ font-family: "Consolas", ui-monospace, monospace; font-variant-numeric: tabular-nums; color: var(--muted); font-size: 0.85rem; }
   .trade-player .pl-value.nr{ font-style: italic; opacity: 0.6; }
-  .trade-subtotal{
+  .trade-side-foot{
     margin-top: 12px; padding-top: 12px; border-top: 2px solid var(--line);
-    text-align: right; font-family: "Consolas", ui-monospace, monospace;
+    display:flex; align-items:center; justify-content: space-between; gap: 10px;
+  }
+  .trade-subtotal{
+    font-family: "Consolas", ui-monospace, monospace;
     font-variant-numeric: tabular-nums; font-size: 1.5rem; font-weight: 900; color: var(--ink);
   }
+  .trade-grade{
+    font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+    font-weight: 900; font-size: 1.7rem; line-height: 1;
+    padding: 6px 12px; border-radius: 8px; letter-spacing: -0.02em;
+    background: var(--surface-2); border: 2px solid var(--line); color: var(--ink);
+  }
+  .trade-grade.g-a{ color: var(--good); border-color: var(--good); background: rgba(79,174,106,0.12); }
+  .trade-grade.g-b{ color: var(--ink); border-color: var(--muted); }
+  .trade-grade.g-c{ color: var(--accent); border-color: var(--accent); background: rgba(245,183,49,0.12); }
+  .trade-grade.g-d{ color: var(--danger); border-color: var(--danger); background: rgba(239,90,60,0.12); }
   .trade-verdict{
     background: var(--surface-2); border: 1px solid var(--line);
     border-left: 4px solid var(--accent); border-radius: 10px;
@@ -582,13 +595,19 @@
           <label class="trade-team-label" for="trade-team-a">Team A sends</label>
           <select id="trade-team-a" class="trade-select"></select>
           <div class="trade-roster" id="trade-roster-a"></div>
-          <div class="trade-subtotal" id="trade-total-a">0</div>
+          <div class="trade-side-foot">
+            <span class="trade-grade" id="trade-grade-a" hidden></span>
+            <span class="trade-subtotal" id="trade-total-a">0</span>
+          </div>
         </div>
         <div class="trade-side">
           <label class="trade-team-label" for="trade-team-b">Team B sends</label>
           <select id="trade-team-b" class="trade-select"></select>
           <div class="trade-roster" id="trade-roster-b"></div>
-          <div class="trade-subtotal" id="trade-total-b">0</div>
+          <div class="trade-side-foot">
+            <span class="trade-grade" id="trade-grade-b" hidden></span>
+            <span class="trade-subtotal" id="trade-total-b">0</span>
+          </div>
         </div>
       </div>
     </section>
@@ -827,6 +846,33 @@
     });
   }
 
+  // Letter grade for one side, from the value it RECEIVES vs what it GIVES.
+  // pct is symmetric between the two sides (one's gain is the other's loss),
+  // so an even swap lands both at B, and a lopsided one splits A+/F.
+  function tradeGrade(gives, gets) {
+    const base = Math.max(gives, gets) || 1;
+    const pct = (gets - gives) / base;
+    // The B band is ±8%, matching the verdict's "Fair trade" threshold, so a
+    // trade the headline calls fair never shows a non-B grade.
+    const table = [
+      [0.25, "A+", "g-a"], [0.15, "A", "g-a"], [0.08, "A-", "g-a"],
+      [-0.08, "B", "g-b"], [-0.15, "C+", "g-c"], [-0.25, "C", "g-c"],
+      [-0.40, "D", "g-d"],
+    ];
+    for (const [thresh, letter, cls] of table) {
+      if (pct >= thresh) return { letter, cls };
+    }
+    return { letter: "F", cls: "g-d" };
+  }
+
+  function setGrade(side, gives, gets) {
+    const el = $(`trade-grade-${side}`);
+    const g = tradeGrade(gives, gets);
+    el.textContent = g.letter;
+    el.className = "trade-grade " + g.cls;
+    el.hidden = false;
+  }
+
   function updateTradeVerdict() {
     const a = sumPicked("a");
     const b = sumPicked("b");
@@ -834,8 +880,17 @@
     $("trade-total-b").textContent = b.value.toLocaleString();
 
     const box = $("trade-verdict");
-    if (!a.count && !b.count) { box.hidden = true; return; }
+    if (!a.count && !b.count) {
+      box.hidden = true;
+      $("trade-grade-a").hidden = true;
+      $("trade-grade-b").hidden = true;
+      return;
+    }
     box.hidden = false;
+
+    // A gives a.value and receives b.value; B is the mirror.
+    setGrade("a", a.value, b.value);
+    setGrade("b", b.value, a.value);
 
     const nameA = tradeState.a ? tradeState.a.team : "Team A";
     const nameB = tradeState.b ? tradeState.b.team : "Team B";
