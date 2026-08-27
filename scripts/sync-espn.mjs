@@ -172,9 +172,10 @@ async function fetchPlayerNames(playerIds) {
 const TX_KEEP = new Set(["ADD", "DROP", "WAIVER", "TRADE_ACCEPT"]);
 
 async function shapeTransactions(regularSeasonWeeks) {
-  const data = await espnGet(`/segments/0/leagues/${LEAGUE_ID}?view=mTransactions2`, {
-    filter: { transactions: { limit: 500 } },
-  });
+  // No filter here: ESPN rejects a limit without a sort on this view, and the
+  // unfiltered response already returns the full transaction list, which we
+  // trim client-side after dropping draft/lineup noise.
+  const data = await espnGet(`/segments/0/leagues/${LEAGUE_ID}?view=mTransactions2`);
 
   const raw = data.transactions || [];
   const kept = [];
