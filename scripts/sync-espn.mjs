@@ -150,11 +150,12 @@ const TX_ACTION = {
 
 async function fetchPlayerNames(playerIds) {
   if (!playerIds.size) return {};
-  // The dedicated players endpoint resolves a specific id list without pulling
-  // ESPN's whole player universe. (The league kona_player_info view ignores an
-  // id filter and returns nothing useful, which is why names came back blank.)
+  // Fetch the active-player list and look ids up from it. An id-filtered query
+  // against ESPN's player views quietly returns nothing, so instead we pull the
+  // active set once (a few hundred KB) and index it — reliable, and we only do
+  // it when there are transactions to label.
   const data = await espnGet(`/players?view=players_wl`, {
-    filterIds: { value: [...playerIds] },
+    filterActive: { value: true },
   });
   const list = Array.isArray(data) ? data : data.players || [];
   const names = {};
