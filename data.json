@@ -38,7 +38,93 @@
       "losses": 0,
       "ties": 0,
       "pointsFor": 0,
-      "pointsAgainst": 0
+      "pointsAgainst": 0,
+      "roster": [
+        {
+          "id": 4374302,
+          "name": "Amon-Ra St. Brown",
+          "pos": "WR",
+          "value": 8280
+        },
+        {
+          "id": 3929630,
+          "name": "Saquon Barkley",
+          "pos": "RB",
+          "value": 7342
+        },
+        {
+          "id": 4685472,
+          "name": "Tetairoa McMillan",
+          "pos": "WR",
+          "value": 3543
+        },
+        {
+          "id": 4239996,
+          "name": "Travis Etienne Jr.",
+          "pos": "RB",
+          "value": 4078
+        },
+        {
+          "id": 4871023,
+          "name": "Carnell Tate",
+          "pos": "WR",
+          "value": 2022
+        },
+        {
+          "id": 4431452,
+          "name": "Drake Maye",
+          "pos": "QB",
+          "value": 3085
+        },
+        {
+          "id": 4360761,
+          "name": "Michael Wilson",
+          "pos": "WR",
+          "value": 1214
+        },
+        {
+          "id": 4608686,
+          "name": "Kyle Monangai",
+          "pos": "RB",
+          "value": 688
+        },
+        {
+          "id": 4575131,
+          "name": "Jacory Croskey-Merritt",
+          "pos": "RB",
+          "value": 885
+        },
+        {
+          "id": 15847,
+          "name": "Travis Kelce",
+          "pos": "TE",
+          "value": 1316
+        },
+        {
+          "id": 3054850,
+          "name": "Alvin Kamara",
+          "pos": "RB",
+          "value": 90
+        },
+        {
+          "id": 4870847,
+          "name": "Ja'Kobi Lane",
+          "pos": "WR",
+          "value": 179
+        },
+        {
+          "id": 4569559,
+          "name": "Devaughn Vele",
+          "pos": "WR",
+          "value": 6
+        },
+        {
+          "id": 4429023,
+          "name": "MarShawn Lloyd",
+          "pos": "RB",
+          "value": 183
+        }
+      ]
     },
     {
       "id": 2,
@@ -49,7 +135,93 @@
       "losses": 0,
       "ties": 0,
       "pointsFor": 0,
-      "pointsAgainst": 0
+      "pointsAgainst": 0,
+      "roster": [
+        {
+          "id": 4426515,
+          "name": "Puka Nacua",
+          "pos": "WR",
+          "value": 9128
+        },
+        {
+          "id": 4685382,
+          "name": "Omarion Hampton",
+          "pos": "RB",
+          "value": 6771
+        },
+        {
+          "id": 4595348,
+          "name": "Malik Nabers",
+          "pos": "WR",
+          "value": 5303
+        },
+        {
+          "id": 4685702,
+          "name": "Quinshon Judkins",
+          "pos": "RB",
+          "value": 2728
+        },
+        {
+          "id": 4372016,
+          "name": "Jaylen Waddle",
+          "pos": "WR",
+          "value": 3360
+        },
+        {
+          "id": 4572680,
+          "name": "Tucker Kraft",
+          "pos": "TE",
+          "value": 2046
+        },
+        {
+          "id": 4685512,
+          "name": "Jadarian Price",
+          "pos": "RB",
+          "value": 2507
+        },
+        {
+          "id": 4569587,
+          "name": "Wan'Dale Robinson",
+          "pos": "WR",
+          "value": 770
+        },
+        {
+          "id": 4429096,
+          "name": "Blake Corum",
+          "pos": "RB",
+          "value": 948
+        },
+        {
+          "id": 4880281,
+          "name": "Jordyn Tyson",
+          "pos": "WR",
+          "value": 933
+        },
+        {
+          "id": 4038941,
+          "name": "Justin Herbert",
+          "pos": "QB",
+          "value": 2056
+        },
+        {
+          "id": 4429013,
+          "name": "Tank Bigsby",
+          "pos": "RB",
+          "value": 72
+        },
+        {
+          "id": 4870612,
+          "name": "Zachariah Branch",
+          "pos": "WR",
+          "value": 9
+        },
+        {
+          "id": 4837248,
+          "name": "Fernando Mendoza",
+          "pos": "QB",
+          "value": 59
+        }
+      ]
     },
     {
       "id": 3,
@@ -60,7 +232,93 @@
       "losses": 0,
       "ties": 0,
       "pointsFor": 0,
-      "pointsAgainst": 0
+      "pointsAgainst": 0,
+      "roster": [
+        {
+          "id": 4262921,
+          "name": "Justin Jefferson",
+          "pos": "WR",
+          "value": 7384
+        },
+        {
+          "id": 4567048,
+          "name": "Kenneth Walker III",
+          "pos": "RB",
+          "value": 6053
+        },
+        {
+          "id": 4429615,
+          "name": "Zay Flowers",
+          "pos": "WR",
+          "value": 3486
+        },
+        {
+          "id": 4723086,
+          "name": "Colston Loveland",
+          "pos": "TE",
+          "value": 3792
+        },
+        {
+          "id": 4426388,
+          "name": "Jameson Williams",
+          "pos": "WR",
+          "value": 2158
+        },
+        {
+          "id": 4569987,
+          "name": "Jaylen Warren",
+          "pos": "RB",
+          "value": 1966
+        },
+        {
+          "id": 4431611,
+          "name": "Caleb Williams",
+          "pos": "QB",
+          "value": 2757
+        },
+        {
+          "id": 4688813,
+          "name": "Josh Downs",
+          "pos": "WR",
+          "value": 855
+        },
+        {
+          "id": 2976212,
+          "name": "Stefon Diggs",
+          "pos": "WR",
+          "value": 1084
+        },
+        {
+          "id": 4568490,
+          "name": "RJ Harvey",
+          "pos": "RB",
+          "value": 1354
+        },
+        {
+          "id": 3116365,
+          "name": "Mark Andrews",
+          "pos": "TE",
+          "value": 724
+        },
+        {
+          "id": 3139477,
+          "name": "Patrick Mahomes",
+          "pos": "QB",
+          "value": 1613
+        },
+        {
+          "id": 3925357,
+          "name": "Calvin Ridley",
+          "pos": "WR",
+          "value": null
+        },
+        {
+          "id": 4429022,
+          "name": "Kayshon Boutte",
+          "pos": "WR",
+          "value": 69
+        }
+      ]
     },
     {
       "id": 4,
@@ -71,7 +329,93 @@
       "losses": 0,
       "ties": 0,
       "pointsFor": 0,
-      "pointsAgainst": 0
+      "pointsAgainst": 0,
+      "roster": [
+        {
+          "id": 3117251,
+          "name": "Christian McCaffrey",
+          "pos": "RB",
+          "value": 8527
+        },
+        {
+          "id": 4426502,
+          "name": "Drake London",
+          "pos": "WR",
+          "value": 5642
+        },
+        {
+          "id": 4427366,
+          "name": "Breece Hall",
+          "pos": "RB",
+          "value": 4323
+        },
+        {
+          "id": 4567750,
+          "name": "Emeka Egbuka",
+          "pos": "WR",
+          "value": 3448
+        },
+        {
+          "id": 4431299,
+          "name": "Rome Odunze",
+          "pos": "WR",
+          "value": 1793
+        },
+        {
+          "id": 4430027,
+          "name": "Sam LaPorta",
+          "pos": "TE",
+          "value": 1909
+        },
+        {
+          "id": 4569173,
+          "name": "Rhamondre Stevenson",
+          "pos": "RB",
+          "value": 1297
+        },
+        {
+          "id": 2577417,
+          "name": "Dak Prescott",
+          "pos": "QB",
+          "value": 1954
+        },
+        {
+          "id": 3916433,
+          "name": "Jakobi Meyers",
+          "pos": "WR",
+          "value": 351
+        },
+        {
+          "id": 4683062,
+          "name": "Xavier Worthy",
+          "pos": "WR",
+          "value": 427
+        },
+        {
+          "id": 4361432,
+          "name": "Romeo Doubs",
+          "pos": "WR",
+          "value": 578
+        },
+        {
+          "id": 4361741,
+          "name": "Brock Purdy",
+          "pos": "QB",
+          "value": 1177
+        },
+        {
+          "id": 3046439,
+          "name": "Hunter Henry",
+          "pos": "TE",
+          "value": 201
+        },
+        {
+          "id": 4241474,
+          "name": "Brian Robinson Jr.",
+          "pos": "RB",
+          "value": 155
+        }
+      ]
     },
     {
       "id": 5,
@@ -82,7 +426,93 @@
       "losses": 0,
       "ties": 0,
       "pointsFor": 0,
-      "pointsAgainst": 0
+      "pointsAgainst": 0,
+      "roster": [
+        {
+          "id": 4379399,
+          "name": "James Cook III",
+          "pos": "RB",
+          "value": 7838
+        },
+        {
+          "id": 4361307,
+          "name": "Trey McBride",
+          "pos": "TE",
+          "value": 5614
+        },
+        {
+          "id": 4430737,
+          "name": "Kyren Williams",
+          "pos": "RB",
+          "value": 4763
+        },
+        {
+          "id": 4239993,
+          "name": "Tee Higgins",
+          "pos": "WR",
+          "value": 3772
+        },
+        {
+          "id": 4432708,
+          "name": "Marvin Harrison Jr.",
+          "pos": "WR",
+          "value": 1572
+        },
+        {
+          "id": 3915511,
+          "name": "Joe Burrow",
+          "pos": "QB",
+          "value": 3362
+        },
+        {
+          "id": 16737,
+          "name": "Mike Evans",
+          "pos": "WR",
+          "value": 1871
+        },
+        {
+          "id": 4038815,
+          "name": "Rico Dowdle",
+          "pos": "RB",
+          "value": 1419
+        },
+        {
+          "id": 4697815,
+          "name": "Rachaad White",
+          "pos": "RB",
+          "value": 660
+        },
+        {
+          "id": 4429025,
+          "name": "Quentin Johnston",
+          "pos": "WR",
+          "value": 725
+        },
+        {
+          "id": 4032473,
+          "name": "Rashid Shaheed",
+          "pos": "WR",
+          "value": 292
+        },
+        {
+          "id": 4360310,
+          "name": "Trevor Lawrence",
+          "pos": "QB",
+          "value": 1859
+        },
+        {
+          "id": 4241463,
+          "name": "Jerry Jeudy",
+          "pos": "WR",
+          "value": null
+        },
+        {
+          "id": 4361529,
+          "name": "Isiah Pacheco",
+          "pos": "RB",
+          "value": 68
+        }
+      ]
     },
     {
       "id": 6,
@@ -93,7 +523,93 @@
       "losses": 0,
       "ties": 0,
       "pointsFor": 0,
-      "pointsAgainst": 0
+      "pointsAgainst": 0,
+      "roster": [
+        {
+          "id": 4241389,
+          "name": "CeeDee Lamb",
+          "pos": "WR",
+          "value": 7516
+        },
+        {
+          "id": 4890973,
+          "name": "Ashton Jeanty",
+          "pos": "RB",
+          "value": 5891
+        },
+        {
+          "id": 4361579,
+          "name": "Javonte Williams",
+          "pos": "RB",
+          "value": 4709
+        },
+        {
+          "id": 16800,
+          "name": "Davante Adams",
+          "pos": "WR",
+          "value": 2611
+        },
+        {
+          "id": 4035538,
+          "name": "David Montgomery",
+          "pos": "RB",
+          "value": 3158
+        },
+        {
+          "id": 3128429,
+          "name": "Courtland Sutton",
+          "pos": "WR",
+          "value": 1000
+        },
+        {
+          "id": 3121023,
+          "name": "Dallas Goedert",
+          "pos": "TE",
+          "value": 561
+        },
+        {
+          "id": 12483,
+          "name": "Matthew Stafford",
+          "pos": "QB",
+          "value": 1502
+        },
+        {
+          "id": 4373678,
+          "name": "Khalil Shakir",
+          "pos": "WR",
+          "value": 485
+        },
+        {
+          "id": 4360569,
+          "name": "Jordan Mason",
+          "pos": "RB",
+          "value": 930
+        },
+        {
+          "id": 4036133,
+          "name": "T.J. Hockenson",
+          "pos": "TE",
+          "value": 147
+        },
+        {
+          "id": 4695883,
+          "name": "Jalen Coker",
+          "pos": "WR",
+          "value": 527
+        },
+        {
+          "id": 4036378,
+          "name": "Jordan Love",
+          "pos": "QB",
+          "value": 718
+        },
+        {
+          "id": 4430834,
+          "name": "Jalen McMillan",
+          "pos": "WR",
+          "value": 34
+        }
+      ]
     },
     {
       "id": 7,
@@ -104,7 +620,93 @@
       "losses": 0,
       "ties": 0,
       "pointsFor": 0,
-      "pointsAgainst": 0
+      "pointsAgainst": 0,
+      "roster": [
+        {
+          "id": 4429795,
+          "name": "Jahmyr Gibbs",
+          "pos": "RB",
+          "value": 10736
+        },
+        {
+          "id": 4428331,
+          "name": "Rashee Rice",
+          "pos": "WR",
+          "value": 4188
+        },
+        {
+          "id": 4426354,
+          "name": "George Pickens",
+          "pos": "WR",
+          "value": 5464
+        },
+        {
+          "id": 4432710,
+          "name": "TreVeyon Henderson",
+          "pos": "RB",
+          "value": 2751
+        },
+        {
+          "id": 4431459,
+          "name": "Tyler Warren",
+          "pos": "TE",
+          "value": 3171
+        },
+        {
+          "id": 4241985,
+          "name": "J.K. Dobbins",
+          "pos": "RB",
+          "value": 992
+        },
+        {
+          "id": 4035687,
+          "name": "Michael Pittman Jr.",
+          "pos": "WR",
+          "value": 963
+        },
+        {
+          "id": 4242355,
+          "name": "Jake Ferguson",
+          "pos": "TE",
+          "value": 704
+        },
+        {
+          "id": 4710714,
+          "name": "De'Zhaun Stribling",
+          "pos": "WR",
+          "value": 607
+        },
+        {
+          "id": 4426338,
+          "name": "Bo Nix",
+          "pos": "QB",
+          "value": 1566
+        },
+        {
+          "id": 4686658,
+          "name": "Mike Washington Jr.",
+          "pos": "RB",
+          "value": 927
+        },
+        {
+          "id": 15818,
+          "name": "Keenan Allen",
+          "pos": "WR",
+          "value": 257
+        },
+        {
+          "id": 3046779,
+          "name": "Jared Goff",
+          "pos": "QB",
+          "value": 930
+        },
+        {
+          "id": 4686612,
+          "name": "Tre' Harris",
+          "pos": "WR",
+          "value": null
+        }
+      ]
     },
     {
       "id": 8,
@@ -115,7 +717,93 @@
       "losses": 0,
       "ties": 0,
       "pointsFor": 0,
-      "pointsAgainst": 0
+      "pointsAgainst": 0,
+      "roster": [
+        {
+          "id": 4430878,
+          "name": "Jaxon Smith-Njigba",
+          "pos": "WR",
+          "value": 8664
+        },
+        {
+          "id": 3043078,
+          "name": "Derrick Henry",
+          "pos": "RB",
+          "value": 6038
+        },
+        {
+          "id": 4047646,
+          "name": "A.J. Brown",
+          "pos": "WR",
+          "value": 6007
+        },
+        {
+          "id": 4596448,
+          "name": "Bucky Irving",
+          "pos": "RB",
+          "value": 3263
+        },
+        {
+          "id": 3121422,
+          "name": "Terry McLaurin",
+          "pos": "WR",
+          "value": 2183
+        },
+        {
+          "id": 4426348,
+          "name": "Jayden Daniels",
+          "pos": "QB",
+          "value": 2927
+        },
+        {
+          "id": 4701936,
+          "name": "Matthew Golden",
+          "pos": "WR",
+          "value": 546
+        },
+        {
+          "id": 4429205,
+          "name": "Jordan Addison",
+          "pos": "WR",
+          "value": 866
+        },
+        {
+          "id": 4241416,
+          "name": "Chuba Hubbard",
+          "pos": "RB",
+          "value": 1372
+        },
+        {
+          "id": 4426385,
+          "name": "Zach Charbonnet",
+          "pos": "RB",
+          "value": 451
+        },
+        {
+          "id": 4361050,
+          "name": "Isaiah Likely",
+          "pos": "TE",
+          "value": 688
+        },
+        {
+          "id": 4385690,
+          "name": "Dalton Kincaid",
+          "pos": "TE",
+          "value": 511
+        },
+        {
+          "id": 4685720,
+          "name": "Bryce Young",
+          "pos": "QB",
+          "value": 189
+        },
+        {
+          "id": 4360939,
+          "name": "Rashod Bateman",
+          "pos": "WR",
+          "value": null
+        }
+      ]
     },
     {
       "id": 9,
@@ -126,7 +814,93 @@
       "losses": 0,
       "ties": 0,
       "pointsFor": 0,
-      "pointsAgainst": 0
+      "pointsAgainst": 0,
+      "roster": [
+        {
+          "id": 4430807,
+          "name": "Bijan Robinson",
+          "pos": "RB",
+          "value": 10319
+        },
+        {
+          "id": 4258173,
+          "name": "Nico Collins",
+          "pos": "WR",
+          "value": 5235
+        },
+        {
+          "id": 4361370,
+          "name": "Chris Olave",
+          "pos": "WR",
+          "value": 4994
+        },
+        {
+          "id": 4259545,
+          "name": "D'Andre Swift",
+          "pos": "RB",
+          "value": 3212
+        },
+        {
+          "id": 3916387,
+          "name": "Lamar Jackson",
+          "pos": "QB",
+          "value": 4365
+        },
+        {
+          "id": 4432620,
+          "name": "Parker Washington",
+          "pos": "WR",
+          "value": 1940
+        },
+        {
+          "id": 4360248,
+          "name": "Kyle Pitts Sr.",
+          "pos": "TE",
+          "value": 1582
+        },
+        {
+          "id": 4362249,
+          "name": "Jayden Reed",
+          "pos": "WR",
+          "value": 843
+        },
+        {
+          "id": 4678008,
+          "name": "Jonathon Brooks",
+          "pos": "RB",
+          "value": 1064
+        },
+        {
+          "id": 4870795,
+          "name": "Makai Lemon",
+          "pos": "WR",
+          "value": 1011
+        },
+        {
+          "id": 4429059,
+          "name": "Woody Marks",
+          "pos": "RB",
+          "value": 408
+        },
+        {
+          "id": 4428718,
+          "name": "Tre Tucker",
+          "pos": "WR",
+          "value": 84
+        },
+        {
+          "id": 4360689,
+          "name": "Tyler Shough",
+          "pos": "QB",
+          "value": 534
+        },
+        {
+          "id": 4569603,
+          "name": "Malik Washington",
+          "pos": "WR",
+          "value": 69
+        }
+      ]
     },
     {
       "id": 10,
@@ -137,7 +911,93 @@
       "losses": 0,
       "ties": 0,
       "pointsFor": 0,
-      "pointsAgainst": 0
+      "pointsAgainst": 0,
+      "roster": [
+        {
+          "id": 4362628,
+          "name": "Ja'Marr Chase",
+          "pos": "WR",
+          "value": 9473
+        },
+        {
+          "id": 4432665,
+          "name": "Brock Bowers",
+          "pos": "TE",
+          "value": 5981
+        },
+        {
+          "id": 4047365,
+          "name": "Josh Jacobs",
+          "pos": "RB",
+          "value": 4129
+        },
+        {
+          "id": 4696981,
+          "name": "Cam Skattebo",
+          "pos": "RB",
+          "value": 3961
+        },
+        {
+          "id": 3915416,
+          "name": "DJ Moore",
+          "pos": "WR",
+          "value": 2549
+        },
+        {
+          "id": 4040715,
+          "name": "Jalen Hurts",
+          "pos": "QB",
+          "value": 2610
+        },
+        {
+          "id": 4432773,
+          "name": "Brian Thomas Jr.",
+          "pos": "WR",
+          "value": 1302
+        },
+        {
+          "id": 4371733,
+          "name": "Kenny Gainwell",
+          "pos": "RB",
+          "value": 896
+        },
+        {
+          "id": 4870653,
+          "name": "KC Concepcion",
+          "pos": "WR",
+          "value": 796
+        },
+        {
+          "id": 4685415,
+          "name": "Travis Hunter",
+          "pos": "WR",
+          "value": 171
+        },
+        {
+          "id": 4360516,
+          "name": "Tyrone Tracy Jr.",
+          "pos": "RB",
+          "value": 163
+        },
+        {
+          "id": 3917315,
+          "name": "Kyler Murray",
+          "pos": "QB",
+          "value": 523
+        },
+        {
+          "id": 4597500,
+          "name": "Adonai Mitchell",
+          "pos": "WR",
+          "value": null
+        },
+        {
+          "id": 3929645,
+          "name": "Juwan Johnson",
+          "pos": "TE",
+          "value": 412
+        }
+      ]
     },
     {
       "id": 11,
@@ -148,7 +1008,93 @@
       "losses": 0,
       "ties": 0,
       "pointsFor": 0,
-      "pointsAgainst": 0
+      "pointsAgainst": 0,
+      "roster": [
+        {
+          "id": 4242335,
+          "name": "Jonathan Taylor",
+          "pos": "RB",
+          "value": 8639
+        },
+        {
+          "id": 4362238,
+          "name": "Chase Brown",
+          "pos": "RB",
+          "value": 6925
+        },
+        {
+          "id": 4569618,
+          "name": "Garrett Wilson",
+          "pos": "WR",
+          "value": 3672
+        },
+        {
+          "id": 3918298,
+          "name": "Josh Allen",
+          "pos": "QB",
+          "value": 5968
+        },
+        {
+          "id": 4685278,
+          "name": "Luther Burden III",
+          "pos": "WR",
+          "value": 2587
+        },
+        {
+          "id": 4047650,
+          "name": "DK Metcalf",
+          "pos": "WR",
+          "value": 1248
+        },
+        {
+          "id": 4248528,
+          "name": "Christian Watson",
+          "pos": "WR",
+          "value": 1826
+        },
+        {
+          "id": 3916148,
+          "name": "Tony Pollard",
+          "pos": "RB",
+          "value": 1232
+        },
+        {
+          "id": 3040151,
+          "name": "George Kittle",
+          "pos": "TE",
+          "value": 1308
+        },
+        {
+          "id": 3116165,
+          "name": "Chris Godwin Jr.",
+          "pos": "WR",
+          "value": 961
+        },
+        {
+          "id": 4366031,
+          "name": "Tank Dell",
+          "pos": "WR",
+          "value": 134
+        },
+        {
+          "id": 4832800,
+          "name": "Denzel Boston",
+          "pos": "WR",
+          "value": 232
+        },
+        {
+          "id": 4430539,
+          "name": "Brenton Strange",
+          "pos": "TE",
+          "value": 197
+        },
+        {
+          "id": 4373626,
+          "name": "Tyler Allgeier",
+          "pos": "RB",
+          "value": 355
+        }
+      ]
     },
     {
       "id": 12,
@@ -159,7 +1105,93 @@
       "losses": 0,
       "ties": 0,
       "pointsFor": 0,
-      "pointsAgainst": 0
+      "pointsAgainst": 0,
+      "roster": [
+        {
+          "id": 4429160,
+          "name": "De'Von Achane",
+          "pos": "RB",
+          "value": 7638
+        },
+        {
+          "id": 4870808,
+          "name": "Jeremiyah Love",
+          "pos": "RB",
+          "value": 4843
+        },
+        {
+          "id": 4241478,
+          "name": "DeVonta Smith",
+          "pos": "WR",
+          "value": 4148
+        },
+        {
+          "id": 4612826,
+          "name": "Ladd McConkey",
+          "pos": "WR",
+          "value": 3518
+        },
+        {
+          "id": 5083076,
+          "name": "Harold Fannin Jr.",
+          "pos": "TE",
+          "value": 1616
+        },
+        {
+          "id": 4882093,
+          "name": "Bhayshul Tuten",
+          "pos": "RB",
+          "value": 2353
+        },
+        {
+          "id": 4360078,
+          "name": "Alec Pierce",
+          "pos": "WR",
+          "value": 747
+        },
+        {
+          "id": 4689114,
+          "name": "Jaxson Dart",
+          "pos": "QB",
+          "value": 1381
+        },
+        {
+          "id": 3126486,
+          "name": "Deebo Samuel Sr.",
+          "pos": "WR",
+          "value": 539
+        },
+        {
+          "id": 3042519,
+          "name": "Aaron Jones Sr.",
+          "pos": "RB",
+          "value": 437
+        },
+        {
+          "id": 3052587,
+          "name": "Baker Mayfield",
+          "pos": "QB",
+          "value": 795
+        },
+        {
+          "id": 5083315,
+          "name": "Kenyon Sadiq",
+          "pos": "TE",
+          "value": 259
+        },
+        {
+          "id": 4428557,
+          "name": "Tyjae Spears",
+          "pos": "RB",
+          "value": 167
+        },
+        {
+          "id": 4382466,
+          "name": "Jalen Nailor",
+          "pos": "WR",
+          "value": 198
+        }
+      ]
     }
   ],
   "weeks": [],
@@ -179,6 +1211,11 @@
       "player": "Chris Rodriguez Jr."
     }
   ],
+  "tradeValues": {
+    "source": "FantasyCalc — redraft, 12-team, PPR, 1QB",
+    "ok": true,
+    "count": 193
+  },
   "paid": {
     "1": true,
     "2": true,
@@ -213,6 +1250,6 @@
       }
     }
   ],
-  "updatedAt": "2026-08-27T22:21:10.446Z",
+  "updatedAt": "2026-08-27T22:31:11.556Z",
   "syncWarnings": []
 }
