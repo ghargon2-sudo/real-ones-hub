@@ -867,9 +867,9 @@
   ],
   "paid": {
     "1": true,
-    "2": false,
+    "2": true,
     "3": false,
-    "4": false,
+    "4": true,
     "5": true,
     "6": true,
     "7": false,
@@ -900,10 +900,5 @@
     }
   ],
   "updatedAt": "2026-08-27T22:09:49.667Z",
-  "syncWarnings": [
-    "Dropped dues entry for unknown team \"IMEATINGTHEWIENERS\".",
-    "Dropped dues entry for unknown team \"Reggie Boys\".",
-    "Dropped dues entry for unknown team \"Korbun's Top-Notch Team\".",
-    "Dropped dues entry for unknown team \"YoureEatingHotDogs\"."
-  ]
+  "syncWarnings": []
 }

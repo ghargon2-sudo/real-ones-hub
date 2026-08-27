@@ -206,25 +206,43 @@ async function shapeTransactions(regularSeasonWeeks) {
 /* ---------- dues carry-over ---------- */
 
 /**
- * Dues used to be keyed by team name, which broke whenever somebody renamed
- * their team. Re-key onto the stable ESPN team id, matching old name entries
- * once so nothing is lost.
+ * Dues are keyed by ESPN team id, which is stable across renames. Carry the
+ * previous file's entries forward. An unrecognised key is resolved in order:
+ * the current team name, then the manager of whatever team held that id last
+ * sync. Manager is the real anchor — team names drift, ids can be reissued, but
+ * the person paying doesn't change — so a payment is never silently dropped.
  */
 function carryDues(previous, teams) {
   const prevPaid = (previous && previous.paid) || {};
-  const byName = {};
-  for (const t of teams) byName[t.team] = t.id;
+  const prevTeams = (previous && previous.teams) || [];
+
+  const norm = (s) => String(s || "").split(/\s+/).join(" ").trim().toLowerCase();
+  const idByName = {};
+  const idByMgr = {};
+  for (const t of teams) {
+    idByName[t.team] = t.id;
+    if (t.manager) idByMgr[norm(t.manager)] = t.id;
+  }
+  // Which manager held each id in the previous file, to follow an id whose
+  // team was renamed or whose id ESPN reassigned.
+  const prevMgrById = {};
+  for (const t of prevTeams) prevMgrById[String(t.id)] = norm(t.manager);
 
   const paid = {};
   for (const t of teams) paid[t.id] = false;
 
   for (const [key, value] of Object.entries(prevPaid)) {
     if (Object.prototype.hasOwnProperty.call(paid, key)) {
-      paid[key] = !!value; // already an id
-    } else if (byName[key] != null) {
-      paid[byName[key]] = !!value; // legacy name key
-    } else {
-      warnings.push(`Dropped dues entry for unknown team "${key}".`);
+      paid[key] = !!value; // key is a current team id
+    } else if (idByName[key] != null) {
+      paid[idByName[key]] = !!value; // legacy name key
+    } else if (prevMgrById[key] != null && idByMgr[prevMgrById[key]] != null) {
+      paid[idByMgr[prevMgrById[key]]] = !!value; // id changed, same manager
+    } else if (idByMgr[norm(key)] != null) {
+      paid[idByMgr[norm(key)]] = !!value; // legacy manager-name key
+    } else if (value) {
+      // Only a *paid* entry going missing is worth shouting about.
+      warnings.push(`Could not carry a PAID dues entry for "${key}" — set it again in admin.html.`);
     }
   }
   return paid;
