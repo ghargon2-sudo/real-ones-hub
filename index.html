@@ -308,6 +308,67 @@
 
   .empty-row td{ color: var(--muted); font-style: normal; text-align:center; padding: 22px 16px; }
 
+  /* Trade analyzer */
+  .trade-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+  .trade-side{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 18px;
+    display:flex; flex-direction:column;
+  }
+  .trade-team-label{
+    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700; margin-bottom: 8px;
+  }
+  .trade-select{
+    width: 100%; background: var(--surface-2); color: var(--ink);
+    border: 1px solid var(--line); border-radius: 6px;
+    padding: 9px 11px; font-family: inherit; font-size: 0.92rem; font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .trade-select:focus{ outline: 2px solid var(--accent); outline-offset: 1px; }
+  .trade-roster{ display:flex; flex-direction:column; gap: 2px; max-height: 420px; overflow-y: auto; }
+  .trade-player{
+    display:flex; align-items:center; gap: 10px;
+    padding: 8px 6px; border-bottom: 1px solid var(--line);
+    cursor: pointer; user-select:none;
+  }
+  .trade-player:last-child{ border-bottom: none; }
+  .trade-player:hover{ background: var(--surface-2); }
+  .trade-player input{ width: 17px; height: 17px; accent-color: var(--accent); cursor:pointer; flex-shrink:0; }
+  .trade-player .pl-pos{
+    font-size: 0.66rem; font-weight: 800; letter-spacing: 0.04em;
+    color: var(--bg); background: var(--muted);
+    border-radius: 3px; padding: 2px 5px; min-width: 34px; text-align:center; flex-shrink:0;
+  }
+  .trade-player .pl-pos.QB{ background:#e07a5f; } .trade-player .pl-pos.RB{ background:#4fae6a; }
+  .trade-player .pl-pos.WR{ background:#5b8ff5; } .trade-player .pl-pos.TE{ background:#c98bdb; }
+  .trade-player .pl-pos.K{ background:#8ea395; } .trade-player .pl-pos.DST{ background:#b0824f; }
+  .trade-player .pl-name{ flex:1; font-weight: 600; font-size: 0.9rem; }
+  .trade-player.checked .pl-name{ color: var(--accent); }
+  .trade-player .pl-value{ font-family: "Consolas", ui-monospace, monospace; font-variant-numeric: tabular-nums; color: var(--muted); font-size: 0.85rem; }
+  .trade-player .pl-value.nr{ font-style: italic; opacity: 0.6; }
+  .trade-subtotal{
+    margin-top: 12px; padding-top: 12px; border-top: 2px solid var(--line);
+    text-align: right; font-family: "Consolas", ui-monospace, monospace;
+    font-variant-numeric: tabular-nums; font-size: 1.5rem; font-weight: 900; color: var(--ink);
+  }
+  .trade-verdict{
+    background: var(--surface-2); border: 1px solid var(--line);
+    border-left: 4px solid var(--accent); border-radius: 10px;
+    padding: 16px 20px; margin-top: 18px;
+  }
+  .trade-verdict .tv-headline{ font-size: 1.15rem; font-weight: 900; margin-bottom: 4px; }
+  .trade-verdict.even .tv-headline{ color: var(--good); }
+  .trade-verdict.edge .tv-headline{ color: var(--accent); }
+  .trade-verdict.lopsided .tv-headline{ color: var(--danger); }
+  .trade-verdict.lopsided{ border-left-color: var(--danger); }
+  .trade-verdict.even{ border-left-color: var(--good); }
+  .trade-verdict .tv-detail{ color: var(--muted); font-size: 0.9rem; }
+  .trade-verdict .tv-detail strong{ color: var(--ink); }
+  @media (max-width: 560px){ .trade-grid{ grid-template-columns: 1fr; } }
+
   /* Prize pool */
   .pool-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
 
@@ -412,6 +473,7 @@
     <button class="tab-btn active" data-tab="overview" role="tab" aria-selected="true">Overview</button>
     <button class="tab-btn" data-tab="standings" role="tab" aria-selected="false">Standings &amp; Dues</button>
     <button class="tab-btn" data-tab="pool" role="tab" aria-selected="false">Prize Pool</button>
+    <button class="tab-btn" data-tab="trade" role="tab" aria-selected="false">Trade Analyzer</button>
     <button class="tab-btn" data-tab="ledger" role="tab" aria-selected="false">Skins Ledger</button>
     <button class="tab-btn" data-tab="hof" role="tab" aria-selected="false">Hall of Fame</button>
     <button class="tab-btn" data-tab="champs" role="tab" aria-selected="false">Past Champions</button>
@@ -498,6 +560,37 @@
       </div>
       <div class="pool-grid" id="pool-grid"></div>
       <div id="pool-totals"></div>
+    </section>
+  </div>
+
+  <div class="tab-panel" id="panel-trade" role="tabpanel">
+    <section>
+      <div class="section-head">
+        <h2>Trade Analyzer</h2>
+        <span class="hint" id="trade-source">Loading values…</span>
+      </div>
+      <div class="rules-card" style="border-left-color: var(--accent);">
+        Pick two teams, check the players each side would send, and see how the
+        redraft trade value shakes out. Values are a market guide from FantasyCalc —
+        a conversation-starter, not a verdict.
+      </div>
+
+      <div class="trade-verdict" id="trade-verdict" hidden></div>
+
+      <div class="trade-grid">
+        <div class="trade-side">
+          <label class="trade-team-label" for="trade-team-a">Team A sends</label>
+          <select id="trade-team-a" class="trade-select"></select>
+          <div class="trade-roster" id="trade-roster-a"></div>
+          <div class="trade-subtotal" id="trade-total-a">0</div>
+        </div>
+        <div class="trade-side">
+          <label class="trade-team-label" for="trade-team-b">Team B sends</label>
+          <select id="trade-team-b" class="trade-select"></select>
+          <div class="trade-roster" id="trade-roster-b"></div>
+          <div class="trade-subtotal" id="trade-total-b">0</div>
+        </div>
+      </div>
     </section>
   </div>
 
@@ -680,6 +773,144 @@
       ledger.push({ week: wk.week, winners, losers, amount: perWeek, share });
     }
     return { ledger, totals };
+  }
+
+  /* ---------- trade analyzer ---------- */
+
+  // Kept at module scope so the dropdowns' change handlers can recompute
+  // without a full re-render.
+  const tradeState = { teams: [], a: null, b: null, picked: { a: new Set(), b: new Set() } };
+
+  function rosterValueRow(p, side) {
+    const checked = tradeState.picked[side].has(p.id);
+    const val = p.value == null
+      ? `<span class="pl-value nr">NR</span>`
+      : `<span class="pl-value">${p.value.toLocaleString()}</span>`;
+    return `
+      <label class="trade-player${checked ? " checked" : ""}">
+        <input type="checkbox" data-side="${side}" data-pid="${p.id}" ${checked ? "checked" : ""}>
+        <span class="pl-pos ${esc(p.pos)}">${esc(p.pos || "—")}</span>
+        <span class="pl-name">${esc(p.name)}</span>
+        ${val}
+      </label>`;
+  }
+
+  function sumPicked(side) {
+    const team = tradeState[side];
+    if (!team) return { value: 0, count: 0, unranked: 0 };
+    let value = 0, count = 0, unranked = 0;
+    for (const p of team.roster || []) {
+      if (!tradeState.picked[side].has(p.id)) continue;
+      count += 1;
+      if (p.value == null) unranked += 1;
+      else value += p.value;
+    }
+    return { value, count, unranked };
+  }
+
+  function renderTradeRosterSide(side) {
+    const team = tradeState[side];
+    const wrap = $(`trade-roster-${side}`);
+    if (!team) { wrap.innerHTML = ""; return; }
+    const roster = [...(team.roster || [])].sort(
+      (x, y) => (y.value ?? -1) - (x.value ?? -1) || x.name.localeCompare(y.name)
+    );
+    wrap.innerHTML = roster.map((p) => rosterValueRow(p, side)).join("");
+    wrap.querySelectorAll("input[type=checkbox]").forEach((cb) => {
+      cb.addEventListener("change", () => {
+        const set = tradeState.picked[side];
+        const pid = Number(cb.dataset.pid);
+        if (cb.checked) set.add(pid); else set.delete(pid);
+        cb.closest(".trade-player").classList.toggle("checked", cb.checked);
+        updateTradeVerdict();
+      });
+    });
+  }
+
+  function updateTradeVerdict() {
+    const a = sumPicked("a");
+    const b = sumPicked("b");
+    $("trade-total-a").textContent = a.value.toLocaleString();
+    $("trade-total-b").textContent = b.value.toLocaleString();
+
+    const box = $("trade-verdict");
+    if (!a.count && !b.count) { box.hidden = true; return; }
+    box.hidden = false;
+
+    const nameA = tradeState.a ? tradeState.a.team : "Team A";
+    const nameB = tradeState.b ? tradeState.b.team : "Team B";
+    const diff = a.value - b.value;                 // + means A sends more value
+    const bigger = Math.max(a.value, b.value) || 1;
+    const pct = Math.abs(diff) / bigger;            // relative gap
+
+    // Fairness bands on the relative value gap. Deliberately generous — trade
+    // values are fuzzy, so only a real mismatch gets called lopsided.
+    let cls, headline, winner;
+    if (pct < 0.08) { cls = "even"; headline = "Fair trade"; }
+    else if (pct < 0.20) { cls = "edge"; winner = diff > 0 ? nameB : nameA; headline = `Slight edge: ${winner}`; }
+    else { cls = "lopsided"; winner = diff > 0 ? nameB : nameA; headline = `Lopsided: ${winner} wins`; }
+    box.className = "trade-verdict " + cls;
+
+    const bits = [];
+    bits.push(`<strong>${esc(nameA)}</strong> sends ${a.value.toLocaleString()} (${a.count} player${a.count === 1 ? "" : "s"})`);
+    bits.push(`<strong>${esc(nameB)}</strong> sends ${b.value.toLocaleString()} (${b.count} player${b.count === 1 ? "" : "s"})`);
+    let detail = bits.join(" · ") + ".";
+    if (a.value && b.value) detail += ` Value gap ${(pct * 100).toFixed(0)}%.`;
+    if (a.count !== b.count) {
+      const short = a.count > b.count ? nameB : nameA;
+      detail += ` ${esc(short)} gives up fewer players and would need a roster spot to fill.`;
+    }
+    const totalNr = a.unranked + b.unranked;
+    if (totalNr) detail += ` ${totalNr} unranked player${totalNr === 1 ? "" : "s"} (NR) carr${totalNr === 1 ? "ies" : "y"} no market value here.`;
+
+    box.innerHTML = `<div class="tv-headline">${esc(headline)}</div><div class="tv-detail">${detail}</div>`;
+  }
+
+  function renderTradeAnalyzer(teams, tradeValues) {
+    tradeState.teams = teams;
+    const hint = $("trade-source");
+    hint.textContent = tradeValues.ok
+      ? tradeValues.source
+      : "Values unavailable — rosters shown without trade values.";
+
+    const withRosters = teams.filter((t) => (t.roster || []).length);
+    if (withRosters.length < 2) {
+      $("trade-verdict").hidden = true;
+      $("trade-roster-a").innerHTML = "";
+      $("trade-roster-b").innerHTML = "";
+      $("trade-team-a").innerHTML = $("trade-team-b").innerHTML =
+        `<option>Rosters load after the next sync</option>`;
+      return;
+    }
+
+    // Default to the first two distinct teams, preserved across re-renders.
+    if (!tradeState.a || !teams.some((t) => t.id === tradeState.a.id)) tradeState.a = withRosters[0];
+    if (!tradeState.b || !teams.some((t) => t.id === tradeState.b.id) || tradeState.b.id === tradeState.a.id) {
+      tradeState.b = withRosters.find((t) => t.id !== tradeState.a.id) || withRosters[1];
+    }
+
+    const opts = (selId) => teams.map((t) =>
+      `<option value="${t.id}" ${t.id === selId ? "selected" : ""}>${esc(t.team)}</option>`).join("");
+    const selA = $("trade-team-a"), selB = $("trade-team-b");
+    selA.innerHTML = opts(tradeState.a.id);
+    selB.innerHTML = opts(tradeState.b.id);
+
+    selA.onchange = () => {
+      tradeState.a = teams.find((t) => t.id === Number(selA.value));
+      tradeState.picked.a.clear();
+      renderTradeRosterSide("a");
+      updateTradeVerdict();
+    };
+    selB.onchange = () => {
+      tradeState.b = teams.find((t) => t.id === Number(selB.value));
+      tradeState.picked.b.clear();
+      renderTradeRosterSide("b");
+      updateTradeVerdict();
+    };
+
+    renderTradeRosterSide("a");
+    renderTradeRosterSide("b");
+    updateTradeVerdict();
   }
 
   /* ---------- render ---------- */
@@ -877,6 +1108,9 @@
           <td>${esc(r.player)}</td>
         </tr>`).join("")
       : emptyRow(4, "No moves yet — this fills in once free agency and waivers open.");
+
+    /* Trade analyzer */
+    renderTradeAnalyzer(teams, data.tradeValues || {});
 
     /* Footer */
     if (data.updatedAt) {

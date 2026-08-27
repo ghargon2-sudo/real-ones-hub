@@ -90,7 +90,28 @@ function managerName(team, membersById) {
   return full || member.displayName || "";
 }
 
-function shapeTeams(league) {
+const ESPN_POS = { 1: "QB", 2: "RB", 3: "WR", 4: "TE", 5: "K", 16: "DST" };
+
+/**
+ * Each team's roster, with a redraft trade value attached per player (null when
+ * the player is outside the value feed's ranked pool). Feeds the trade analyzer.
+ */
+function shapeRoster(team, valueByEspnId) {
+  const entries = (team.roster && team.roster.entries) || [];
+  return entries.map((e) => {
+    const p = (e.playerPoolEntry && e.playerPoolEntry.player) || {};
+    const espnId = String(e.playerId);
+    const v = valueByEspnId[espnId];
+    return {
+      id: e.playerId,
+      name: p.fullName || `Player ${espnId}`,
+      pos: ESPN_POS[p.defaultPositionId] || "",
+      value: v == null ? null : v,
+    };
+  });
+}
+
+function shapeTeams(league, valueByEspnId) {
   const membersById = {};
   for (const m of league.members || []) membersById[m.id] = m;
 
@@ -106,8 +127,28 @@ function shapeTeams(league) {
       ties: overall.ties || 0,
       pointsFor: Number((overall.pointsFor ?? 0).toFixed(2)),
       pointsAgainst: Number((overall.pointsAgainst ?? 0).toFixed(2)),
+      roster: shapeRoster(t, valueByEspnId),
     };
   });
+}
+
+/**
+ * Current redraft trade values from FantasyCalc, keyed by ESPN player id.
+ * FantasyCalc carries an espnId on every player, so no name-matching is needed.
+ * Best effort: on any failure the rosters still sync, just without values.
+ */
+async function fetchTradeValues() {
+  const url =
+    "https://api.fantasycalc.com/values/current?isDynasty=false&numQbs=1&numTeams=12&ppr=1";
+  const res = await fetch(url, { headers: { accept: "application/json" } });
+  if (!res.ok) throw new Error(`FantasyCalc ${res.status}`);
+  const list = await res.json();
+  const byId = {};
+  for (const row of list || []) {
+    const p = row.player || {};
+    if (p.espnId != null && row.value != null) byId[String(p.espnId)] = row.value;
+  }
+  return byId;
 }
 
 /**
@@ -259,14 +300,24 @@ async function main() {
   console.log(`Syncing ESPN league ${LEAGUE_ID}, season ${SEASON}...`);
 
   const league = await espnGet(
-    `/segments/0/leagues/${LEAGUE_ID}?view=mTeam&view=mSettings&view=mMatchupScore`
+    `/segments/0/leagues/${LEAGUE_ID}?view=mTeam&view=mSettings&view=mMatchupScore&view=mRoster`
   );
 
   const settings = league.settings || {};
   const schedSettings = settings.scheduleSettings || {};
   const regularSeasonWeeks = schedSettings.matchupPeriodCount || 13;
 
-  const teams = shapeTeams(league);
+  let valueByEspnId = {};
+  let valuesOk = false;
+  try {
+    valueByEspnId = await fetchTradeValues();
+    valuesOk = Object.keys(valueByEspnId).length > 0;
+    if (!valuesOk) warnings.push("Trade values came back empty from FantasyCalc.");
+  } catch (e) {
+    warnings.push(`Trade values unavailable: ${e.message}`);
+  }
+
+  const teams = shapeTeams(league, valueByEspnId);
   if (!teams.length) throw new Error("ESPN returned no teams — check the league id and season.");
   const weeks = shapeWeeks(league, regularSeasonWeeks);
 
@@ -307,6 +358,11 @@ async function main() {
     teams,
     weeks,
     transactions,
+    tradeValues: {
+      source: "FantasyCalc — redraft, 12-team, PPR, 1QB",
+      ok: valuesOk,
+      count: Object.keys(valueByEspnId).length,
+    },
     paid: carryDues(previous, teams),
     champions: previous.champions || [],
     updatedAt: new Date().toISOString(),
