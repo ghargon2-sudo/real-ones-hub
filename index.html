@@ -487,8 +487,7 @@
     <button class="tab-btn" data-tab="standings" role="tab" aria-selected="false">Standings &amp; Dues</button>
     <button class="tab-btn" data-tab="pool" role="tab" aria-selected="false">Prize Pool</button>
     <button class="tab-btn" data-tab="trade" role="tab" aria-selected="false">Trade Analyzer</button>
-    <button class="tab-btn" data-tab="ledger" role="tab" aria-selected="false">Skins Ledger</button>
-    <button class="tab-btn" data-tab="hof" role="tab" aria-selected="false">Hall of Fame</button>
+    <button class="tab-btn" data-tab="skins" role="tab" aria-selected="false">Skins</button>
     <button class="tab-btn" data-tab="champs" role="tab" aria-selected="false">Past Champions</button>
     <button class="tab-btn" data-tab="tx" role="tab" aria-selected="false">Transactions</button>
   </nav>
@@ -613,7 +612,7 @@
     </section>
   </div>
 
-  <div class="tab-panel" id="panel-ledger" role="tabpanel">
+  <div class="tab-panel" id="panel-skins" role="tabpanel">
     <section>
       <div class="section-head">
         <h2>Skins Ledger</h2>
@@ -634,12 +633,9 @@
         </table>
       </div>
     </section>
-  </div>
-
-  <div class="tab-panel" id="panel-hof" role="tabpanel">
     <section>
       <div class="section-head">
-        <h2>Skins Hall of Fame &amp; Shame</h2>
+        <h2>Hall of Fame &amp; Shame</h2>
         <span class="hint">Fills in as weeks are played</span>
       </div>
       <div class="table-scroll">
@@ -748,18 +744,29 @@
     </div>`;
   }
 
-  /* Tabs */
-  const tabButtons = document.querySelectorAll(".tab-btn");
+  /* Tabs — hash-routed so they're linkable, refresh-safe and back-button aware. */
+  const tabButtons = Array.from(document.querySelectorAll(".tab-btn"));
   const panels = document.querySelectorAll(".tab-panel");
-  tabButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      tabButtons.forEach((b) => { b.classList.remove("active"); b.setAttribute("aria-selected", "false"); });
-      panels.forEach((p) => p.classList.remove("active"));
-      btn.classList.add("active");
-      btn.setAttribute("aria-selected", "true");
-      $("panel-" + btn.dataset.tab).classList.add("active");
+  const tabNames = tabButtons.map((b) => b.dataset.tab);
+
+  function activateTab(name, { push = false } = {}) {
+    if (!tabNames.includes(name)) name = "overview";
+    tabButtons.forEach((b) => {
+      const on = b.dataset.tab === name;
+      b.classList.toggle("active", on);
+      b.setAttribute("aria-selected", on ? "true" : "false");
+      if (on) b.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
     });
+    panels.forEach((p) => p.classList.toggle("active", p.id === "panel-" + name));
+    if (push && location.hash.slice(1) !== name) history.pushState(null, "", "#" + name);
+  }
+
+  tabButtons.forEach((btn) => {
+    btn.addEventListener("click", () => activateTab(btn.dataset.tab, { push: true }));
   });
+  // Back/forward and direct links (e.g. .../#trade) land on the right tab.
+  window.addEventListener("hashchange", () => activateTab(location.hash.slice(1)));
+  activateTab(location.hash.slice(1) || "overview");
 
   /* ---------- skins, derived from weekly scores ---------- */
 
