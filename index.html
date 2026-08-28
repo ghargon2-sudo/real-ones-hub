@@ -308,6 +308,41 @@
 
   .empty-row td{ color: var(--muted); font-style: normal; text-align:center; padding: 22px 16px; }
 
+  /* This Week scoreboard */
+  .matchup-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+  .matchup{
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 10px; padding: 6px 14px; position: relative; overflow: hidden;
+  }
+  .matchup::before{
+    content:""; position:absolute; inset:0 auto 0 0; width:3px; background: var(--line);
+  }
+  .matchup.live::before{ background: var(--good); }
+  .matchup.final::before{ background: var(--accent); }
+  .mu-team{
+    display:flex; align-items:center; justify-content:space-between; gap: 10px;
+    padding: 9px 0; border-bottom: 1px solid var(--line);
+  }
+  .mu-team:last-of-type{ border-bottom: none; }
+  .mu-side{ display:flex; align-items:center; gap: 7px; min-width:0; }
+  .mu-name{ font-weight: 700; font-size: 0.92rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .mu-team.leader .mu-name{ color: var(--accent); }
+  .mu-team.leader .mu-score{ color: var(--ink); }
+  .mu-score{
+    font-family: "Consolas", ui-monospace, monospace; font-variant-numeric: tabular-nums;
+    font-weight: 800; font-size: 1.05rem; color: var(--muted); flex-shrink:0;
+  }
+  .mu-badge{ font-size: 0.85rem; flex-shrink:0; }
+  .mu-status{
+    text-align:right; font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase;
+    font-weight: 700; color: var(--muted); padding: 4px 0 2px;
+  }
+  .mu-status.live{ color: var(--good); }
+  .mu-status.final{ color: var(--accent); }
+  .thisweek-note{ color: var(--muted); font-size: 0.85rem; margin: 12px 2px 0; }
+  .thisweek-note .hi{ color: var(--good); font-weight:700; }
+  .thisweek-note .lo{ color: var(--danger); font-weight:700; }
+
   /* Power rankings */
   .power-list{ display:flex; flex-direction:column; gap: 10px; }
   .power-row{
@@ -521,6 +556,14 @@
   </nav>
 
   <div class="tab-panel active" id="panel-overview" role="tabpanel">
+    <section>
+      <div class="section-head">
+        <h2 id="thisweek-head">This Week</h2>
+        <span class="hint" id="thisweek-hint"></span>
+      </div>
+      <div id="this-week"></div>
+    </section>
+
     <section class="scoreboard">
       <div class="scoreboard-head">
         <h2>Season status</h2>
@@ -1010,6 +1053,65 @@
     updateTradeVerdict();
   }
 
+  /* ---------- this week scoreboard ---------- */
+
+  function renderThisWeek(teams, sb) {
+    const byId = Object.fromEntries(teams.map((t) => [t.id, t]));
+    const wrap = $("this-week");
+    const hint = $("thisweek-hint");
+    const head = $("thisweek-head");
+    const matchups = (sb && sb.matchups) || [];
+
+    if (!matchups.length) {
+      head.textContent = "This Week";
+      hint.textContent = "";
+      wrap.innerHTML = `<p class="empty-state">The week's matchups appear here once the schedule is live.</p>`;
+      return;
+    }
+
+    head.textContent = `Week ${sb.week}`;
+    const anyLive = matchups.some((m) => m.status === "live");
+    const anyFinal = matchups.some((m) => m.status === "final");
+    const allFinal = matchups.every((m) => m.status === "final");
+    hint.textContent = allFinal ? "Final" : anyLive ? "Live" : anyFinal ? "In progress" : "Kickoff pending";
+
+    const teamName = (id) => (byId[id] || {}).team || "—";
+    const fmt = (n) => (n || 0).toFixed(1);
+
+    const side = (t, isLeader, badge) => `
+      <div class="mu-team${isLeader ? " leader" : ""}">
+        <span class="mu-side">
+          ${badge ? `<span class="mu-badge">${badge}</span>` : ""}
+          <span class="mu-name">${esc(teamName(t.teamId))}</span>
+        </span>
+        <span class="mu-score">${fmt(t.points)}</span>
+      </div>`;
+
+    wrap.innerHTML = `<div class="matchup-grid">` + matchups.map((m) => {
+      const started = m.status !== "upcoming";
+      const hp = m.home.points || 0, ap = m.away.points || 0;
+      const homeLead = started && hp > ap, awayLead = started && ap > hp;
+      const hiId = sb.skinsHighTeamId, loId = sb.skinsLowTeamId;
+      const badge = (id) => id === hiId ? "💰" : id === loId ? "⚠️" : "";
+      const label = m.status === "final" ? "Final" : m.status === "live" ? "Live" : "Upcoming";
+      return `
+        <div class="matchup ${m.status}">
+          ${side(m.home, homeLead, badge(m.home.teamId))}
+          ${side(m.away, awayLead, badge(m.away.teamId))}
+          <div class="mu-status ${m.status}">${label}</div>
+        </div>`;
+    }).join("") + `</div>`;
+
+    // Skins context once scores exist.
+    if (sb.skinsHighTeamId != null) {
+      const note = document.createElement("p");
+      note.className = "thisweek-note";
+      note.innerHTML = `Skins so far: <span class="hi">💰 ${esc(teamName(sb.skinsHighTeamId))}</span> leads for the $10`
+        + (sb.skinsLowTeamId != null ? ` · <span class="lo">⚠️ ${esc(teamName(sb.skinsLowTeamId))}</span> is the low score</span>` : "");
+      wrap.appendChild(note);
+    }
+  }
+
   /* ---------- power rankings ---------- */
 
   function renderPowerRankings(teams, pr) {
@@ -1253,7 +1355,8 @@
         </tr>`).join("")
       : emptyRow(4, "No moves yet — this fills in once free agency and waivers open.");
 
-    /* Power rankings */
+    /* This week + power rankings */
+    renderThisWeek(teams, data.scoreboard || {});
     renderPowerRankings(teams, data.powerRankings || {});
 
     /* Trade analyzer */
@@ -1279,6 +1382,7 @@
     $("tx-body").innerHTML = emptyRow(4, "Could not load data.json.");
     $("champs-body").innerHTML = emptyRow(5, "Could not load data.json.");
     $("power-list").innerHTML = `<p class="empty-state">Could not load data.json.</p>`;
+    $("this-week").innerHTML = `<p class="empty-state">Could not load data.json.</p>`;
   }
 
   fetch("./data.json", { cache: "no-store" })

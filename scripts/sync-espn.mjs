@@ -178,6 +178,38 @@ function shapeWeeks(league, regularSeasonWeeks) {
     .map(([week, scores]) => ({ week, scores: scores.sort((a, b) => b.score - a.score) }));
 }
 
+/**
+ * The current week's matchups for the "This Week" scoreboard, including games
+ * not yet final (unlike shapeWeeks, which only keeps decided weeks for skins).
+ */
+function shapeScoreboard(league, currentWeek) {
+  const games = (league.schedule || []).filter((g) => g.matchupPeriodId === currentWeek && g.home && g.away);
+  const matchups = games.map((g) => {
+    const hp = Number(g.home.totalPoints ?? 0);
+    const ap = Number(g.away.totalPoints ?? 0);
+    const decided = g.winner && g.winner !== "UNDECIDED";
+    const status = decided ? "final" : hp > 0 || ap > 0 ? "live" : "upcoming";
+    return {
+      home: { teamId: g.home.teamId, points: Number(hp.toFixed(1)) },
+      away: { teamId: g.away.teamId, points: Number(ap.toFixed(1)) },
+      winner: g.winner || "UNDECIDED",
+      status,
+    };
+  });
+
+  // Current skins standings for the week — only once anyone has scored.
+  let skinsHighTeamId = null, skinsLowTeamId = null;
+  const scored = matchups.flatMap((m) => [m.home, m.away]).filter((s) => s.points > 0);
+  if (scored.length) {
+    const hi = Math.max(...scored.map((s) => s.points));
+    const lo = Math.min(...scored.map((s) => s.points));
+    skinsHighTeamId = (scored.find((s) => s.points === hi) || {}).teamId ?? null;
+    skinsLowTeamId = (scored.find((s) => s.points === lo) || {}).teamId ?? null;
+  }
+
+  return { week: currentWeek, matchups, skinsHighTeamId, skinsLowTeamId };
+}
+
 /* ---------- transactions (best effort) ---------- */
 
 const TX_ACTION = {
@@ -354,12 +386,15 @@ async function main() {
   }
 
   const status = league.status || {};
+  const currentWeek = status.currentMatchupPeriod || status.latestScoringPeriod || 1;
+  const scoreboard = shapeScoreboard(league, currentWeek);
+
   const next = {
     league: {
       id: String(LEAGUE_ID),
       name: settings.name || previous.league?.name || "Real Ones",
       season: SEASON,
-      currentWeek: status.currentMatchupPeriod || status.latestScoringPeriod || 0,
+      currentWeek,
       regularSeasonWeeks,
       teamCount: teams.length,
     },
@@ -375,6 +410,7 @@ async function main() {
     },
     teams,
     weeks,
+    scoreboard,
     transactions,
     tradeValues: {
       source: "FantasyCalc — redraft, 12-team, PPR, 1QB",
