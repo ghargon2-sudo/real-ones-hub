@@ -249,6 +249,24 @@ async function shapeTransactions(regularSeasonWeeks) {
   return out.slice(0, 100);
 }
 
+/* ---------- power rankings seed ---------- */
+
+/**
+ * First-run power rankings: rank by record then points-for, no movement yet and
+ * empty blurbs. Order in the array is the rank. After this, admin.html owns it
+ * and the sync just carries it forward.
+ */
+function seedPowerRankings(teams) {
+  const ordered = [...teams].sort(
+    (a, b) => b.wins - a.wins || b.pointsFor - a.pointsFor || a.team.localeCompare(b.team)
+  );
+  return {
+    week: 0,
+    updatedAt: new Date().toISOString(),
+    entries: ordered.map((t) => ({ teamId: t.id, prevRank: null, note: "" })),
+  };
+}
+
 /* ---------- dues carry-over ---------- */
 
 /**
@@ -365,6 +383,9 @@ async function main() {
     },
     paid: carryDues(previous, teams),
     champions: previous.champions || [],
+    // Editorial, commissioner-owned — preserve it. Seed from the standings order
+    // the first time so the tab isn't empty; blurbs and re-ranks come from admin.
+    powerRankings: previous.powerRankings || seedPowerRankings(teams),
     updatedAt: new Date().toISOString(),
     syncWarnings: warnings,
   };

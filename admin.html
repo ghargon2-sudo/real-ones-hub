@@ -91,6 +91,24 @@
 
   a{ color: var(--accent); }
   .hidden{ display:none; }
+
+  .power-edit{ display:flex; flex-direction:column; gap: 8px; }
+  .power-edit-row{
+    display:grid; grid-template-columns: 28px auto 1fr; gap: 10px; align-items:start;
+    padding: 10px 0; border-bottom: 1px solid var(--line);
+  }
+  .power-edit-row:last-child{ border-bottom:none; }
+  .pe-rank{ font-weight: 800; color: var(--muted); text-align:center; padding-top: 6px; }
+  .pe-move{ display:flex; flex-direction:column; gap: 3px; }
+  .pe-move button{ padding: 2px 8px; font-size: 0.8rem; background: var(--surface-2); color: var(--ink); border: 1px solid var(--line); }
+  .pe-move button:disabled{ opacity: 0.3; }
+  .pe-main .pe-team{ font-weight: 700; font-size: 0.9rem; }
+  .pe-main textarea{
+    width: 100%; margin-top: 5px; background: var(--surface-2); color: var(--ink);
+    border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px;
+    font-family: inherit; font-size: 0.85rem; resize: vertical; min-height: 42px;
+  }
+  .pe-main textarea:focus{ outline: 2px solid var(--accent); outline-offset: 1px; }
 </style>
 </head>
 <body>
@@ -126,6 +144,16 @@
     </div>
   </div>
 
+  <div class="card hidden" id="power-card">
+    <h2>Power Rankings</h2>
+    <p>Drag the order with the arrows, write a blurb for each team, then publish. Movement arrows on the site are figured from the last rankings you posted.</p>
+    <div class="power-edit" id="power-edit"></div>
+    <div class="row">
+      <button class="primary" id="publish-power-btn">Publish rankings</button>
+      <span class="status" id="power-status"></span>
+    </div>
+  </div>
+
   <p class="sub"><a href="./">&larr; Back to the public hub</a></p>
 
 </div>
@@ -140,6 +168,12 @@
   const duesCard = document.getElementById("dues-card");
   const teamList = document.getElementById("team-list");
   const publishStatus = document.getElementById("publish-status");
+  const powerCard = document.getElementById("power-card");
+  const powerEdit = document.getElementById("power-edit");
+  const powerStatus = document.getElementById("power-status");
+
+  let powerOrder = [];   // team ids, in rank order
+  let powerNotes = {};   // teamId -> blurb
 
   // The whole data.json is kept so publishing can't clobber the fields the
   // ESPN sync owns (teams, weeks, transactions...). We only touch `paid`.
@@ -183,7 +217,10 @@
       currentData = JSON.parse(decoded) || {};
       currentPaid = currentData.paid || {};
       teams = currentData.teams || [];
+      initPower();
       renderTeamList();
+      renderPowerEditor();
+      powerCard.classList.remove("hidden");
       if (!teams.length) {
         tokenStatus.textContent = "Connected, but no teams yet — run the \"Sync ESPN league\" action first.";
         tokenStatus.className = "status pending";
@@ -240,36 +277,91 @@
   document.getElementById("clear-token").addEventListener("click", () => {
     localStorage.removeItem(TOKEN_KEY);
     duesCard.classList.add("hidden");
+    powerCard.classList.add("hidden");
     tokenStatus.textContent = "Token forgotten.";
     tokenStatus.className = "status";
   });
 
-  document.getElementById("publish-btn").addEventListener("click", async () => {
+  /* ---------- power rankings editor ---------- */
+
+  function teamById(id) { return teams.find(t => String(t.id) === String(id)); }
+
+  function initPower() {
+    const entries = (currentData.powerRankings && currentData.powerRankings.entries) || [];
+    if (entries.length) {
+      powerOrder = entries.map(e => e.teamId);
+      powerNotes = {};
+      entries.forEach(e => { powerNotes[e.teamId] = e.note || ""; });
+      // Append any team missing from the saved order (e.g. an expansion team).
+      for (const t of teams) if (!powerOrder.some(id => String(id) === String(t.id))) powerOrder.push(t.id);
+    } else {
+      powerOrder = teams.map(t => t.id);
+      powerNotes = {};
+    }
+  }
+
+  function movePower(i, dir) {
+    const j = i + dir;
+    if (j < 0 || j >= powerOrder.length) return;
+    [powerOrder[i], powerOrder[j]] = [powerOrder[j], powerOrder[i]];
+    renderPowerEditor();
+  }
+
+  function renderPowerEditor() {
+    powerEdit.innerHTML = "";
+    if (!teams.length) {
+      powerEdit.innerHTML = `<div class="team-mgr">No teams yet — run the ESPN sync first.</div>`;
+      return;
+    }
+    powerOrder.forEach((tid, i) => {
+      const t = teamById(tid);
+      if (!t) return;
+      const row = document.createElement("div");
+      row.className = "power-edit-row";
+      row.innerHTML = `
+        <div class="pe-rank">${i + 1}</div>
+        <div class="pe-move">
+          <button data-up="${i}" ${i === 0 ? "disabled" : ""} title="Move up">▲</button>
+          <button data-down="${i}" ${i === powerOrder.length - 1 ? "disabled" : ""} title="Move down">▼</button>
+        </div>
+        <div class="pe-main">
+          <div class="pe-team">${esc(t.team)} <span class="team-mgr">— ${esc(t.manager)}</span></div>
+          <textarea data-note="${esc(tid)}" placeholder="Blurb / trash talk (optional)">${esc(powerNotes[tid] || "")}</textarea>
+        </div>
+      `;
+      powerEdit.appendChild(row);
+    });
+    powerEdit.querySelectorAll("button[data-up]").forEach(b => b.onclick = () => movePower(Number(b.dataset.up), -1));
+    powerEdit.querySelectorAll("button[data-down]").forEach(b => b.onclick = () => movePower(Number(b.dataset.down), 1));
+    powerEdit.querySelectorAll("textarea[data-note]").forEach(ta => {
+      ta.addEventListener("input", () => { powerNotes[ta.dataset.note] = ta.value; });
+    });
+  }
+
+  /* ---------- shared publish ---------- */
+
+  // Fetches the latest file, applies buildPatch(freshData) on top, and commits.
+  // Merging onto the freshest copy keeps a sync landing mid-edit from being lost,
+  // and only the fields in the patch are ever touched.
+  async function publishPatch(buildPatch, message, statusEl) {
     const token = getToken();
     if (!token) return;
-    publishStatus.textContent = "Publishing...";
-    publishStatus.className = "status pending";
+    statusEl.textContent = "Publishing...";
+    statusEl.className = "status pending";
     try {
-      // Merge onto the latest file so a sync landing mid-edit isn't overwritten.
       const fresh = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE_PATH}`, {
         headers: ghHeaders(token)
       }).then(r => r.ok ? r.json() : null);
       if (fresh) {
         currentSha = fresh.sha;
-        const decoded = decodeURIComponent(escape(atob(fresh.content.replace(/\n/g, ""))));
-        currentData = JSON.parse(decoded) || currentData;
+        currentData = JSON.parse(decodeURIComponent(escape(atob(fresh.content.replace(/\n/g, ""))))) || currentData;
       }
-      const merged = { ...currentData, paid: currentPaid };
-      const newContent = JSON.stringify(merged, null, 2) + "\n";
-      const encoded = btoa(unescape(encodeURIComponent(newContent)));
+      const merged = { ...currentData, ...buildPatch(currentData) };
+      const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(merged, null, 2) + "\n")));
       const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE_PATH}`, {
         method: "PUT",
         headers: { ...ghHeaders(token), "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: "Update dues via admin panel",
-          content: encoded,
-          sha: currentSha
-        })
+        body: JSON.stringify({ message, content: encoded, sha: currentSha })
       });
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
@@ -277,12 +369,33 @@
       }
       const result = await res.json();
       currentSha = result.content.sha;
-      publishStatus.textContent = "Published — live in ~1 minute.";
-      publishStatus.className = "status ok";
+      currentData = merged;
+      statusEl.textContent = "Published — live in ~1 minute.";
+      statusEl.className = "status ok";
     } catch (e) {
-      publishStatus.textContent = "Error: " + e.message;
-      publishStatus.className = "status err";
+      statusEl.textContent = "Error: " + e.message;
+      statusEl.className = "status err";
     }
+  }
+
+  document.getElementById("publish-btn").addEventListener("click", () => {
+    publishPatch(() => ({ paid: currentPaid }), "Update dues via admin panel", publishStatus);
+  });
+
+  document.getElementById("publish-power-btn").addEventListener("click", () => {
+    publishPatch((fresh) => {
+      // Movement is measured against the order that's currently published.
+      const prev = (fresh.powerRankings && fresh.powerRankings.entries) || [];
+      const prevRankById = {};
+      prev.forEach((e, i) => { prevRankById[String(e.teamId)] = i + 1; });
+      const entries = powerOrder.map((tid) => ({
+        teamId: tid,
+        prevRank: String(tid) in prevRankById ? prevRankById[String(tid)] : null,
+        note: (powerNotes[tid] || "").trim(),
+      }));
+      const week = (fresh.league && fresh.league.currentWeek) || 0;
+      return { powerRankings: { week, updatedAt: new Date().toISOString(), entries } };
+    }, "Update power rankings via admin panel", powerStatus);
   });
 
   if (getToken()) {

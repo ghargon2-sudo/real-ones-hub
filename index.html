@@ -308,6 +308,34 @@
 
   .empty-row td{ color: var(--muted); font-style: normal; text-align:center; padding: 22px 16px; }
 
+  /* Power rankings */
+  .power-list{ display:flex; flex-direction:column; gap: 10px; }
+  .power-row{
+    display:flex; align-items:flex-start; gap: 14px;
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 10px; padding: 14px 16px;
+  }
+  .power-rank{
+    font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+    font-weight: 900; font-size: 1.7rem; line-height: 1; color: var(--muted);
+    min-width: 40px; text-align: center; flex-shrink:0;
+    font-variant-numeric: tabular-nums;
+  }
+  .power-row.top .power-rank{ color: var(--accent); }
+  .power-move{
+    font-size: 0.72rem; font-weight: 800; margin-top: 4px; min-width: 34px;
+    text-align:center; flex-shrink:0;
+  }
+  .power-move.up{ color: var(--good); }
+  .power-move.down{ color: var(--danger); }
+  .power-move.flat{ color: var(--muted); }
+  .power-move.new{ color: var(--accent); }
+  .power-body{ flex:1; min-width:0; }
+  .power-team{ font-weight: 800; font-size: 1.02rem; }
+  .power-meta{ color: var(--muted); font-size: 0.82rem; margin-bottom: 4px; }
+  .power-note{ font-size: 0.92rem; color: var(--ink); }
+  .power-note.empty{ color: var(--muted); font-style: italic; }
+
   /* Trade analyzer */
   .trade-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
   .trade-side{
@@ -484,11 +512,11 @@
 
   <nav class="tabs" role="tablist" aria-label="Hub sections">
     <button class="tab-btn active" data-tab="overview" role="tab" aria-selected="true">Overview</button>
+    <button class="tab-btn" data-tab="power" role="tab" aria-selected="false">Power Rankings</button>
     <button class="tab-btn" data-tab="standings" role="tab" aria-selected="false">Standings &amp; Dues</button>
-    <button class="tab-btn" data-tab="pool" role="tab" aria-selected="false">Prize Pool</button>
     <button class="tab-btn" data-tab="trade" role="tab" aria-selected="false">Trade Analyzer</button>
     <button class="tab-btn" data-tab="skins" role="tab" aria-selected="false">Skins</button>
-    <button class="tab-btn" data-tab="champs" role="tab" aria-selected="false">Past Champions</button>
+    <button class="tab-btn" data-tab="history" role="tab" aria-selected="false">History</button>
     <button class="tab-btn" data-tab="tx" role="tab" aria-selected="false">Transactions</button>
   </nav>
 
@@ -562,9 +590,6 @@
         </table>
       </div>
     </section>
-  </div>
-
-  <div class="tab-panel" id="panel-pool" role="tabpanel">
     <section>
       <div class="section-head">
         <h2>Season Prize Pool</h2>
@@ -572,6 +597,16 @@
       </div>
       <div class="pool-grid" id="pool-grid"></div>
       <div id="pool-totals"></div>
+    </section>
+  </div>
+
+  <div class="tab-panel" id="panel-power" role="tabpanel">
+    <section>
+      <div class="section-head">
+        <h2>Power Rankings</h2>
+        <span class="hint" id="power-hint">Loading…</span>
+      </div>
+      <div class="power-list" id="power-list"></div>
     </section>
   </div>
 
@@ -655,7 +690,7 @@
     </section>
   </div>
 
-  <div class="tab-panel" id="panel-champs" role="tabpanel">
+  <div class="tab-panel" id="panel-history" role="tabpanel">
     <section>
       <div class="section-head">
         <h2>Past Champions</h2>
@@ -975,6 +1010,53 @@
     updateTradeVerdict();
   }
 
+  /* ---------- power rankings ---------- */
+
+  function renderPowerRankings(teams, pr) {
+    const byId = Object.fromEntries(teams.map((t) => [t.id, t]));
+    const entries = (pr && pr.entries) || [];
+    const list = $("power-list");
+    const hint = $("power-hint");
+
+    if (!entries.length) {
+      hint.textContent = "Not posted yet";
+      list.innerHTML = `<p class="empty-state">Power rankings haven't been posted yet — the commissioner sets these each week.</p>`;
+      return;
+    }
+
+    hint.textContent = pr.week ? `Week ${pr.week}` : "Preseason";
+
+    list.innerHTML = entries.map((e, i) => {
+      const rank = i + 1;
+      const t = byId[e.teamId] || { team: "Unknown team", manager: "", wins: 0, losses: 0, ties: 0 };
+      const rec = t.ties ? `${t.wins}-${t.losses}-${t.ties}` : `${t.wins}-${t.losses}`;
+
+      let move;
+      if (e.prevRank == null) move = `<div class="power-move new">NEW</div>`;
+      else {
+        const delta = e.prevRank - rank;            // + means climbed
+        if (delta > 0) move = `<div class="power-move up">▲${delta}</div>`;
+        else if (delta < 0) move = `<div class="power-move down">▼${-delta}</div>`;
+        else move = `<div class="power-move flat">—</div>`;
+      }
+
+      const note = e.note
+        ? `<div class="power-note">${esc(e.note)}</div>`
+        : `<div class="power-note empty">No blurb yet.</div>`;
+
+      return `
+        <div class="power-row${rank === 1 ? " top" : ""}">
+          <div class="power-rank">${rank}</div>
+          ${move}
+          <div class="power-body">
+            <div class="power-team">${esc(t.team)}</div>
+            <div class="power-meta">${esc(t.manager)} · ${rec}</div>
+            ${note}
+          </div>
+        </div>`;
+    }).join("");
+  }
+
   /* ---------- render ---------- */
 
   function render(data) {
@@ -1171,6 +1253,9 @@
         </tr>`).join("")
       : emptyRow(4, "No moves yet — this fills in once free agency and waivers open.");
 
+    /* Power rankings */
+    renderPowerRankings(teams, data.powerRankings || {});
+
     /* Trade analyzer */
     renderTradeAnalyzer(teams, data.tradeValues || {});
 
@@ -1193,6 +1278,7 @@
     $("ledger-body").innerHTML = emptyRow(5, "Could not load data.json.");
     $("tx-body").innerHTML = emptyRow(4, "Could not load data.json.");
     $("champs-body").innerHTML = emptyRow(5, "Could not load data.json.");
+    $("power-list").innerHTML = `<p class="empty-state">Could not load data.json.</p>`;
   }
 
   fetch("./data.json", { cache: "no-store" })
