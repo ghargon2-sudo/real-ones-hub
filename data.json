@@ -980,12 +980,6 @@
           "value": 215
         },
         {
-          "id": 3917315,
-          "name": "Kyler Murray",
-          "pos": "QB",
-          "value": 518
-        },
-        {
           "id": 4597500,
           "name": "Adonai Mitchell",
           "pos": "WR",
@@ -996,6 +990,12 @@
           "name": "Juwan Johnson",
           "pos": "TE",
           "value": 418
+        },
+        {
+          "id": 3149687,
+          "name": "Chris Brooks",
+          "pos": "RB",
+          "value": null
         }
       ]
     },
@@ -1195,7 +1195,100 @@
     }
   ],
   "weeks": [],
+  "scoreboard": {
+    "week": 1,
+    "matchups": [
+      {
+        "home": {
+          "teamId": 1,
+          "points": 0
+        },
+        "away": {
+          "teamId": 11,
+          "points": 0
+        },
+        "winner": "UNDECIDED",
+        "status": "upcoming"
+      },
+      {
+        "home": {
+          "teamId": 5,
+          "points": 0
+        },
+        "away": {
+          "teamId": 9,
+          "points": 0
+        },
+        "winner": "UNDECIDED",
+        "status": "upcoming"
+      },
+      {
+        "home": {
+          "teamId": 7,
+          "points": 0
+        },
+        "away": {
+          "teamId": 3,
+          "points": 0
+        },
+        "winner": "UNDECIDED",
+        "status": "upcoming"
+      },
+      {
+        "home": {
+          "teamId": 8,
+          "points": 0
+        },
+        "away": {
+          "teamId": 4,
+          "points": 0
+        },
+        "winner": "UNDECIDED",
+        "status": "upcoming"
+      },
+      {
+        "home": {
+          "teamId": 12,
+          "points": 0
+        },
+        "away": {
+          "teamId": 6,
+          "points": 0
+        },
+        "winner": "UNDECIDED",
+        "status": "upcoming"
+      },
+      {
+        "home": {
+          "teamId": 2,
+          "points": 0
+        },
+        "away": {
+          "teamId": 10,
+          "points": 0
+        },
+        "winner": "UNDECIDED",
+        "status": "upcoming"
+      }
+    ],
+    "skinsHighTeamId": null,
+    "skinsLowTeamId": null
+  },
   "transactions": [
+    {
+      "date": "2026-08-28",
+      "week": 1,
+      "teamId": 10,
+      "action": "Added",
+      "player": "Chris Brooks"
+    },
+    {
+      "date": "2026-08-28",
+      "week": 1,
+      "teamId": 10,
+      "action": "Dropped",
+      "player": "Kyler Murray"
+    },
     {
       "date": "2026-08-27",
       "week": 1,
@@ -1316,6 +1409,6 @@
       }
     ]
   },
-  "updatedAt": "2026-08-28T13:45:02.540Z",
+  "updatedAt": "2026-08-28T14:29:07.298Z",
   "syncWarnings": []
 }
