@@ -216,8 +216,7 @@ const TX_ACTION = {
   ADD: "Added",
   DROP: "Dropped",
   LINEUP: "Lineup",
-  TRADE_ACCEPT: "Trade",
-  TRADE_PROPOSE: "Trade proposed",
+  TRADE: "Traded for",
   WAIVER: "Waiver claim",
 };
 
@@ -242,7 +241,15 @@ async function fetchPlayerNames(playerIds) {
 // Transaction item types we surface on the hub. ESPN ignores a server-side
 // filterType on this view, so draft picks, lineup sets and the like all come
 // back and have to be dropped here.
-const TX_KEEP = new Set(["ADD", "DROP", "WAIVER", "TRADE_ACCEPT"]);
+//
+// A trade's items are type "TRADE" -- "TRADE_ACCEPT" is the *transaction*
+// type, never an item type, so listing it here matched nothing and every
+// trade was silently dropped from the feed.
+const TX_KEEP = new Set(["ADD", "DROP", "WAIVER", "TRADE"]);
+
+// ESPN records the whole negotiation: proposals, declines, cancellations. Only
+// these two mean a trade actually happened.
+const TRADE_DONE = new Set(["TRADE_ACCEPT", "TRADE_UPHOLD"]);
 
 async function shapeTransactions(regularSeasonWeeks) {
   // No filter here: ESPN rejects a limit without a sort on this view, and the
@@ -251,12 +258,28 @@ async function shapeTransactions(regularSeasonWeeks) {
   const data = await espnGet(`/segments/0/leagues/${LEAGUE_ID}?view=mTransactions2`);
 
   const raw = data.transactions || [];
+
+  if (process.env.DEBUG_TX) {
+    const shape = {};
+    for (const tx of raw) {
+      for (const item of tx.items || []) {
+        const key = `${tx.type}/${tx.status}/${item.type}` +
+          `/from:${item.fromTeamId ?? "-"}/to:${item.toTeamId ?? "-"}`;
+        shape[key] = (shape[key] || 0) + 1;
+      }
+    }
+    console.log("DEBUG_TX shapes:", JSON.stringify(shape, null, 2));
+  }
+
   const kept = [];
   const playerIds = new Set();
   for (const tx of raw) {
     if (tx.status && tx.status !== "EXECUTED") continue;
     for (const item of tx.items || []) {
       if (!TX_KEEP.has(item.type)) continue; // skip DRAFT, LINEUP, proposals...
+      // A TRADE item also shows up under a proposal that was declined or
+      // pulled; only an accepted or upheld trade actually moved anyone.
+      if (item.type === "TRADE" && !TRADE_DONE.has(tx.type)) continue;
       kept.push({ tx, item });
       if (item.playerId != null) playerIds.add(item.playerId);
     }
@@ -269,13 +292,19 @@ async function shapeTransactions(regularSeasonWeeks) {
     warnings.push(`Could not resolve player names: ${e.message}`);
   }
 
-  const out = kept.map(({ tx, item }) => ({
-    date: tx.proposedDate ? new Date(tx.proposedDate).toISOString().slice(0, 10) : "",
-    week: tx.scoringPeriodId && tx.scoringPeriodId <= regularSeasonWeeks ? tx.scoringPeriodId : null,
-    teamId: item.toTeamId || item.fromTeamId || tx.teamId || null,
-    action: TX_ACTION[item.type] || item.type,
-    player: names[item.playerId] || (item.playerId ? `Player ${item.playerId}` : ""),
-  }));
+  const out = kept.map(({ tx, item }) => {
+    const trade = item.type === "TRADE";
+    return {
+      date: tx.proposedDate ? new Date(tx.proposedDate).toISOString().slice(0, 10) : "",
+      week: tx.scoringPeriodId && tx.scoringPeriodId <= regularSeasonWeeks ? tx.scoringPeriodId : null,
+      // A trade names the side that received the player; the side that gave him
+      // up rides along in withTeamId so one row tells the whole story.
+      teamId: item.toTeamId || item.fromTeamId || tx.teamId || null,
+      withTeamId: trade ? item.fromTeamId || null : null,
+      action: trade ? "Traded for" : TX_ACTION[item.type] || item.type,
+      player: names[item.playerId] || (item.playerId ? `Player ${item.playerId}` : ""),
+    };
+  });
 
   out.sort((a, b) => String(b.date).localeCompare(String(a.date)));
   return out.slice(0, 100);

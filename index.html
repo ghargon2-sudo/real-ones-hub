@@ -290,6 +290,7 @@
   .team-cell .mgr{ color: var(--muted); font-size: 0.8rem; }
   td.num, th.num{ text-align:right; }
   .rank{ color: var(--muted); font-weight: 700; }
+  .tx-with{ color: var(--muted); font-size: 0.8rem; }
 
   .chip{
     display:inline-flex;
@@ -1350,7 +1351,8 @@
       ? tx.map((r) => `<tr>
           <td class="mono">${esc(r.date)}</td>
           <td>${esc((byId[r.teamId] || {}).team || "—")}</td>
-          <td>${esc(r.action)}</td>
+          <td>${esc(r.action)}${r.withTeamId && byId[r.withTeamId]
+            ? ` <span class="tx-with">from ${esc(byId[r.withTeamId].team)}</span>` : ""}</td>
           <td>${esc(r.player)}</td>
         </tr>`).join("")
       : emptyRow(4, "No moves yet — this fills in once free agency and waivers open.");

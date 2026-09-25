@@ -1404,6 +1404,7 @@
       "date": "2026-09-25",
       "week": 3,
       "teamId": 6,
+      "withTeamId": null,
       "action": "Added",
       "player": "Pat Freiermuth"
     },
@@ -1411,6 +1412,7 @@
       "date": "2026-09-24",
       "week": 3,
       "teamId": 2,
+      "withTeamId": null,
       "action": "Added",
       "player": "Trevor Lawrence"
     },
@@ -1418,6 +1420,7 @@
       "date": "2026-09-24",
       "week": 3,
       "teamId": 9,
+      "withTeamId": null,
       "action": "Added",
       "player": "Xavier Hutchinson"
     },
@@ -1425,6 +1428,7 @@
       "date": "2026-09-24",
       "week": 3,
       "teamId": 9,
+      "withTeamId": null,
       "action": "Dropped",
       "player": "Jayden Reed"
     },
@@ -1432,6 +1436,7 @@
       "date": "2026-09-24",
       "week": 3,
       "teamId": 1,
+      "withTeamId": null,
       "action": "Added",
       "player": "C.J. Stroud"
     },
@@ -1439,6 +1444,7 @@
       "date": "2026-09-24",
       "week": 3,
       "teamId": 1,
+      "withTeamId": null,
       "action": "Dropped",
       "player": "MarShawn Lloyd"
     },
@@ -1446,6 +1452,7 @@
       "date": "2026-09-24",
       "week": 3,
       "teamId": 12,
+      "withTeamId": null,
       "action": "Added",
       "player": "Terrance Ferguson"
     },
@@ -1453,6 +1460,7 @@
       "date": "2026-09-24",
       "week": 3,
       "teamId": 12,
+      "withTeamId": null,
       "action": "Dropped",
       "player": "Kenyon Sadiq"
     },
@@ -1460,6 +1468,7 @@
       "date": "2026-09-23",
       "week": 3,
       "teamId": 12,
+      "withTeamId": null,
       "action": "Added",
       "player": "Oronde Gadsden"
     },
@@ -1467,6 +1476,7 @@
       "date": "2026-09-23",
       "week": 3,
       "teamId": 12,
+      "withTeamId": null,
       "action": "Dropped",
       "player": "Pat Freiermuth"
     },
@@ -1474,6 +1484,7 @@
       "date": "2026-09-23",
       "week": 3,
       "teamId": 12,
+      "withTeamId": null,
       "action": "Dropped",
       "player": "Jaxson Dart"
     },
@@ -1481,6 +1492,7 @@
       "date": "2026-09-23",
       "week": 3,
       "teamId": 1,
+      "withTeamId": null,
       "action": "Added",
       "player": "Emmett Johnson"
     },
@@ -1488,6 +1500,7 @@
       "date": "2026-09-23",
       "week": 3,
       "teamId": 1,
+      "withTeamId": null,
       "action": "Added",
       "player": "Tank Bigsby"
     },
@@ -1495,6 +1508,7 @@
       "date": "2026-09-23",
       "week": 3,
       "teamId": 1,
+      "withTeamId": null,
       "action": "Dropped",
       "player": "Chris Rodriguez Jr."
     },
@@ -1502,6 +1516,7 @@
       "date": "2026-09-23",
       "week": 3,
       "teamId": 5,
+      "withTeamId": null,
       "action": "Added",
       "player": "Mack Hollins"
     },
@@ -1509,6 +1524,7 @@
       "date": "2026-09-23",
       "week": 3,
       "teamId": 12,
+      "withTeamId": null,
       "action": "Added",
       "player": "Kyler Murray"
     },
@@ -1516,6 +1532,7 @@
       "date": "2026-09-23",
       "week": 3,
       "teamId": 12,
+      "withTeamId": null,
       "action": "Dropped",
       "player": "Alec Pierce"
     },
@@ -1523,6 +1540,7 @@
       "date": "2026-09-23",
       "week": 3,
       "teamId": 2,
+      "withTeamId": null,
       "action": "Added",
       "player": "Dalton Schultz"
     },
@@ -1530,6 +1548,7 @@
       "date": "2026-09-23",
       "week": 3,
       "teamId": 2,
+      "withTeamId": null,
       "action": "Dropped",
       "player": "Michael Mayer"
     },
@@ -1537,6 +1556,7 @@
       "date": "2026-09-23",
       "week": 3,
       "teamId": 7,
+      "withTeamId": null,
       "action": "Added",
       "player": "Adonai Mitchell"
     },
@@ -1544,6 +1564,7 @@
       "date": "2026-09-23",
       "week": 3,
       "teamId": 7,
+      "withTeamId": null,
       "action": "Dropped",
       "player": "Tre' Harris"
     },
@@ -1551,6 +1572,7 @@
       "date": "2026-09-23",
       "week": 3,
       "teamId": 5,
+      "withTeamId": null,
       "action": "Dropped",
       "player": "Jerry Jeudy"
     },
@@ -1558,6 +1580,7 @@
       "date": "2026-09-23",
       "week": 3,
       "teamId": 5,
+      "withTeamId": null,
       "action": "Added",
       "player": "Tre Tucker"
     },
@@ -1565,6 +1588,7 @@
       "date": "2026-09-23",
       "week": 3,
       "teamId": 5,
+      "withTeamId": null,
       "action": "Dropped",
       "player": "Trevor Lawrence"
     },
@@ -1572,6 +1596,7 @@
       "date": "2026-09-23",
       "week": 3,
       "teamId": 9,
+      "withTeamId": null,
       "action": "Added",
       "player": "Emanuel Wilson"
     },
@@ -1579,13 +1604,47 @@
       "date": "2026-09-23",
       "week": 3,
       "teamId": 9,
+      "withTeamId": null,
       "action": "Dropped",
       "player": "Jonathon Brooks"
     },
     {
       "date": "2026-09-22",
       "week": 3,
+      "teamId": 12,
+      "withTeamId": 1,
+      "action": "Traded for",
+      "player": "Jacory Croskey-Merritt"
+    },
+    {
+      "date": "2026-09-22",
+      "week": 3,
+      "teamId": 12,
+      "withTeamId": 1,
+      "action": "Traded for",
+      "player": "Mike Evans"
+    },
+    {
+      "date": "2026-09-22",
+      "week": 3,
+      "teamId": 1,
+      "withTeamId": 12,
+      "action": "Traded for",
+      "player": "Bhayshul Tuten"
+    },
+    {
+      "date": "2026-09-22",
+      "week": 3,
+      "teamId": 1,
+      "withTeamId": 12,
+      "action": "Traded for",
+      "player": "Deebo Samuel Sr."
+    },
+    {
+      "date": "2026-09-22",
+      "week": 3,
       "teamId": 2,
+      "withTeamId": null,
       "action": "Dropped",
       "player": "Konata Mumpfield"
     }
@@ -1695,6 +1754,6 @@
       }
     ]
   },
-  "updatedAt": "2026-09-25T14:23:39.708Z",
+  "updatedAt": "2026-09-25T14:30:55.902Z",
   "syncWarnings": []
 }
