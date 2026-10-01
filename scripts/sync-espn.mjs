@@ -310,21 +310,84 @@ async function shapeTransactions(regularSeasonWeeks) {
   return out.slice(0, 100);
 }
 
-/* ---------- power rankings seed ---------- */
+/* ---------- power rankings ---------- */
 
 /**
- * First-run power rankings: rank by record then points-for, no movement yet and
- * empty blurbs. Order in the array is the rank. After this, admin.html owns it
- * and the sync just carries it forward.
+ * Scales a set of values onto 0..1 so points for and points against can be
+ * mixed with a win percentage. A league where every team has the same value
+ * collapses to the midpoint rather than dividing by zero.
  */
-function seedPowerRankings(teams) {
+function scaler(values) {
+  const lo = Math.min(...values);
+  const hi = Math.max(...values);
+  return (v) => (hi > lo ? (v - lo) / (hi - lo) : 0.5);
+}
+
+/**
+ * Blended power score: half the weight on results, the rest on how the team
+ * actually plays. Points for separates the 1-2 team that scores 380 from the
+ * 1-2 team that scores 280; points against is worth a little because a soft
+ * schedule inflates a record, and carrying it keeps a 3-0 built on weak
+ * opponents from outranking a 3-0 that beat the league.
+ */
+const POWER_WEIGHTS = { winPct: 0.5, pointsFor: 0.35, pointsAgainst: 0.15 };
+
+/**
+ * Recomputed from the standings on every sync. The order and the movement
+ * arrows belong to the sync; the blurbs belong to the commissioner and are
+ * carried across by team id, so writing one in admin.html survives the next
+ * run and a renamed team keeps its note.
+ */
+function computePowerRankings(teams, weeksPlayed, previous) {
+  const prev = previous.powerRankings || null;
+  const prevEntries = (prev && prev.entries) || [];
+
+  const notes = {};
+  for (const e of prevEntries) {
+    if (e.note) notes[String(e.teamId)] = e.note;
+  }
+
+  const pf = scaler(teams.map((t) => t.pointsFor));
+  const pa = scaler(teams.map((t) => t.pointsAgainst));
+  const score = (t) => {
+    const games = t.wins + t.losses + t.ties;
+    const winPct = games ? (t.wins + t.ties * 0.5) / games : 0;
+    return (
+      POWER_WEIGHTS.winPct * winPct +
+      POWER_WEIGHTS.pointsFor * pf(t.pointsFor) +
+      // Low points against is the good end, so invert it.
+      POWER_WEIGHTS.pointsAgainst * (1 - pa(t.pointsAgainst))
+    );
+  };
+
   const ordered = [...teams].sort(
-    (a, b) => b.wins - a.wins || b.pointsFor - a.pointsFor || a.team.localeCompare(b.team)
+    (a, b) => score(b) - score(a) || b.pointsFor - a.pointsFor || a.team.localeCompare(b.team)
   );
+
+  // Movement is measured week over week, not sync over sync. The sync runs
+  // hourly on game days; re-baselining each run would flatten every arrow to
+  // "no change" within minutes of a week turning over, so inside a week we
+  // keep the baseline we already published.
+  const sameWeek = prev != null && prev.week === weeksPlayed && weeksPlayed > 0;
+  // week 0 is the old preseason seed — an arbitrary order over 0-0 teams. It
+  // is not something to show movement against.
+  const hasBaseline = prev != null && prev.week > 0 && prevEntries.length > 0;
+
+  const baseline = {};
+  if (sameWeek) {
+    for (const e of prevEntries) baseline[String(e.teamId)] = e.prevRank ?? null;
+  } else if (hasBaseline) {
+    prevEntries.forEach((e, i) => { baseline[String(e.teamId)] = i + 1; });
+  }
+
   return {
-    week: 0,
+    week: weeksPlayed,
     updatedAt: new Date().toISOString(),
-    entries: ordered.map((t) => ({ teamId: t.id, prevRank: null, note: "" })),
+    entries: ordered.map((t) => ({
+      teamId: t.id,
+      prevRank: baseline[String(t.id)] ?? null,
+      note: notes[String(t.id)] || "",
+    })),
   };
 }
 
@@ -448,9 +511,9 @@ async function main() {
     },
     paid: carryDues(previous, teams),
     champions: previous.champions || [],
-    // Editorial, commissioner-owned — preserve it. Seed from the standings order
-    // the first time so the tab isn't empty; blurbs and re-ranks come from admin.
-    powerRankings: previous.powerRankings || seedPowerRankings(teams),
+    // Order and movement are recomputed every run; the blurbs inside are
+    // commissioner-owned and ride along by team id.
+    powerRankings: computePowerRankings(teams, weeks.length, previous),
     updatedAt: new Date().toISOString(),
     syncWarnings: warnings,
   };

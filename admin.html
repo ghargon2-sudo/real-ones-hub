@@ -94,14 +94,11 @@
 
   .power-edit{ display:flex; flex-direction:column; gap: 8px; }
   .power-edit-row{
-    display:grid; grid-template-columns: 28px auto 1fr; gap: 10px; align-items:start;
+    display:grid; grid-template-columns: 28px 1fr; gap: 10px; align-items:start;
     padding: 10px 0; border-bottom: 1px solid var(--line);
   }
   .power-edit-row:last-child{ border-bottom:none; }
   .pe-rank{ font-weight: 800; color: var(--muted); text-align:center; padding-top: 6px; }
-  .pe-move{ display:flex; flex-direction:column; gap: 3px; }
-  .pe-move button{ padding: 2px 8px; font-size: 0.8rem; background: var(--surface-2); color: var(--ink); border: 1px solid var(--line); }
-  .pe-move button:disabled{ opacity: 0.3; }
   .pe-main .pe-team{ font-weight: 700; font-size: 0.9rem; }
   .pe-main textarea{
     width: 100%; margin-top: 5px; background: var(--surface-2); color: var(--ink);
@@ -146,10 +143,10 @@
 
   <div class="card hidden" id="power-card">
     <h2>Power Rankings</h2>
-    <p>Drag the order with the arrows, write a blurb for each team, then publish. Movement arrows on the site are figured from the last rankings you posted.</p>
+    <p>The order and the movement arrows are computed by the ESPN sync from record, points for and points against. Write a blurb for each team and publish — blurbs are yours and survive every sync.</p>
     <div class="power-edit" id="power-edit"></div>
     <div class="row">
-      <button class="primary" id="publish-power-btn">Publish rankings</button>
+      <button class="primary" id="publish-power-btn">Publish blurbs</button>
       <span class="status" id="power-status"></span>
     </div>
   </div>
@@ -172,7 +169,7 @@
   const powerEdit = document.getElementById("power-edit");
   const powerStatus = document.getElementById("power-status");
 
-  let powerOrder = [];   // team ids, in rank order
+  let powerOrder = [];   // team ids, in the order the sync published
   let powerNotes = {};   // teamId -> blurb
 
   // The whole data.json is kept so publishing can't clobber the fields the
@@ -300,13 +297,6 @@
     }
   }
 
-  function movePower(i, dir) {
-    const j = i + dir;
-    if (j < 0 || j >= powerOrder.length) return;
-    [powerOrder[i], powerOrder[j]] = [powerOrder[j], powerOrder[i]];
-    renderPowerEditor();
-  }
-
   function renderPowerEditor() {
     powerEdit.innerHTML = "";
     if (!teams.length) {
@@ -320,10 +310,6 @@
       row.className = "power-edit-row";
       row.innerHTML = `
         <div class="pe-rank">${i + 1}</div>
-        <div class="pe-move">
-          <button data-up="${i}" ${i === 0 ? "disabled" : ""} title="Move up">▲</button>
-          <button data-down="${i}" ${i === powerOrder.length - 1 ? "disabled" : ""} title="Move down">▼</button>
-        </div>
         <div class="pe-main">
           <div class="pe-team">${esc(t.team)} <span class="team-mgr">— ${esc(t.manager)}</span></div>
           <textarea data-note="${esc(tid)}" placeholder="Blurb / trash talk (optional)">${esc(powerNotes[tid] || "")}</textarea>
@@ -331,8 +317,6 @@
       `;
       powerEdit.appendChild(row);
     });
-    powerEdit.querySelectorAll("button[data-up]").forEach(b => b.onclick = () => movePower(Number(b.dataset.up), -1));
-    powerEdit.querySelectorAll("button[data-down]").forEach(b => b.onclick = () => movePower(Number(b.dataset.down), 1));
     powerEdit.querySelectorAll("textarea[data-note]").forEach(ta => {
       ta.addEventListener("input", () => { powerNotes[ta.dataset.note] = ta.value; });
     });
@@ -384,18 +368,16 @@
 
   document.getElementById("publish-power-btn").addEventListener("click", () => {
     publishPatch((fresh) => {
-      // Movement is measured against the order that's currently published.
-      const prev = (fresh.powerRankings && fresh.powerRankings.entries) || [];
-      const prevRankById = {};
-      prev.forEach((e, i) => { prevRankById[String(e.teamId)] = i + 1; });
-      const entries = powerOrder.map((tid) => ({
-        teamId: tid,
-        prevRank: String(tid) in prevRankById ? prevRankById[String(tid)] : null,
-        note: (powerNotes[tid] || "").trim(),
+      // Write the blurbs onto whatever the sync last published. Rank order,
+      // week and movement are the sync's to own — rebuilding them here would
+      // undo the ranking the moment a blurb is saved.
+      const pr = (fresh && fresh.powerRankings) || {};
+      const entries = (pr.entries || []).map((e) => ({
+        ...e,
+        note: (powerNotes[e.teamId] || "").trim(),
       }));
-      const week = (fresh.league && fresh.league.currentWeek) || 0;
-      return { powerRankings: { week, updatedAt: new Date().toISOString(), entries } };
-    }, "Update power rankings via admin panel", powerStatus);
+      return { powerRankings: { ...pr, entries, updatedAt: new Date().toISOString() } };
+    }, "Update power ranking blurbs via admin panel", powerStatus);
   });
 
   if (getToken()) {

@@ -59,6 +59,22 @@ Dues are the one thing ESPN doesn't know about. Toggle them on `admin.html`
 everything the sync owns alone. Payments are keyed by ESPN team id, so
 renaming a team no longer loses its payment.
 
+## Power rankings
+
+Recomputed from the standings on every sync, so the tab never goes stale. The
+score is 50% win percentage, 35% points for and 15% points against (scaled
+across the league, low points against being the good end) — points for
+separates two teams on the same record, and points against keeps a record
+built on a soft schedule from outranking one that wasn't.
+
+Movement arrows are week over week, not sync over sync: inside a week the
+published baseline is kept, so the hourly game-day runs don't flatten every
+arrow to "no change".
+
+The blurbs are yours. Write them on `admin.html` and publish — they're keyed by
+team id and carried across every sync, so a rename keeps its note. The admin
+panel no longer sets the order.
+
 ## Things you still edit by hand in `data.json`
 
 - `config.duesPerTeam`, `config.skinsPerWeek`, `config.payouts` — league money.
