@@ -3,7 +3,7 @@
     "id": "535797493",
     "name": "White Guys and Addison",
     "season": 2026,
-    "currentWeek": 6,
+    "currentWeek": 7,
     "regularSeasonWeeks": 13,
     "teamCount": 12
   },
@@ -34,59 +34,59 @@
       "team": "Stop Higgin in My Booty",
       "manager": "Guy Hargon",
       "abbrev": "BOOT",
-      "wins": 2,
+      "wins": 3,
       "losses": 3,
       "ties": 0,
-      "pointsFor": 560.22,
-      "pointsAgainst": 585.78,
+      "pointsFor": 691.62,
+      "pointsAgainst": 676.18,
       "roster": [
         {
           "id": 4374302,
           "name": "Amon-Ra St. Brown",
           "pos": "WR",
-          "value": 7858
+          "value": 7900
         },
         {
           "id": 4431452,
           "name": "Drake Maye",
           "pos": "QB",
-          "value": 2270
+          "value": 2369
         },
         {
           "id": 4360761,
           "name": "Michael Wilson",
           "pos": "WR",
-          "value": 1906
+          "value": 2092
         },
         {
           "id": 4569559,
           "name": "Devaughn Vele",
           "pos": "WR",
-          "value": 499
+          "value": 479
         },
         {
           "id": 4379399,
           "name": "James Cook III",
           "pos": "RB",
-          "value": 7505
+          "value": 7282
         },
         {
           "id": 4882093,
           "name": "Bhayshul Tuten",
           "pos": "RB",
-          "value": 3349
+          "value": 3372
         },
         {
           "id": 4599739,
           "name": "Kendre Miller",
           "pos": "RB",
-          "value": 245
+          "value": 227
         },
         {
           "id": 4431459,
           "name": "Tyler Warren",
           "pos": "TE",
-          "value": 2410
+          "value": 2430
         },
         {
           "id": 4869961,
@@ -98,31 +98,31 @@
           "id": 4427366,
           "name": "Breece Hall",
           "pos": "RB",
-          "value": 3576
+          "value": 3542
         },
         {
           "id": 4426502,
           "name": "Drake London",
           "pos": "WR",
-          "value": 5105
+          "value": 4848
         },
         {
           "id": 4360248,
           "name": "Kyle Pitts Sr.",
           "pos": "TE",
-          "value": 583
+          "value": 633
         },
         {
           "id": 4360238,
           "name": "Dameon Pierce",
           "pos": "RB",
-          "value": 396
+          "value": 367
         },
         {
           "id": 4870847,
           "name": "Ja'Kobi Lane",
           "pos": "WR",
-          "value": 82
+          "value": 93
         }
       ]
     },
@@ -131,101 +131,101 @@
       "team": "Spot the Ball.",
       "manager": "william moore",
       "abbrev": "MOOR",
-      "wins": 1,
+      "wins": 2,
       "losses": 4,
       "ties": 0,
-      "pointsFor": 478.7,
-      "pointsAgainst": 612.98,
+      "pointsFor": 608.04,
+      "pointsAgainst": 715.28,
       "roster": [
         {
           "id": 4685702,
           "name": "Quinshon Judkins",
           "pos": "RB",
-          "value": 1700
+          "value": 1694
         },
         {
           "id": 4372016,
           "name": "Jaylen Waddle",
           "pos": "WR",
-          "value": 1404
+          "value": 1342
         },
         {
           "id": 4685512,
           "name": "Jadarian Price",
           "pos": "RB",
-          "value": 470
+          "value": 412
         },
         {
           "id": 4569587,
           "name": "Wan'Dale Robinson",
           "pos": "WR",
-          "value": 560
+          "value": 593
         },
         {
           "id": 4429096,
           "name": "Blake Corum",
           "pos": "RB",
-          "value": 879
+          "value": 931
         },
         {
           "id": 4880281,
           "name": "Jordyn Tyson",
           "pos": "WR",
-          "value": 666
+          "value": 880
         },
         {
           "id": 4360310,
           "name": "Trevor Lawrence",
           "pos": "QB",
-          "value": 1734
+          "value": 1885
         },
         {
           "id": 4711533,
           "name": "Ollie Gordon II",
           "pos": "RB",
-          "value": 1234
+          "value": 1187
         },
         {
           "id": 4887558,
           "name": "Emanuel Wilson",
           "pos": "RB",
-          "value": 755
+          "value": 621
         },
         {
           "id": 4432665,
           "name": "Brock Bowers",
           "pos": "TE",
-          "value": 6452
+          "value": 6295
         },
         {
           "id": 4635008,
           "name": "Keon Coleman",
           "pos": "WR",
-          "value": 415
+          "value": 423
         },
         {
           "id": 4701936,
           "name": "Matthew Golden",
           "pos": "WR",
-          "value": 2986
+          "value": 3127
         },
         {
           "id": 4241416,
           "name": "Chuba Hubbard",
           "pos": "RB",
-          "value": 4893
+          "value": 4913
         },
         {
           "id": 4361050,
           "name": "Isaiah Likely",
           "pos": "TE",
-          "value": 2703
+          "value": 2801
         },
         {
           "id": 4360078,
           "name": "Alec Pierce",
           "pos": "WR",
-          "value": 141
+          "value": 156
         }
       ]
     },
@@ -234,83 +234,83 @@
       "team": "Reggie  Boys",
       "manager": "Cole Criswell",
       "abbrev": "REG",
-      "wins": 3,
+      "wins": 4,
       "losses": 2,
       "ties": 0,
-      "pointsFor": 604.04,
-      "pointsAgainst": 571.38,
+      "pointsFor": 709.92,
+      "pointsAgainst": 650.14,
       "roster": [
         {
           "id": 4262921,
           "name": "Justin Jefferson",
           "pos": "WR",
-          "value": 6194
+          "value": 5993
         },
         {
           "id": 4567048,
           "name": "Kenneth Walker III",
           "pos": "RB",
-          "value": 9107
+          "value": 9394
         },
         {
           "id": 4429615,
           "name": "Zay Flowers",
           "pos": "WR",
-          "value": 5154
+          "value": 5152
         },
         {
           "id": 4723086,
           "name": "Colston Loveland",
           "pos": "TE",
-          "value": 1260
+          "value": 1275
         },
         {
           "id": 4426388,
           "name": "Jameson Williams",
           "pos": "WR",
-          "value": 1513
+          "value": 1481
         },
         {
           "id": 4569987,
           "name": "Jaylen Warren",
           "pos": "RB",
-          "value": 3946
+          "value": 3756
         },
         {
           "id": 4431611,
           "name": "Caleb Williams",
           "pos": "QB",
-          "value": 1915
+          "value": 1840
         },
         {
           "id": 4688813,
           "name": "Josh Downs",
           "pos": "WR",
-          "value": 608
+          "value": 597
         },
         {
           "id": 2976212,
           "name": "Stefon Diggs",
           "pos": "WR",
-          "value": 783
+          "value": 797
         },
         {
           "id": 4568490,
           "name": "RJ Harvey",
           "pos": "RB",
-          "value": 1288
+          "value": 1174
         },
         {
           "id": 3116365,
           "name": "Mark Andrews",
           "pos": "TE",
-          "value": 384
+          "value": 346
         },
         {
           "id": 3139477,
           "name": "Patrick Mahomes",
           "pos": "QB",
-          "value": 2073
+          "value": 1920
         },
         {
           "id": 4429022,
@@ -322,7 +322,7 @@
           "id": 14880,
           "name": "Kirk Cousins",
           "pos": "QB",
-          "value": 391
+          "value": 411
         }
       ]
     },
@@ -332,100 +332,100 @@
       "manager": "Korbun Harrell",
       "abbrev": "KTT",
       "wins": 1,
-      "losses": 4,
+      "losses": 5,
       "ties": 0,
-      "pointsFor": 534.34,
-      "pointsAgainst": 668.1,
+      "pointsFor": 622.86,
+      "pointsAgainst": 760.2,
       "roster": [
         {
           "id": 3117251,
           "name": "Christian McCaffrey",
           "pos": "RB",
-          "value": 8016
+          "value": 7905
         },
         {
           "id": 4567750,
           "name": "Emeka Egbuka",
           "pos": "WR",
-          "value": 2104
+          "value": 1955
         },
         {
           "id": 4431299,
           "name": "Rome Odunze",
           "pos": "WR",
-          "value": 977
+          "value": 943
         },
         {
           "id": 4430027,
           "name": "Sam LaPorta",
           "pos": "TE",
-          "value": 2611
+          "value": 2496
         },
         {
           "id": 4569173,
           "name": "Rhamondre Stevenson",
           "pos": "RB",
-          "value": 2178
+          "value": 1962
         },
         {
           "id": 2577417,
           "name": "Dak Prescott",
           "pos": "QB",
-          "value": 1226
+          "value": 1342
         },
         {
           "id": 3916433,
           "name": "Jakobi Meyers",
           "pos": "WR",
-          "value": 352
+          "value": 432
         },
         {
           "id": 4683062,
           "name": "Xavier Worthy",
           "pos": "WR",
-          "value": 536
+          "value": 615
         },
         {
           "id": 4361432,
           "name": "Romeo Doubs",
           "pos": "WR",
-          "value": 369
+          "value": 355
         },
         {
           "id": 3046439,
           "name": "Hunter Henry",
           "pos": "TE",
-          "value": 219
+          "value": 220
         },
         {
           "id": 4362628,
           "name": "Ja'Marr Chase",
           "pos": "WR",
-          "value": 8451
+          "value": 8284
         },
         {
           "id": 4239996,
           "name": "Travis Etienne Jr.",
           "pos": "RB",
-          "value": 1550
+          "value": 1544
         },
         {
           "id": 3917315,
           "name": "Kyler Murray",
           "pos": "QB",
-          "value": 275
+          "value": 271
         },
         {
           "id": 4429023,
           "name": "MarShawn Lloyd",
           "pos": "RB",
-          "value": 732
+          "value": 737
         },
         {
           "id": 2573401,
           "name": "Tyler Higbee",
           "pos": "TE",
-          "value": 357
+          "value": 374
         }
       ]
     },
@@ -434,41 +434,41 @@
       "team": "McFuggin Stally",
       "manager": "Hayden McFarlain",
       "abbrev": "MCFA",
-      "wins": 1,
+      "wins": 2,
       "losses": 4,
       "ties": 0,
-      "pointsFor": 516.14,
-      "pointsAgainst": 628.84,
+      "pointsFor": 624.02,
+      "pointsAgainst": 731.5,
       "roster": [
         {
           "id": 4430737,
           "name": "Kyren Williams",
           "pos": "RB",
-          "value": 6175
+          "value": 6028
         },
         {
           "id": 4432708,
           "name": "Marvin Harrison Jr.",
           "pos": "WR",
-          "value": 1048
+          "value": 1004
         },
         {
           "id": 3915511,
           "name": "Joe Burrow",
           "pos": "QB",
-          "value": 2657
+          "value": 2731
         },
         {
           "id": 4038815,
           "name": "Rico Dowdle",
           "pos": "RB",
-          "value": 396
+          "value": 410
         },
         {
           "id": 4697815,
           "name": "Rachaad White",
           "pos": "RB",
-          "value": 542
+          "value": 549
         },
         {
           "id": 4032473,
@@ -480,37 +480,37 @@
           "id": 4608686,
           "name": "Kyle Monangai",
           "pos": "RB",
-          "value": 1214
+          "value": 1093
         },
         {
           "id": 4871023,
           "name": "Carnell Tate",
           "pos": "WR",
-          "value": 1417
+          "value": 1422
         },
         {
           "id": 5083076,
           "name": "Harold Fannin Jr.",
           "pos": "TE",
-          "value": 670
+          "value": 686
         },
         {
           "id": 4241478,
           "name": "DeVonta Smith",
           "pos": "WR",
-          "value": 3089
+          "value": 2944
         },
         {
           "id": 3042519,
           "name": "Aaron Jones Sr.",
           "pos": "RB",
-          "value": 1726
+          "value": 1615
         },
         {
           "id": 4428718,
           "name": "Tre Tucker",
           "pos": "WR",
-          "value": 390
+          "value": 402
         },
         {
           "id": 2991662,
@@ -522,13 +522,13 @@
           "id": 2969939,
           "name": "Jameis Winston",
           "pos": "QB",
-          "value": 124
+          "value": 108
         },
         {
           "id": 4715355,
           "name": "Darius Cooper",
           "pos": "WR",
-          "value": 51
+          "value": 58
         }
       ]
     },
@@ -538,94 +538,94 @@
       "manager": "Kade Thomas",
       "abbrev": "THOM",
       "wins": 5,
-      "losses": 0,
+      "losses": 1,
       "ties": 0,
-      "pointsFor": 613.98,
-      "pointsAgainst": 443.46,
+      "pointsFor": 714.76,
+      "pointsAgainst": 555.82,
       "roster": [
         {
           "id": 4241389,
           "name": "CeeDee Lamb",
           "pos": "WR",
-          "value": 7538
+          "value": 7601
         },
         {
           "id": 4890973,
           "name": "Ashton Jeanty",
           "pos": "RB",
-          "value": 5109
+          "value": 5140
         },
         {
           "id": 4361579,
           "name": "Javonte Williams",
           "pos": "RB",
-          "value": 4990
+          "value": 4808
         },
         {
           "id": 16800,
           "name": "Davante Adams",
           "pos": "WR",
-          "value": 2712
+          "value": 2421
         },
         {
           "id": 4035538,
           "name": "David Montgomery",
           "pos": "RB",
-          "value": 1276
+          "value": 1117
         },
         {
           "id": 3128429,
           "name": "Courtland Sutton",
           "pos": "WR",
-          "value": 193
+          "value": 195
         },
         {
           "id": 3121023,
           "name": "Dallas Goedert",
           "pos": "TE",
-          "value": 730
+          "value": 761
         },
         {
           "id": 12483,
           "name": "Matthew Stafford",
           "pos": "QB",
-          "value": 1387
+          "value": 1345
         },
         {
           "id": 4373678,
           "name": "Khalil Shakir",
           "pos": "WR",
-          "value": 488
+          "value": 426
         },
         {
           "id": 4360569,
           "name": "Jordan Mason",
           "pos": "RB",
-          "value": 990
+          "value": 1143
         },
         {
           "id": 4036133,
           "name": "T.J. Hockenson",
           "pos": "TE",
-          "value": 142
+          "value": 140
         },
         {
           "id": 4695883,
           "name": "Jalen Coker",
           "pos": "WR",
-          "value": 2043
+          "value": 2162
         },
         {
           "id": 4036378,
           "name": "Jordan Love",
           "pos": "QB",
-          "value": 1117
+          "value": 1179
         },
         {
           "id": 4361411,
           "name": "Pat Freiermuth",
           "pos": "TE",
-          "value": 293
+          "value": 282
         },
         {
           "id": 4431492,
@@ -641,64 +641,64 @@
       "manager": "Ryan Willis",
       "abbrev": "WIN",
       "wins": 2,
-      "losses": 3,
+      "losses": 4,
       "ties": 0,
-      "pointsFor": 535.04,
-      "pointsAgainst": 627.44,
+      "pointsFor": 637.34,
+      "pointsAgainst": 756.78,
       "roster": [
         {
           "id": 4432710,
           "name": "TreVeyon Henderson",
           "pos": "RB",
-          "value": 1164
+          "value": 1055
         },
         {
           "id": 15818,
           "name": "Keenan Allen",
           "pos": "WR",
-          "value": 410
+          "value": 483
         },
         {
           "id": 3046779,
           "name": "Jared Goff",
           "pos": "QB",
-          "value": 1402
+          "value": 1354
         },
         {
           "id": 3126486,
           "name": "Deebo Samuel Sr.",
           "pos": "WR",
-          "value": 824
+          "value": 817
         },
         {
           "id": 15847,
           "name": "Travis Kelce",
           "pos": "TE",
-          "value": 1635
+          "value": 1445
         },
         {
           "id": 4685472,
           "name": "Tetairoa McMillan",
           "pos": "WR",
-          "value": 3733
+          "value": 3575
         },
         {
           "id": 4569618,
           "name": "Garrett Wilson",
           "pos": "WR",
-          "value": 4514
+          "value": 4279
         },
         {
           "id": 4242335,
           "name": "Jonathan Taylor",
           "pos": "RB",
-          "value": 8278
+          "value": 8268
         },
         {
           "id": 3916148,
           "name": "Tony Pollard",
           "pos": "RB",
-          "value": 1102
+          "value": 1079
         },
         {
           "id": 4249836,
@@ -710,25 +710,25 @@
           "id": 4695193,
           "name": "Efton Chism III",
           "pos": "WR",
-          "value": null
+          "value": 4
         },
         {
           "id": 3116389,
           "name": "Samaje Perine",
           "pos": "RB",
-          "value": null
+          "value": 4
         },
         {
           "id": 3045523,
           "name": "Kendrick Bourne",
           "pos": "WR",
-          "value": 289
+          "value": 273
         },
         {
           "id": 4035671,
           "name": "Tyler Huntley",
           "pos": "QB",
-          "value": 30
+          "value": 27
         }
       ]
     },
@@ -738,100 +738,100 @@
       "manager": "Sutton Oathout",
       "abbrev": "SUT",
       "wins": 4,
-      "losses": 1,
+      "losses": 2,
       "ties": 0,
-      "pointsFor": 701.62,
-      "pointsAgainst": 546.06,
+      "pointsFor": 792.02,
+      "pointsAgainst": 677.46,
       "roster": [
         {
           "id": 4430878,
           "name": "Jaxon Smith-Njigba",
           "pos": "WR",
-          "value": 9768
+          "value": 9746
         },
         {
           "id": 3043078,
           "name": "Derrick Henry",
           "pos": "RB",
-          "value": 7144
+          "value": 7141
         },
         {
           "id": 4047646,
           "name": "A.J. Brown",
           "pos": "WR",
-          "value": 3540
+          "value": 3550
         },
         {
           "id": 4596448,
           "name": "Bucky Irving",
           "pos": "RB",
-          "value": 3320
+          "value": 3190
         },
         {
           "id": 3121422,
           "name": "Terry McLaurin",
           "pos": "WR",
-          "value": 1456
+          "value": 1436
         },
         {
           "id": 4426348,
           "name": "Jayden Daniels",
           "pos": "QB",
-          "value": 1580
+          "value": 1279
         },
         {
           "id": 4429205,
           "name": "Jordan Addison",
           "pos": "WR",
-          "value": 427
+          "value": 443
         },
         {
           "id": 4426385,
           "name": "Zach Charbonnet",
           "pos": "RB",
-          "value": 1445
+          "value": 1403
         },
         {
           "id": 4385690,
           "name": "Dalton Kincaid",
           "pos": "TE",
-          "value": 901
+          "value": 873
         },
         {
           "id": 4685720,
           "name": "Bryce Young",
           "pos": "QB",
-          "value": 1096
+          "value": 1078
         },
         {
           "id": 5081432,
           "name": "Antonio Williams",
           "pos": "WR",
-          "value": 51
+          "value": 43
         },
         {
           "id": 4360939,
           "name": "Rashod Bateman",
           "pos": "WR",
-          "value": 15
+          "value": 16
         },
         {
           "id": 4685382,
           "name": "Omarion Hampton",
           "pos": "RB",
-          "value": 1972
+          "value": 1885
         },
         {
           "id": 4572680,
           "name": "Tucker Kraft",
           "pos": "TE",
-          "value": 1435
+          "value": 1386
         },
         {
           "id": 4426515,
           "name": "Puka Nacua",
           "pos": "WR",
-          "value": 8632
+          "value": 8611
         }
       ]
     },
@@ -840,95 +840,95 @@
       "team": "YoungNjigba squad",
       "manager": "Blake Fant",
       "abbrev": "FANT",
-      "wins": 2,
+      "wins": 3,
       "losses": 3,
       "ties": 0,
-      "pointsFor": 614.52,
-      "pointsAgainst": 582.44,
+      "pointsFor": 726.88,
+      "pointsAgainst": 683.22,
       "roster": [
         {
           "id": 4430807,
           "name": "Bijan Robinson",
           "pos": "RB",
-          "value": 10094
+          "value": 10035
         },
         {
           "id": 4258173,
           "name": "Nico Collins",
           "pos": "WR",
-          "value": 5075
+          "value": 5095
         },
         {
           "id": 4361370,
           "name": "Chris Olave",
           "pos": "WR",
-          "value": 5660
+          "value": 5534
         },
         {
           "id": 4259545,
           "name": "D'Andre Swift",
           "pos": "RB",
-          "value": 4145
+          "value": 4138
         },
         {
           "id": 3916387,
           "name": "Lamar Jackson",
           "pos": "QB",
-          "value": 3006
+          "value": 3193
         },
         {
           "id": 4432620,
           "name": "Parker Washington",
           "pos": "WR",
-          "value": 3884
+          "value": 3815
         },
         {
           "id": 4429059,
           "name": "Woody Marks",
           "pos": "RB",
-          "value": 1081
+          "value": 1067
         },
         {
           "id": 4360689,
           "name": "Tyler Shough",
           "pos": "QB",
-          "value": 1117
+          "value": 1195
         },
         {
           "id": 4569603,
           "name": "Malik Washington",
           "pos": "WR",
-          "value": 410
+          "value": 417
         },
         {
           "id": 2973405,
           "name": "Kalif Raymond",
           "pos": "WR",
-          "value": 33
+          "value": 38
         },
         {
           "id": 4428850,
           "name": "Dontayvion Wicks",
           "pos": "WR",
-          "value": 154
+          "value": 159
         },
         {
           "id": 2576925,
           "name": "Darren Waller",
           "pos": "TE",
-          "value": 64
+          "value": 60
         },
         {
           "id": 4430539,
           "name": "Brenton Strange",
           "pos": "TE",
-          "value": 678
+          "value": 671
         },
         {
           "id": 4430968,
           "name": "Kimani Vidal",
           "pos": "RB",
-          "value": 141
+          "value": 157
         }
       ]
     },
@@ -938,28 +938,28 @@
       "manager": "Hudson Ossman",
       "abbrev": "Ass",
       "wins": 1,
-      "losses": 4,
+      "losses": 5,
       "ties": 0,
-      "pointsFor": 429.62,
-      "pointsAgainst": 526.48,
+      "pointsFor": 508.38,
+      "pointsAgainst": 632.36,
       "roster": [
         {
           "id": 4047365,
           "name": "Josh Jacobs",
           "pos": "RB",
-          "value": 3450
+          "value": 3197
         },
         {
           "id": 4696981,
           "name": "Cam Skattebo",
           "pos": "RB",
-          "value": 1466
+          "value": 1499
         },
         {
           "id": 3915416,
           "name": "DJ Moore",
           "pos": "WR",
-          "value": 1776
+          "value": 1773
         },
         {
           "id": 4040715,
@@ -971,67 +971,67 @@
           "id": 4432773,
           "name": "Brian Thomas Jr.",
           "pos": "WR",
-          "value": 347
+          "value": 354
         },
         {
           "id": 4371733,
           "name": "Kenny Gainwell",
           "pos": "RB",
-          "value": 157
+          "value": 127
         },
         {
           "id": 4870653,
           "name": "KC Concepcion",
           "pos": "WR",
-          "value": 563
+          "value": 588
         },
         {
           "id": 3929645,
           "name": "Juwan Johnson",
           "pos": "TE",
-          "value": 636
+          "value": 688
         },
         {
           "id": 4870795,
           "name": "Makai Lemon",
           "pos": "WR",
-          "value": 198
+          "value": 195
         },
         {
           "id": 4612826,
           "name": "Ladd McConkey",
           "pos": "WR",
-          "value": 1201
+          "value": 1173
         },
         {
           "id": 4870808,
           "name": "Jeremiyah Love",
           "pos": "RB",
-          "value": 2883
+          "value": 3021
         },
         {
           "id": 4685247,
           "name": "Braelon Allen",
           "pos": "RB",
-          "value": 606
+          "value": 650
         },
         {
           "id": 4595348,
           "name": "Malik Nabers",
           "pos": "WR",
-          "value": 5482
+          "value": 5517
         },
         {
           "id": 4685261,
           "name": "Germie Bernard",
           "pos": "WR",
-          "value": 578
+          "value": 680
         },
         {
           "id": 3122840,
           "name": "Deshaun Watson",
           "pos": "QB",
-          "value": 162
+          "value": 130
         }
       ]
     },
@@ -1040,101 +1040,101 @@
       "team": "Lee's Army",
       "manager": "Carter Cox",
       "abbrev": "BAG",
-      "wins": 5,
+      "wins": 6,
       "losses": 0,
       "ties": 0,
-      "pointsFor": 662.06,
-      "pointsAgainst": 496.14,
+      "pointsFor": 754.16,
+      "pointsAgainst": 584.66,
       "roster": [
         {
           "id": 4362238,
           "name": "Chase Brown",
           "pos": "RB",
-          "value": 4296
+          "value": 4422
         },
         {
           "id": 3918298,
           "name": "Josh Allen",
           "pos": "QB",
-          "value": 5695
+          "value": 5665
         },
         {
           "id": 4685278,
           "name": "Luther Burden III",
           "pos": "WR",
-          "value": 1692
+          "value": 1780
         },
         {
           "id": 4047650,
           "name": "DK Metcalf",
           "pos": "WR",
-          "value": 1249
+          "value": 1251
         },
         {
           "id": 4248528,
           "name": "Christian Watson",
           "pos": "WR",
-          "value": 4971
+          "value": 4849
         },
         {
           "id": 3040151,
           "name": "George Kittle",
           "pos": "TE",
-          "value": 3097
+          "value": 3183
         },
         {
           "id": 3116165,
           "name": "Chris Godwin Jr.",
           "pos": "WR",
-          "value": 362
+          "value": 372
         },
         {
           "id": 4366031,
           "name": "Tank Dell",
           "pos": "WR",
-          "value": 72
+          "value": 85
         },
         {
           "id": 4832800,
           "name": "Denzel Boston",
           "pos": "WR",
-          "value": 1287
+          "value": 1159
         },
         {
           "id": 4373626,
           "name": "Tyler Allgeier",
           "pos": "RB",
-          "value": 576
+          "value": 575
         },
         {
           "id": 4596334,
           "name": "Keaton Mitchell",
           "pos": "RB",
-          "value": 191
+          "value": 173
         },
         {
           "id": 3116406,
           "name": "Tyreek Hill",
           "pos": "WR",
-          "value": 131
+          "value": 124
         },
         {
           "id": 4429795,
           "name": "Jahmyr Gibbs",
           "pos": "RB",
-          "value": 10764
+          "value": 10758
         },
         {
           "id": 4428331,
           "name": "Rashee Rice",
           "pos": "WR",
-          "value": 2020
+          "value": 2177
         },
         {
           "id": 4597500,
           "name": "Adonai Mitchell",
           "pos": "WR",
-          "value": 29
+          "value": 38
         }
       ]
     },
@@ -1144,58 +1144,58 @@
       "manager": "Addison Stallcup",
       "abbrev": "STAL",
       "wins": 3,
-      "losses": 2,
+      "losses": 3,
       "ties": 0,
-      "pointsFor": 553.46,
-      "pointsAgainst": 514.64,
+      "pointsFor": 656.12,
+      "pointsAgainst": 622.52,
       "roster": [
         {
           "id": 3052587,
           "name": "Baker Mayfield",
           "pos": "QB",
-          "value": 86
+          "value": 87
         },
         {
           "id": 4428557,
           "name": "Tyjae Spears",
           "pos": "RB",
-          "value": 68
+          "value": 73
         },
         {
           "id": 3054850,
           "name": "Alvin Kamara",
           "pos": "RB",
-          "value": 666
+          "value": 752
         },
         {
           "id": 4361307,
           "name": "Trey McBride",
           "pos": "TE",
-          "value": 6014
+          "value": 5954
         },
         {
           "id": 4239993,
           "name": "Tee Higgins",
           "pos": "WR",
-          "value": 3152
+          "value": 3155
         },
         {
           "id": 4575131,
           "name": "Jacory Croskey-Merritt",
           "pos": "RB",
-          "value": 631
+          "value": 672
         },
         {
           "id": 16737,
           "name": "Mike Evans",
           "pos": "WR",
-          "value": 2816
+          "value": 2606
         },
         {
           "id": 4361741,
           "name": "Brock Purdy",
           "pos": "QB",
-          "value": 2634
+          "value": 2624
         },
         {
           "id": 4570037,
@@ -1207,7 +1207,7 @@
           "id": 5083754,
           "name": "Ryan Flournoy",
           "pos": "WR",
-          "value": 5
+          "value": 12
         },
         {
           "id": 4429835,
@@ -1219,19 +1219,19 @@
           "id": 4241985,
           "name": "J.K. Dobbins",
           "pos": "RB",
-          "value": 1003
+          "value": 1104
         },
         {
           "id": 4426354,
           "name": "George Pickens",
           "pos": "WR",
-          "value": 3450
+          "value": 3502
         },
         {
           "id": 3929630,
           "name": "Saquon Barkley",
           "pos": "RB",
-          "value": 3407
+          "value": 3377
         },
         {
           "id": 4427095,
@@ -1507,66 +1507,119 @@
           "score": 77.1
         }
       ]
+    },
+    {
+      "week": 6,
+      "scores": [
+        {
+          "teamId": 1,
+          "score": 131.4
+        },
+        {
+          "teamId": 2,
+          "score": 129.34
+        },
+        {
+          "teamId": 9,
+          "score": 112.36
+        },
+        {
+          "teamId": 5,
+          "score": 107.88
+        },
+        {
+          "teamId": 3,
+          "score": 105.88
+        },
+        {
+          "teamId": 12,
+          "score": 102.66
+        },
+        {
+          "teamId": 7,
+          "score": 102.3
+        },
+        {
+          "teamId": 6,
+          "score": 100.78
+        },
+        {
+          "teamId": 11,
+          "score": 92.1
+        },
+        {
+          "teamId": 8,
+          "score": 90.4
+        },
+        {
+          "teamId": 4,
+          "score": 88.52
+        },
+        {
+          "teamId": 10,
+          "score": 78.76
+        }
+      ]
     }
   ],
   "scoreboard": {
-    "week": 6,
+    "week": 7,
     "matchups": [
       {
         "home": {
-          "teamId": 11,
-          "points": 0
-        },
-        "away": {
           "teamId": 4,
           "points": 0
         },
-        "winner": "UNDECIDED",
-        "status": "upcoming"
-      },
-      {
-        "home": {
+        "away": {
           "teamId": 1,
           "points": 0
         },
-        "away": {
+        "winner": "UNDECIDED",
+        "status": "upcoming"
+      },
+      {
+        "home": {
           "teamId": 8,
           "points": 0
         },
-        "winner": "UNDECIDED",
-        "status": "upcoming"
-      },
-      {
-        "home": {
+        "away": {
           "teamId": 9,
           "points": 0
         },
-        "away": {
+        "winner": "UNDECIDED",
+        "status": "upcoming"
+      },
+      {
+        "home": {
           "teamId": 6,
           "points": 0
         },
-        "winner": "UNDECIDED",
-        "status": "upcoming"
-      },
-      {
-        "home": {
+        "away": {
           "teamId": 3,
           "points": 0
         },
-        "away": {
+        "winner": "UNDECIDED",
+        "status": "upcoming"
+      },
+      {
+        "home": {
           "teamId": 10,
           "points": 0
         },
-        "winner": "UNDECIDED",
-        "status": "upcoming"
-      },
-      {
-        "home": {
+        "away": {
           "teamId": 7,
           "points": 0
         },
-        "away": {
+        "winner": "UNDECIDED",
+        "status": "upcoming"
+      },
+      {
+        "home": {
           "teamId": 2,
+          "points": 0
+        },
+        "away": {
+          "teamId": 5,
           "points": 0
         },
         "winner": "UNDECIDED",
@@ -1574,11 +1627,11 @@
       },
       {
         "home": {
-          "teamId": 5,
+          "teamId": 12,
           "points": 0
         },
         "away": {
-          "teamId": 12,
+          "teamId": 11,
           "points": 0
         },
         "winner": "UNDECIDED",
@@ -1588,340 +1641,11 @@
     "skinsHighTeamId": null,
     "skinsLowTeamId": null
   },
-  "transactions": [
-    {
-      "date": "2026-10-16",
-      "week": 6,
-      "teamId": 4,
-      "withTeamId": null,
-      "action": "Added",
-      "player": "Tyler Higbee"
-    },
-    {
-      "date": "2026-10-16",
-      "week": 6,
-      "teamId": 7,
-      "withTeamId": null,
-      "action": "Added",
-      "player": "Tyler Huntley"
-    },
-    {
-      "date": "2026-10-16",
-      "week": 6,
-      "teamId": 7,
-      "withTeamId": null,
-      "action": "Dropped",
-      "player": "Aaron Rodgers"
-    },
-    {
-      "date": "2026-10-16",
-      "week": 6,
-      "teamId": 5,
-      "withTeamId": null,
-      "action": "Added",
-      "player": "Darius Cooper"
-    },
-    {
-      "date": "2026-10-16",
-      "week": 6,
-      "teamId": 5,
-      "withTeamId": null,
-      "action": "Dropped",
-      "player": "Brian Robinson Jr."
-    },
-    {
-      "date": "2026-10-15",
-      "week": 6,
-      "teamId": 7,
-      "withTeamId": null,
-      "action": "Added",
-      "player": "Kendrick Bourne"
-    },
-    {
-      "date": "2026-10-15",
-      "week": 6,
-      "teamId": 7,
-      "withTeamId": null,
-      "action": "Dropped",
-      "player": "Mike Washington Jr."
-    },
-    {
-      "date": "2026-10-15",
-      "week": 6,
-      "teamId": 10,
-      "withTeamId": null,
-      "action": "Added",
-      "player": "Deshaun Watson"
-    },
-    {
-      "date": "2026-10-14",
-      "week": 6,
-      "teamId": 10,
-      "withTeamId": null,
-      "action": "Added",
-      "player": "Germie Bernard"
-    },
-    {
-      "date": "2026-10-14",
-      "week": 6,
-      "teamId": 1,
-      "withTeamId": null,
-      "action": "Added",
-      "player": "Ja'Kobi Lane"
-    },
-    {
-      "date": "2026-10-14",
-      "week": 6,
-      "teamId": 1,
-      "withTeamId": null,
-      "action": "Dropped",
-      "player": "Tyler Higbee"
-    },
-    {
-      "date": "2026-10-14",
-      "week": 6,
-      "teamId": 1,
-      "withTeamId": null,
-      "action": "Added",
-      "player": "Kyle Pitts Sr."
-    },
-    {
-      "date": "2026-10-14",
-      "week": 6,
-      "teamId": 1,
-      "withTeamId": null,
-      "action": "Dropped",
-      "player": "Kenyon Sadiq"
-    },
-    {
-      "date": "2026-10-14",
-      "week": 6,
-      "teamId": 7,
-      "withTeamId": null,
-      "action": "Added",
-      "player": "Aaron Rodgers"
-    },
-    {
-      "date": "2026-10-14",
-      "week": 6,
-      "teamId": 7,
-      "withTeamId": null,
-      "action": "Dropped",
-      "player": "Joe Mixon"
-    },
-    {
-      "date": "2026-10-14",
-      "week": 6,
-      "teamId": 11,
-      "withTeamId": null,
-      "action": "Added",
-      "player": "Adonai Mitchell"
-    },
-    {
-      "date": "2026-10-14",
-      "week": 6,
-      "teamId": 7,
-      "withTeamId": null,
-      "action": "Added",
-      "player": "Efton Chism III"
-    },
-    {
-      "date": "2026-10-14",
-      "week": 6,
-      "teamId": 7,
-      "withTeamId": null,
-      "action": "Dropped",
-      "player": "Darius Cooper"
-    },
-    {
-      "date": "2026-10-14",
-      "week": 6,
-      "teamId": 1,
-      "withTeamId": null,
-      "action": "Added",
-      "player": "Dameon Pierce"
-    },
-    {
-      "date": "2026-10-14",
-      "week": 6,
-      "teamId": 1,
-      "withTeamId": null,
-      "action": "Dropped",
-      "player": "Will Shipley"
-    },
-    {
-      "date": "2026-10-14",
-      "week": 6,
-      "teamId": 12,
-      "withTeamId": null,
-      "action": "Added",
-      "player": "DeMario Douglas"
-    },
-    {
-      "date": "2026-10-14",
-      "week": 6,
-      "teamId": 12,
-      "withTeamId": null,
-      "action": "Dropped",
-      "player": "Isaiah Davis"
-    },
-    {
-      "date": "2026-10-14",
-      "week": 6,
-      "teamId": 9,
-      "withTeamId": null,
-      "action": "Added",
-      "player": "Kimani Vidal"
-    },
-    {
-      "date": "2026-10-14",
-      "week": 6,
-      "teamId": 9,
-      "withTeamId": null,
-      "action": "Dropped",
-      "player": "Jaylen Wright"
-    },
-    {
-      "date": "2026-10-14",
-      "week": 6,
-      "teamId": 7,
-      "withTeamId": null,
-      "action": "Added",
-      "player": "Samaje Perine"
-    },
-    {
-      "date": "2026-10-14",
-      "week": 6,
-      "teamId": 7,
-      "withTeamId": null,
-      "action": "Dropped",
-      "player": "Bo Nix"
-    },
-    {
-      "date": "2026-10-14",
-      "week": 6,
-      "teamId": 2,
-      "withTeamId": null,
-      "action": "Added",
-      "player": "Alec Pierce"
-    },
-    {
-      "date": "2026-10-14",
-      "week": 6,
-      "teamId": 2,
-      "withTeamId": null,
-      "action": "Dropped",
-      "player": "Justin Herbert"
-    },
-    {
-      "date": "2026-10-14",
-      "week": 6,
-      "teamId": 5,
-      "withTeamId": null,
-      "action": "Added",
-      "player": "Jameis Winston"
-    },
-    {
-      "date": "2026-10-14",
-      "week": 6,
-      "teamId": 1,
-      "withTeamId": null,
-      "action": "Added",
-      "player": "Tyler Higbee"
-    },
-    {
-      "date": "2026-10-14",
-      "week": 6,
-      "teamId": 7,
-      "withTeamId": null,
-      "action": "Added",
-      "player": "Pierre Strong Jr."
-    },
-    {
-      "date": "2026-10-14",
-      "week": 6,
-      "teamId": 7,
-      "withTeamId": null,
-      "action": "Dropped",
-      "player": "Mike Gesicki"
-    },
-    {
-      "date": "2026-10-13",
-      "week": 6,
-      "teamId": 12,
-      "withTeamId": 1,
-      "action": "Traded for",
-      "player": "J.K. Dobbins"
-    },
-    {
-      "date": "2026-10-13",
-      "week": 6,
-      "teamId": 12,
-      "withTeamId": 1,
-      "action": "Traded for",
-      "player": "George Pickens"
-    },
-    {
-      "date": "2026-10-13",
-      "week": 6,
-      "teamId": 12,
-      "withTeamId": 1,
-      "action": "Traded for",
-      "player": "Saquon Barkley"
-    },
-    {
-      "date": "2026-10-13",
-      "week": 6,
-      "teamId": 1,
-      "withTeamId": 12,
-      "action": "Traded for",
-      "player": "Breece Hall"
-    },
-    {
-      "date": "2026-10-13",
-      "week": 6,
-      "teamId": 1,
-      "withTeamId": 12,
-      "action": "Traded for",
-      "player": "Drake London"
-    },
-    {
-      "date": "2026-10-13",
-      "week": 6,
-      "teamId": 12,
-      "withTeamId": null,
-      "action": "Dropped",
-      "player": "Oronde Gadsden"
-    },
-    {
-      "date": "2026-10-13",
-      "week": 6,
-      "teamId": 7,
-      "withTeamId": null,
-      "action": "Dropped",
-      "player": "Tre' Harris"
-    },
-    {
-      "date": "2026-10-13",
-      "week": 6,
-      "teamId": 12,
-      "withTeamId": null,
-      "action": "Dropped",
-      "player": "Oronde Gadsden"
-    },
-    {
-      "date": "2026-10-13",
-      "week": 6,
-      "teamId": 10,
-      "withTeamId": null,
-      "action": "Dropped",
-      "player": "Skyler Bell"
-    }
-  ],
+  "transactions": [],
   "tradeValues": {
     "source": "FantasyCalc — redraft, 12-team, PPR, 1QB",
     "ok": true,
-    "count": 196
+    "count": 197
   },
   "paid": {
     "1": true,
@@ -1958,17 +1682,17 @@
     }
   ],
   "powerRankings": {
-    "week": 5,
-    "updatedAt": "2026-10-20T05:34:33.247Z",
+    "week": 6,
+    "updatedAt": "2026-10-20T10:42:10.800Z",
     "entries": [
       {
         "teamId": 11,
-        "prevRank": 2,
+        "prevRank": 1,
         "note": ""
       },
       {
         "teamId": 6,
-        "prevRank": 1,
+        "prevRank": 2,
         "note": ""
       },
       {
@@ -1978,32 +1702,37 @@
       },
       {
         "teamId": 3,
-        "prevRank": 5,
-        "note": ""
-      },
-      {
-        "teamId": 12,
-        "prevRank": 6,
-        "note": ""
-      },
-      {
-        "teamId": 9,
         "prevRank": 4,
         "note": ""
       },
       {
+        "teamId": 9,
+        "prevRank": 6,
+        "note": ""
+      },
+      {
         "teamId": 1,
+        "prevRank": 7,
+        "note": ""
+      },
+      {
+        "teamId": 12,
+        "prevRank": 5,
+        "note": ""
+      },
+      {
+        "teamId": 5,
         "prevRank": 9,
         "note": ""
       },
       {
         "teamId": 7,
-        "prevRank": 7,
+        "prevRank": 8,
         "note": ""
       },
       {
-        "teamId": 5,
-        "prevRank": 8,
+        "teamId": 2,
+        "prevRank": 11,
         "note": ""
       },
       {
@@ -2012,17 +1741,12 @@
         "note": ""
       },
       {
-        "teamId": 2,
-        "prevRank": 12,
-        "note": ""
-      },
-      {
         "teamId": 10,
-        "prevRank": 11,
+        "prevRank": 12,
         "note": ""
       }
     ]
   },
-  "updatedAt": "2026-10-20T05:34:33.247Z",
+  "updatedAt": "2026-10-20T10:42:10.800Z",
   "syncWarnings": []
 }
