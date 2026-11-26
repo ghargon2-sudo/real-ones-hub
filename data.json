@@ -44,7 +44,7 @@
           "id": 4374302,
           "name": "Amon-Ra St. Brown",
           "pos": "WR",
-          "value": 8077
+          "value": 8244
         },
         {
           "id": 4431452,
@@ -56,79 +56,79 @@
           "id": 4379399,
           "name": "James Cook III",
           "pos": "RB",
-          "value": 7798
+          "value": 7810
         },
         {
           "id": 4882093,
           "name": "Bhayshul Tuten",
           "pos": "RB",
-          "value": 4615
+          "value": 4387
         },
         {
           "id": 4431459,
           "name": "Tyler Warren",
           "pos": "TE",
-          "value": 1044
+          "value": 1181
         },
         {
           "id": 4427366,
           "name": "Breece Hall",
           "pos": "RB",
-          "value": 3715
+          "value": 4017
         },
         {
           "id": 4426502,
           "name": "Drake London",
           "pos": "WR",
-          "value": 4626
+          "value": 4378
         },
         {
           "id": 4360248,
           "name": "Kyle Pitts Sr.",
           "pos": "TE",
-          "value": 595
+          "value": 516
         },
         {
           "id": 4702555,
           "name": "Jonah Coleman",
           "pos": "RB",
-          "value": 4846
+          "value": 5352
         },
         {
           "id": 4710855,
           "name": "Konata Mumpfield",
           "pos": "WR",
-          "value": 186
+          "value": 221
         },
         {
           "id": 14880,
           "name": "Kirk Cousins",
           "pos": "QB",
-          "value": 609
+          "value": 544
         },
         {
           "id": 3122840,
           "name": "Deshaun Watson",
           "pos": "QB",
-          "value": 210
+          "value": 251
         },
         {
           "id": 4362619,
           "name": "Chris Rodriguez Jr.",
           "pos": "RB",
-          "value": 581
+          "value": 653
         },
         {
           "id": 4837248,
           "name": "Fernando Mendoza",
           "pos": "QB",
-          "value": 806
+          "value": 627
         },
         {
           "id": 4569559,
           "name": "Devaughn Vele",
           "pos": "WR",
-          "value": 199
+          "value": 201
         }
       ]
     },
@@ -147,13 +147,13 @@
           "id": 4685702,
           "name": "Quinshon Judkins",
           "pos": "RB",
-          "value": 2081
+          "value": 1960
         },
         {
           "id": 4372016,
           "name": "Jaylen Waddle",
           "pos": "WR",
-          "value": 1197
+          "value": 1036
         },
         {
           "id": 4569587,
@@ -165,61 +165,61 @@
           "id": 4429096,
           "name": "Blake Corum",
           "pos": "RB",
-          "value": 2017
+          "value": 2337
         },
         {
           "id": 4880281,
           "name": "Jordyn Tyson",
           "pos": "WR",
-          "value": 1425
+          "value": 1404
         },
         {
           "id": 4360310,
           "name": "Trevor Lawrence",
           "pos": "QB",
-          "value": 2728
+          "value": 2587
         },
         {
           "id": 4711533,
           "name": "Ollie Gordon II",
           "pos": "RB",
-          "value": 1769
+          "value": 1509
         },
         {
           "id": 4432665,
           "name": "Brock Bowers",
           "pos": "TE",
-          "value": 6036
+          "value": 6113
         },
         {
           "id": 4701936,
           "name": "Matthew Golden",
           "pos": "WR",
-          "value": 5257
+          "value": 4946
         },
         {
           "id": 4241416,
           "name": "Chuba Hubbard",
           "pos": "RB",
-          "value": 6398
+          "value": 6475
         },
         {
           "id": 4361050,
           "name": "Isaiah Likely",
           "pos": "TE",
-          "value": 3549
+          "value": 3540
         },
         {
           "id": 4360635,
           "name": "Chig Okonkwo",
           "pos": "TE",
-          "value": 422
+          "value": 418
         },
         {
           "id": 4883647,
           "name": "Elic Ayomanor",
           "pos": "WR",
-          "value": 220
+          "value": 138
         },
         {
           "id": 4429022,
@@ -231,7 +231,7 @@
           "id": 4360438,
           "name": "Brandon Aiyuk",
           "pos": "WR",
-          "value": 9
+          "value": 99
         }
       ]
     },
@@ -250,85 +250,85 @@
           "id": 4262921,
           "name": "Justin Jefferson",
           "pos": "WR",
-          "value": 6636
+          "value": 6599
         },
         {
           "id": 4567048,
           "name": "Kenneth Walker III",
           "pos": "RB",
-          "value": 8068
+          "value": 7692
         },
         {
           "id": 4429615,
           "name": "Zay Flowers",
           "pos": "WR",
-          "value": 3950
+          "value": 4012
         },
         {
           "id": 4723086,
           "name": "Colston Loveland",
           "pos": "TE",
-          "value": 2336
+          "value": 2735
         },
         {
           "id": 4426388,
           "name": "Jameson Williams",
           "pos": "WR",
-          "value": 2076
+          "value": 2356
         },
         {
           "id": 4569987,
           "name": "Jaylen Warren",
           "pos": "RB",
-          "value": 3861
+          "value": 3337
         },
         {
           "id": 4431611,
           "name": "Caleb Williams",
           "pos": "QB",
-          "value": 2312
+          "value": 2292
         },
         {
           "id": 4688813,
           "name": "Josh Downs",
           "pos": "WR",
-          "value": 1353
+          "value": 1112
         },
         {
           "id": 2976212,
           "name": "Stefon Diggs",
           "pos": "WR",
-          "value": 1648
+          "value": 1478
         },
         {
           "id": 4568490,
           "name": "RJ Harvey",
           "pos": "RB",
-          "value": 286
+          "value": 335
         },
         {
           "id": 3116365,
           "name": "Mark Andrews",
           "pos": "TE",
-          "value": 504
+          "value": 444
         },
         {
           "id": 3139477,
           "name": "Patrick Mahomes",
           "pos": "QB",
-          "value": 2349
+          "value": 2567
         },
         {
           "id": 4832955,
           "name": "Emmett Johnson",
           "pos": "RB",
-          "value": 1986
+          "value": 2035
         },
         {
           "id": 4685512,
           "name": "Jadarian Price",
           "pos": "RB",
-          "value": 1197
+          "value": 1102
         }
       ]
     },
@@ -347,73 +347,73 @@
           "id": 3117251,
           "name": "Christian McCaffrey",
           "pos": "RB",
-          "value": 9202
+          "value": 9015
         },
         {
           "id": 4567750,
           "name": "Emeka Egbuka",
           "pos": "WR",
-          "value": 1110
+          "value": 1166
         },
         {
           "id": 4431299,
           "name": "Rome Odunze",
           "pos": "WR",
-          "value": 1534
+          "value": 1452
         },
         {
           "id": 4430027,
           "name": "Sam LaPorta",
           "pos": "TE",
-          "value": 1852
+          "value": 1588
         },
         {
           "id": 4569173,
           "name": "Rhamondre Stevenson",
           "pos": "RB",
-          "value": 1609
+          "value": 1707
         },
         {
           "id": 2577417,
           "name": "Dak Prescott",
           "pos": "QB",
-          "value": 2416
+          "value": 2442
         },
         {
           "id": 3916433,
           "name": "Jakobi Meyers",
           "pos": "WR",
-          "value": 579
+          "value": 667
         },
         {
           "id": 4683062,
           "name": "Xavier Worthy",
           "pos": "WR",
-          "value": 194
+          "value": 168
         },
         {
           "id": 4361432,
           "name": "Romeo Doubs",
           "pos": "WR",
-          "value": 15
+          "value": 7
         },
         {
           "id": 3046439,
           "name": "Hunter Henry",
           "pos": "TE",
-          "value": 113
+          "value": 152
         },
         {
           "id": 4362628,
           "name": "Ja'Marr Chase",
           "pos": "WR",
-          "value": 9146
+          "value": 9356
         },
         {
           "id": 4239996,
           "name": "Travis Etienne Jr.",
           "pos": "RB",
-          "value": 1436
+          "value": 1496
         },
         {
           "id": 3917315,
@@ -450,67 +450,67 @@
           "id": 4430737,
           "name": "Kyren Williams",
           "pos": "RB",
-          "value": 3658
+          "value": 3822
         },
         {
           "id": 4432708,
           "name": "Marvin Harrison Jr.",
           "pos": "WR",
-          "value": 46
+          "value": 75
         },
         {
           "id": 3915511,
           "name": "Joe Burrow",
           "pos": "QB",
-          "value": 5407
+          "value": 5317
         },
         {
           "id": 4038815,
           "name": "Rico Dowdle",
           "pos": "RB",
-          "value": 726
+          "value": 547
         },
         {
           "id": 4697815,
           "name": "Rachaad White",
           "pos": "RB",
-          "value": 383
+          "value": 273
         },
         {
           "id": 4608686,
           "name": "Kyle Monangai",
           "pos": "RB",
-          "value": 1125
+          "value": 1160
         },
         {
           "id": 4871023,
           "name": "Carnell Tate",
           "pos": "WR",
-          "value": 1975
+          "value": 1826
         },
         {
           "id": 5083076,
           "name": "Harold Fannin Jr.",
           "pos": "TE",
-          "value": 1991
+          "value": 2029
         },
         {
           "id": 4241478,
           "name": "DeVonta Smith",
           "pos": "WR",
-          "value": 2450
+          "value": 2509
         },
         {
           "id": 3042519,
           "name": "Aaron Jones Sr.",
           "pos": "RB",
-          "value": 1074
+          "value": 1197
         },
         {
           "id": 4428718,
           "name": "Tre Tucker",
           "pos": "WR",
-          "value": 391
+          "value": 371
         },
         {
           "id": 2991662,
@@ -522,13 +522,13 @@
           "id": 4723820,
           "name": "Omar Cooper Jr.",
           "pos": "WR",
-          "value": 581
+          "value": 588
         },
         {
           "id": 2576925,
           "name": "Darren Waller",
           "pos": "TE",
-          "value": 211
+          "value": 157
         }
       ]
     },
@@ -547,91 +547,91 @@
           "id": 4241389,
           "name": "CeeDee Lamb",
           "pos": "WR",
-          "value": 9059
+          "value": 8865
         },
         {
           "id": 4361579,
           "name": "Javonte Williams",
           "pos": "RB",
-          "value": 5070
+          "value": 5360
         },
         {
           "id": 16800,
           "name": "Davante Adams",
           "pos": "WR",
-          "value": 2832
+          "value": 3077
         },
         {
           "id": 4035538,
           "name": "David Montgomery",
           "pos": "RB",
-          "value": 1488
+          "value": 1665
         },
         {
           "id": 3121023,
           "name": "Dallas Goedert",
           "pos": "TE",
-          "value": 485
+          "value": 494
         },
         {
           "id": 12483,
           "name": "Matthew Stafford",
           "pos": "QB",
-          "value": 659
+          "value": 490
         },
         {
           "id": 4360569,
           "name": "Jordan Mason",
           "pos": "RB",
-          "value": 616
+          "value": 532
         },
         {
           "id": 4036133,
           "name": "T.J. Hockenson",
           "pos": "TE",
-          "value": 1046
+          "value": 1185
         },
         {
           "id": 4695883,
           "name": "Jalen Coker",
           "pos": "WR",
-          "value": 656
+          "value": 714
         },
         {
           "id": 4036378,
           "name": "Jordan Love",
           "pos": "QB",
-          "value": 1831
+          "value": 1925
         },
         {
           "id": 4361411,
           "name": "Pat Freiermuth",
           "pos": "TE",
-          "value": 355
+          "value": 284
         },
         {
           "id": 4575131,
           "name": "Jacory Croskey-Merritt",
           "pos": "RB",
-          "value": 922
+          "value": 905
         },
         {
           "id": 5083754,
           "name": "Ryan Flournoy",
           "pos": "WR",
-          "value": 480
+          "value": 541
         },
         {
           "id": 4239993,
           "name": "Tee Higgins",
           "pos": "WR",
-          "value": 5885
+          "value": 5921
         },
         {
           "id": 3116389,
           "name": "Samaje Perine",
           "pos": "RB",
-          "value": 259
+          "value": 335
         }
       ]
     },
@@ -650,49 +650,49 @@
           "id": 4432710,
           "name": "TreVeyon Henderson",
           "pos": "RB",
-          "value": null
+          "value": 48
         },
         {
           "id": 3046779,
           "name": "Jared Goff",
           "pos": "QB",
-          "value": 1516
+          "value": 1628
         },
         {
           "id": 3126486,
           "name": "Deebo Samuel Sr.",
           "pos": "WR",
-          "value": 758
+          "value": 831
         },
         {
           "id": 15847,
           "name": "Travis Kelce",
           "pos": "TE",
-          "value": 1934
+          "value": 2212
         },
         {
           "id": 4685472,
           "name": "Tetairoa McMillan",
           "pos": "WR",
-          "value": 3096
+          "value": 3119
         },
         {
           "id": 4242335,
           "name": "Jonathan Taylor",
           "pos": "RB",
-          "value": 4404
+          "value": 4476
         },
         {
           "id": 3916148,
           "name": "Tony Pollard",
           "pos": "RB",
-          "value": 3631
+          "value": 3439
         },
         {
           "id": 4595348,
           "name": "Malik Nabers",
           "pos": "WR",
-          "value": 5181
+          "value": 5584
         },
         {
           "id": 4431487,
@@ -704,31 +704,31 @@
           "id": 4360797,
           "name": "Tutu Atwell",
           "pos": "WR",
-          "value": 4
+          "value": null
         },
         {
           "id": 4600981,
           "name": "Pat Bryant",
           "pos": "WR",
-          "value": 388
+          "value": 322
         },
         {
           "id": 4429086,
           "name": "Michael Mayer",
           "pos": "TE",
-          "value": 296
+          "value": 249
         },
         {
           "id": 4431492,
           "name": "Roman Wilson",
           "pos": "WR",
-          "value": 33
+          "value": 15
         },
         {
           "id": 4603186,
           "name": "Jack Bech",
           "pos": "WR",
-          "value": 2
+          "value": 61
         }
       ]
     },
@@ -747,67 +747,67 @@
           "id": 4430878,
           "name": "Jaxon Smith-Njigba",
           "pos": "WR",
-          "value": 10208
+          "value": 10188
         },
         {
           "id": 3043078,
           "name": "Derrick Henry",
           "pos": "RB",
-          "value": 4360
+          "value": 4539
         },
         {
           "id": 4047646,
           "name": "A.J. Brown",
           "pos": "WR",
-          "value": 893
+          "value": 979
         },
         {
           "id": 4596448,
           "name": "Bucky Irving",
           "pos": "RB",
-          "value": 6667
+          "value": 6849
         },
         {
           "id": 4426348,
           "name": "Jayden Daniels",
           "pos": "QB",
-          "value": 1912
+          "value": 2033
         },
         {
           "id": 4429205,
           "name": "Jordan Addison",
           "pos": "WR",
-          "value": 325
+          "value": 372
         },
         {
           "id": 4426385,
           "name": "Zach Charbonnet",
           "pos": "RB",
-          "value": 1589
+          "value": 1344
         },
         {
           "id": 4385690,
           "name": "Dalton Kincaid",
           "pos": "TE",
-          "value": 879
+          "value": 804
         },
         {
           "id": 5081432,
           "name": "Antonio Williams",
           "pos": "WR",
-          "value": 533
+          "value": 641
         },
         {
           "id": 4685382,
           "name": "Omarion Hampton",
           "pos": "RB",
-          "value": 2265
+          "value": 2105
         },
         {
           "id": 4572680,
           "name": "Tucker Kraft",
           "pos": "TE",
-          "value": 1377
+          "value": 1177
         },
         {
           "id": 4426515,
@@ -819,13 +819,13 @@
           "id": 4870795,
           "name": "Makai Lemon",
           "pos": "WR",
-          "value": 493
+          "value": 484
         },
         {
           "id": 4686422,
           "name": "Xavier Hutchinson",
           "pos": "WR",
-          "value": 246
+          "value": 242
         },
         {
           "id": 3930086,
@@ -850,91 +850,91 @@
           "id": 4430807,
           "name": "Bijan Robinson",
           "pos": "RB",
-          "value": 9088
+          "value": 9086
         },
         {
           "id": 4258173,
           "name": "Nico Collins",
           "pos": "WR",
-          "value": 4844
+          "value": 4959
         },
         {
           "id": 4361370,
           "name": "Chris Olave",
           "pos": "WR",
-          "value": 4216
+          "value": 4448
         },
         {
           "id": 4259545,
           "name": "D'Andre Swift",
           "pos": "RB",
-          "value": 4452
+          "value": 4436
         },
         {
           "id": 3916387,
           "name": "Lamar Jackson",
           "pos": "QB",
-          "value": 266
+          "value": 392
         },
         {
           "id": 4432620,
           "name": "Parker Washington",
           "pos": "WR",
-          "value": 5062
+          "value": 4956
         },
         {
           "id": 4429059,
           "name": "Woody Marks",
           "pos": "RB",
-          "value": 451
+          "value": 574
         },
         {
           "id": 4360689,
           "name": "Tyler Shough",
           "pos": "QB",
-          "value": 516
+          "value": 441
         },
         {
           "id": 4569603,
           "name": "Malik Washington",
           "pos": "WR",
-          "value": 408
+          "value": 378
         },
         {
           "id": 4430539,
           "name": "Brenton Strange",
           "pos": "TE",
-          "value": 483
+          "value": 462
         },
         {
           "id": 4869645,
           "name": "Caleb Douglas",
           "pos": "WR",
-          "value": 530
+          "value": 531
         },
         {
           "id": 4597500,
           "name": "Adonai Mitchell",
           "pos": "WR",
-          "value": 387
+          "value": 355
         },
         {
           "id": 4426338,
           "name": "Bo Nix",
           "pos": "QB",
-          "value": 673
+          "value": 746
         },
         {
           "id": 5081397,
           "name": "Dylan Sampson",
           "pos": "RB",
-          "value": 248
+          "value": 271
         },
         {
           "id": 3116164,
           "name": "Mike Gesicki",
           "pos": "TE",
-          "value": 466
+          "value": 504
         }
       ]
     },
@@ -953,49 +953,49 @@
           "id": 4047365,
           "name": "Josh Jacobs",
           "pos": "RB",
-          "value": 3324
+          "value": 3162
         },
         {
           "id": 4696981,
           "name": "Cam Skattebo",
           "pos": "RB",
-          "value": 2877
+          "value": 3134
         },
         {
           "id": 3915416,
           "name": "DJ Moore",
           "pos": "WR",
-          "value": 2115
+          "value": 2336
         },
         {
           "id": 4371733,
           "name": "Kenny Gainwell",
           "pos": "RB",
-          "value": 731
+          "value": 768
         },
         {
           "id": 4870653,
           "name": "KC Concepcion",
           "pos": "WR",
-          "value": 1065
+          "value": 1099
         },
         {
           "id": 3929645,
           "name": "Juwan Johnson",
           "pos": "TE",
-          "value": 193
+          "value": 203
         },
         {
           "id": 4612826,
           "name": "Ladd McConkey",
           "pos": "WR",
-          "value": 1259
+          "value": 1419
         },
         {
           "id": 4870808,
           "name": "Jeremiyah Love",
           "pos": "RB",
-          "value": 2123
+          "value": 2164
         },
         {
           "id": 4685247,
@@ -1007,37 +1007,37 @@
           "id": 4685261,
           "name": "Germie Bernard",
           "pos": "WR",
-          "value": 477
+          "value": 459
         },
         {
           "id": 15818,
           "name": "Keenan Allen",
           "pos": "WR",
-          "value": 668
+          "value": 632
         },
         {
           "id": 4569618,
           "name": "Garrett Wilson",
           "pos": "WR",
-          "value": 3280
+          "value": 3183
         },
         {
           "id": 4038441,
           "name": "Justice Hill",
           "pos": "RB",
-          "value": 369
+          "value": 516
         },
         {
           "id": 3117256,
           "name": "Dalton Schultz",
           "pos": "TE",
-          "value": 27
+          "value": 42
         },
         {
           "id": 4433970,
           "name": "J.J. McCarthy",
           "pos": "QB",
-          "value": 204
+          "value": 225
         }
       ]
     },
@@ -1056,79 +1056,79 @@
           "id": 4362238,
           "name": "Chase Brown",
           "pos": "RB",
-          "value": 4049
+          "value": 3689
         },
         {
           "id": 3918298,
           "name": "Josh Allen",
           "pos": "QB",
-          "value": 6003
+          "value": 5785
         },
         {
           "id": 4685278,
           "name": "Luther Burden III",
           "pos": "WR",
-          "value": 3783
+          "value": 4106
         },
         {
           "id": 4047650,
           "name": "DK Metcalf",
           "pos": "WR",
-          "value": 739
+          "value": 688
         },
         {
           "id": 4248528,
           "name": "Christian Watson",
           "pos": "WR",
-          "value": 5909
+          "value": 5399
         },
         {
           "id": 3040151,
           "name": "George Kittle",
           "pos": "TE",
-          "value": 3178
+          "value": 3484
         },
         {
           "id": 3116165,
           "name": "Chris Godwin Jr.",
           "pos": "WR",
-          "value": 113
+          "value": 83
         },
         {
           "id": 4366031,
           "name": "Tank Dell",
           "pos": "WR",
-          "value": 453
+          "value": 461
         },
         {
           "id": 4832800,
           "name": "Denzel Boston",
           "pos": "WR",
-          "value": 1051
+          "value": 969
         },
         {
           "id": 4373626,
           "name": "Tyler Allgeier",
           "pos": "RB",
-          "value": 382
+          "value": 373
         },
         {
           "id": 4429795,
           "name": "Jahmyr Gibbs",
           "pos": "RB",
-          "value": 10770
+          "value": 10798
         },
         {
           "id": 4428331,
           "name": "Rashee Rice",
           "pos": "WR",
-          "value": 2497
+          "value": 2195
         },
         {
           "id": 4432577,
           "name": "C.J. Stroud",
           "pos": "QB",
-          "value": 1747
+          "value": 1744
         },
         {
           "id": 4360516,
@@ -1140,7 +1140,7 @@
           "id": 4686658,
           "name": "Mike Washington Jr.",
           "pos": "RB",
-          "value": 175
+          "value": 113
         }
       ]
     },
@@ -1159,31 +1159,31 @@
           "id": 3052587,
           "name": "Baker Mayfield",
           "pos": "QB",
-          "value": 208
+          "value": 212
         },
         {
           "id": 3054850,
           "name": "Alvin Kamara",
           "pos": "RB",
-          "value": 424
+          "value": 368
         },
         {
           "id": 4361307,
           "name": "Trey McBride",
           "pos": "TE",
-          "value": 5380
+          "value": 5561
         },
         {
           "id": 16737,
           "name": "Mike Evans",
           "pos": "WR",
-          "value": 2957
+          "value": 2883
         },
         {
           "id": 4361741,
           "name": "Brock Purdy",
           "pos": "QB",
-          "value": 2798
+          "value": 2811
         },
         {
           "id": 4570037,
@@ -1195,55 +1195,55 @@
           "id": 4241985,
           "name": "J.K. Dobbins",
           "pos": "RB",
-          "value": 183
+          "value": 92
         },
         {
           "id": 4426354,
           "name": "George Pickens",
           "pos": "WR",
-          "value": 4346
+          "value": 4681
         },
         {
           "id": 3929630,
           "name": "Saquon Barkley",
           "pos": "RB",
-          "value": 3109
+          "value": 3176
         },
         {
           "id": 4427095,
           "name": "DeMario Douglas",
           "pos": "WR",
-          "value": 144
+          "value": 142
         },
         {
           "id": 4431431,
           "name": "Corey Kiner",
           "pos": "RB",
-          "value": 41
+          "value": 67
         },
         {
           "id": 3068267,
           "name": "Austin Ekeler",
           "pos": "RB",
-          "value": 8
+          "value": 7
         },
         {
           "id": 3128429,
           "name": "Courtland Sutton",
           "pos": "WR",
-          "value": 235
+          "value": 208
         },
         {
           "id": 4373678,
           "name": "Khalil Shakir",
           "pos": "WR",
-          "value": 537
+          "value": 571
         },
         {
           "id": 4890973,
           "name": "Ashton Jeanty",
           "pos": "RB",
-          "value": 4143
+          "value": 4317
         }
       ]
     }
@@ -2045,7 +2045,7 @@
   "tradeValues": {
     "source": "FantasyCalc — redraft, 12-team, PPR, 1QB",
     "ok": true,
-    "count": 194
+    "count": 193
   },
   "paid": {
     "1": true,
@@ -2083,7 +2083,7 @@
   ],
   "powerRankings": {
     "week": 11,
-    "updatedAt": "2026-11-25T22:08:59.836Z",
+    "updatedAt": "2026-11-26T22:08:00.202Z",
     "entries": [
       {
         "teamId": 8,
@@ -2147,6 +2147,6 @@
       }
     ]
   },
-  "updatedAt": "2026-11-25T22:08:59.836Z",
+  "updatedAt": "2026-11-26T22:08:00.202Z",
   "syncWarnings": []
 }
